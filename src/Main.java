@@ -12,7 +12,7 @@ public class Main extends JFrame {
         int frameWidth = 1600;
         int frameHeight = frameWidth / 2;
 
-        setTitle("Level: Mittel");
+        setTitle("Level: EINFACH");
         setSize(frameWidth, frameHeight);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
