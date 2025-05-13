@@ -4,12 +4,41 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Steuerung implements KeyListener {
-    public boolean up1Pressed = false;
-    public boolean up2Pressed = false;
-    public boolean right1Pressed = false;
-    public boolean right2Pressed = false;
-    public boolean left1Pressed = false;
-    public boolean left2Pressed = false;
+    private boolean up1Pressed = false;
+    private boolean up2Pressed = false;
+    private boolean right1Pressed = false;
+    private boolean right2Pressed = false;
+    private boolean left1Pressed = false;
+    private boolean left2Pressed = false;
+    private GamePanel gamePanel;
+
+    public Steuerung(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
+    public boolean isUp1Pressed() {
+        return up1Pressed;
+    }
+
+    public boolean isUp2Pressed() {
+        return up2Pressed;
+    }
+
+    public boolean isRight1Pressed() {
+        return right1Pressed;
+    }
+
+    public boolean isRight2Pressed() {
+        return right2Pressed;
+    }
+
+    public boolean isLeft1Pressed() {
+        return left1Pressed;
+    }
+
+    public boolean isLeft2Pressed() {
+        return left2Pressed;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {}
@@ -24,6 +53,7 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_RIGHT -> right2Pressed = true;
             case KeyEvent.VK_LEFT -> left2Pressed = true;
         }
+        gamePanel.update();
     }
 
     @Override

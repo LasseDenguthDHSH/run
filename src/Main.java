@@ -1,46 +1,39 @@
 package src;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Scanner;
 
-public class Main extends JFrame {
-    private GamePanel gamePanel;
-    private Steuerung steuerung;
-
-    public Main() {
-        int frameWidth = 1600;
-        int frameHeight = frameWidth / 2;
-
-        setTitle("Level: EINFACH");
-        setSize(frameWidth, frameHeight);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        steuerung = new Steuerung();
-        gamePanel = new GamePanel(frameWidth, frameHeight, steuerung);
-        add(gamePanel);
-
-        addKeyListener(steuerung);
-        setVisible(true);
-
-        Timer timer = new Timer(16, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.update();
-                gamePanel.repaint();
-            }
-        });
-        timer.start();
-    }
-
+public class Main {
     public static void main(String[] args) {
-        new Main();
+        // Level-Instanzen erstellen
+        Level1 level1 = new Level1();
+        Level2 level2 = new Level2();
+        Level3 level3 = new Level3();
+
+        Scanner sc = new Scanner(System.in);
+        String auswahl = sc.nextLine();
+
+        Level startLevel;
+
+        if (auswahl.equals("1")) {
+            startLevel = level1;
+        } else if (auswahl.equals("2")) {
+            startLevel = level2;
+        } else if (auswahl.equals("3")) {
+            startLevel = level3;
+        } else {
+            System.out.println("Ungültige Auswahl! Das Spiel wird nicht gestartet.");
+            return;
+        }
+
+        // Fenster erstellen und Spiel starten
+        JFrame frame = new JFrame("Spiel");
+        GamePanel gamePanel = new GamePanel(startLevel);
+        frame.add(gamePanel);
+        frame.setSize(1600, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        gamePanel.requestFocusInWindow();
     }
 }
-
-
-
-
-

@@ -4,8 +4,12 @@ public class Level1 extends Level {
     @Override
     public void setupLevel() {
         groundY = 300;
-        backgroundImage = "assets/images/level1_bg.png";
+        backgroundImage = "src/images/unbekannt.png";
+        player1ImagePath = "src/images/player1.png";
+        player2ImagePath = "src/images/player2.png";
     }
 }
+
+
 
 
