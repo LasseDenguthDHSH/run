@@ -1,4 +1,7 @@
 package src;
 
-public class Level {
+public abstract class Level {
+
+    int level;
+
 }
