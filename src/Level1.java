@@ -13,8 +13,8 @@ public class Level1 extends Level {
         this.player2Image = loadImage("src/images/player2.png");
         this.platformColor = Color.BLUE;
         // Plattformen hinzufügen
-        platforms.add(new Platform(200, 600, 100, 20));
-        platforms.add(new Platform(400, 500, 100, 20));
+        platforms.add(new Platform(200, 600, 150, 20));
+        platforms.add(new Platform(450, 500, 150, 20));
     }
 }
 

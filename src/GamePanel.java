@@ -11,6 +11,8 @@ public class GamePanel extends JPanel {
     private Timer gameTimer;
     private int cameraX = 0;
 
+
+
     public GamePanel(Level level) {
         this.currentLevel = level;
 
@@ -18,8 +20,8 @@ public class GamePanel extends JPanel {
         this.addKeyListener(steuerung);
         this.setFocusable(true);
 
-        this.player1 = new Player(32, 32, currentLevel.getPlayer1StartX(), currentLevel.getPlayer1StartY(), 3, currentLevel.getPlayer1Image());
-        this.player2 = new Player(32, 32, currentLevel.getPlayer2StartX(), currentLevel.getPlayer2StartY(), 3, currentLevel.getPlayer2Image());
+        this.player1 = new Player(32, 32, currentLevel.getPlayer1StartX(), currentLevel.getPlayer1StartY(), 5, currentLevel.getPlayer1Image());
+        this.player2 = new Player(32, 32, currentLevel.getPlayer2StartX(), currentLevel.getPlayer2StartY(), 5, currentLevel.getPlayer2Image());
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -74,15 +76,16 @@ public class GamePanel extends JPanel {
         }
         player2.applyGravity(currentLevel);
 
-        // Kamera folgt dem führenden Spieler
-        int screenCenter = getWidth() / 2;
-        if (player1.x > screenCenter) {
-            cameraX = player1.x - screenCenter;
-        }
-        if (player2.x > screenCenter) {
-            cameraX = player2.x - screenCenter;
-        }
+        // Immer den Spieler mit der höchsten X-Position auswählen
+        Player leadingPlayer = (player1.x > player2.x) ? player1 : player2;
+
+        // Kamera folgt dem führenden Spieler in Echtzeit
+        cameraX = leadingPlayer.x - (getWidth() / 2) + leadingPlayer.width / 2;
+
+        // Falls dein Level eine feste Breite hat, Kamera begrenzen
+        cameraX = Math.max(0, Math.min(cameraX, getWidth()*2));
 
         repaint();
+
     }
 }

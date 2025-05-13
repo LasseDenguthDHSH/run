@@ -30,7 +30,7 @@ public class Main {
         JFrame frame = new JFrame(startLevel.getTitle());
         GamePanel gamePanel = new GamePanel(startLevel);
         frame.add(gamePanel);
-        frame.setSize(1600, 830);
+        frame.setSize(1600, 839);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setResizable(false);
