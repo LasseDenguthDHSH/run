@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // Level-Instanzen erstellen
-        Level1 level1 = new Level1();
-        Level2 level2 = new Level2();
-        Level3 level3 = new Level3();
+        Level1 level1 = new Level1("Level 1");
+        Level2 level2 = new Level2("Level 2");
+        Level3 level3 = new Level3("Level 3");
 
         Scanner sc = new Scanner(System.in);
         String auswahl = sc.nextLine();
@@ -27,12 +27,13 @@ public class Main {
         }
 
         // Fenster erstellen und Spiel starten
-        JFrame frame = new JFrame("Spiel");
+        JFrame frame = new JFrame(startLevel.getTitle());
         GamePanel gamePanel = new GamePanel(startLevel);
         frame.add(gamePanel);
-        frame.setSize(1600, 800);
+        frame.setSize(1600, 830);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.setResizable(false);
 
         gamePanel.requestFocusInWindow();
     }

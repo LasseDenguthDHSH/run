@@ -1,8 +1,8 @@
 package src;
 
 public class Level2 extends Level{
-    @Override
-    public void setupLevel() {
+    public Level2(String title) {
+        super(title);
 
     }
 }

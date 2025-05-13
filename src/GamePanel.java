@@ -9,17 +9,17 @@ public class GamePanel extends JPanel {
     private Level currentLevel;
     private Steuerung steuerung;
     private Timer gameTimer;
+    private int cameraX = 0;
 
     public GamePanel(Level level) {
         this.currentLevel = level;
-        this.currentLevel.setupLevel();
 
         this.steuerung = new Steuerung(this);
         this.addKeyListener(steuerung);
         this.setFocusable(true);
 
-        this.player1 = new Player(32, 32, currentLevel.getPlayer1StartX(), currentLevel.getPlayer1StartY(), 5, currentLevel.getPlayer1Image());
-        this.player2 = new Player(32, 32, currentLevel.getPlayer2StartX(), currentLevel.getPlayer2StartY(), 5, currentLevel.getPlayer2Image());
+        this.player1 = new Player(32, 32, currentLevel.getPlayer1StartX(), currentLevel.getPlayer1StartY(), 3, currentLevel.getPlayer1Image());
+        this.player2 = new Player(32, 32, currentLevel.getPlayer2StartX(), currentLevel.getPlayer2StartY(), 3, currentLevel.getPlayer2Image());
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -30,33 +30,58 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.drawImage(currentLevel.getGroundImage(), 0, currentLevel.getGroundY(), getWidth(), 50, this);
-        g2.drawImage(player1.getImage(), player1.x, player1.y, player1.width, player1.height, this);
-        g2.drawImage(player2.getImage(), player2.x, player2.y, player2.width, player2.height, this);
+        //Hintergrund
+        g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), getWidth()-cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), getWidth()*2-cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth(), 700, this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth()-cameraX, 0, getWidth(), 700, this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth()*2-cameraX, 0, getWidth(), 700, this);
+
+        // Plattformen
+        for (Platform platform : currentLevel.getPlatforms()) {
+            g2.setColor(currentLevel.getPlatformColor());
+            g2.fillRect(platform.x - cameraX, platform.y, platform.width, platform.height);
+        }
+
+        // Player
+        g2.drawImage(player1.getImage(), player1.x - cameraX, player1.y, player1.width, player1.height, this);
+        g2.drawImage(player2.getImage(), player2.x - cameraX, player2.y, player2.width, player2.height, this);
     }
 
     public void update() {
-        if (steuerung.isUp1Pressed() && !player1.isJumping) {
-            player1.jump();
-        }
+        // Bewegung von Spieler 1
         if (steuerung.isRight1Pressed()) {
             player1.moveRight();
         }
         if (steuerung.isLeft1Pressed()) {
             player1.moveLeft();
         }
-        player1.applyGravity(currentLevel.getGroundY());
-
-        if (steuerung.isUp2Pressed() && !player2.isJumping) {
-            player2.jump();
+        if (steuerung.isUp1Pressed()){
+            player1.jump();
         }
+        player1.applyGravity(currentLevel);
+
+        // Bewegung von Spieler 2
         if (steuerung.isRight2Pressed()) {
             player2.moveRight();
         }
         if (steuerung.isLeft2Pressed()) {
             player2.moveLeft();
         }
-        player2.applyGravity(currentLevel.getGroundY());
+        if (steuerung.isUp2Pressed()){
+            player2.jump();
+        }
+        player2.applyGravity(currentLevel);
+
+        // Kamera folgt dem führenden Spieler
+        int screenCenter = getWidth() / 2;
+        if (player1.x > screenCenter) {
+            cameraX = player1.x - screenCenter;
+        }
+        if (player2.x > screenCenter) {
+            cameraX = player2.x - screenCenter;
+        }
 
         repaint();
     }

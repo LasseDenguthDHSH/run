@@ -1,17 +1,24 @@
 package src;
 
 import javax.imageio.ImageIO;
-import java.awt.Image;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public abstract class Level {
     protected int groundY;
     protected Image groundImage;
+    protected Image skyImage;
     protected Image player1Image;
     protected Image player2Image;
+    protected ArrayList<Platform> platforms = new ArrayList<>();
+    String title;
+    Color platformColor;
 
-    public abstract void setupLevel();
+    public Level(String title){
+        this.title = title;
+    }
 
     protected Image loadImage(String absolutePath) {
         try {
@@ -37,6 +44,10 @@ public abstract class Level {
         return groundImage;
     }
 
+    public Image getSkyImage() {
+        return skyImage;
+    }
+
     public Image getPlayer1Image() {
         return player1Image;
     }
@@ -60,4 +71,15 @@ public abstract class Level {
     public int getPlayer2StartY() {
         return groundY - 32;
     }
+
+    public String getTitle() {
+        return title;
+    }
+    public ArrayList<Platform> getPlatforms() {
+        return platforms;
+    }
+    public Color getPlatformColor() {
+        return platformColor;
+    }
+
 }

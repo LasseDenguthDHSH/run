@@ -1,6 +1,5 @@
 package src;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Player {
@@ -13,6 +12,7 @@ public class Player {
     double jumpStrength = 12;
     double velocityY = 0;
     boolean isJumping = false;
+    boolean isOnPlatform = false;
     private Image playerImage;
 
     public Player(int width, int height, int x, int y, double speed, Image image) {
@@ -35,22 +35,41 @@ public class Player {
         }
     }
 
-    public void applyGravity(int groundY) {
-        if (isJumping) {
+    public void applyGravity(Level level) {
+        for (Platform platform : level.getPlatforms()) {
+            if (x <= platform.x || x > platform.x + platform.width) {
+                isOnPlatform = false;
+            }
+        }
+        if (isJumping || !isOnPlatform) {
             y += velocityY;
             velocityY += gravity;
-
-            // Prüfen, ob der Spieler den Boden erreicht hat
-            if (y + height >= groundY) {
-                y = groundY - height; // Spieler auf den Boden setzen
+            if (y + height >= level.getGroundY()) {
+                y = level.getGroundY() - height;
                 isJumping = false;
                 velocityY = 0;
             }
+            for (Platform platform : level.getPlatforms()) {
+                if (y + height >= platform.y && y + height - velocityY < platform.y && x + width > platform.x && x < platform.x + platform.width) {
+                    y = platform.y - height; // Spieler auf Plattform setzen
+                    isJumping = false;
+                    velocityY = 0;
+                    isOnPlatform = true;
+                    return;
+                }
+            }
         }
+        // Prüfen, ob der Spieler auf einer Plattform landet
+
+        // Prüfen, ob der Spieler auf dem Boden landet
+
+
     }
 
     public void moveLeft() {
-        x -= speed;
+        if (x >= 0) {
+            x -= speed;
+        }
     }
 
     public void moveRight() {
