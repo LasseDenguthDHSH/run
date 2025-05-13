@@ -1,27 +1,48 @@
 package src;
 
+import javax.imageio.ImageIO;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
 public abstract class Level {
     protected int groundY;
-    protected String backgroundImage;
-    protected String player1ImagePath;
-    protected String player2ImagePath;
+    protected Image groundImage;
+    protected Image player1Image;
+    protected Image player2Image;
 
     public abstract void setupLevel();
+
+    protected Image loadImage(String absolutePath) {
+        try {
+            File file = new File(absolutePath);
+            if (file.exists()) {
+                return ImageIO.read(file);
+            } else {
+                System.out.println("Bild nicht gefunden: " + file.getAbsolutePath());
+                return null;
+            }
+        } catch (IOException e) {
+            System.out.println("Fehler beim Laden des Bildes: " + absolutePath);
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public int getGroundY() {
         return groundY;
     }
 
-    public String getBackgroundImage() {
-        return backgroundImage;
+    public Image getGroundImage() {
+        return groundImage;
     }
 
-    public String getPlayer1ImagePath() {
-        return player1ImagePath;
+    public Image getPlayer1Image() {
+        return player1Image;
     }
 
-    public String getPlayer2ImagePath() {
-        return player2ImagePath;
+    public Image getPlayer2Image() {
+        return player2Image;
     }
 
     public int getPlayer1StartX() {

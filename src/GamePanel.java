@@ -8,7 +8,6 @@ public class GamePanel extends JPanel {
     private Player player2;
     private Level currentLevel;
     private Steuerung steuerung;
-    private Image backgroundImage;
     private Timer gameTimer;
 
     public GamePanel(Level level) {
@@ -19,10 +18,8 @@ public class GamePanel extends JPanel {
         this.addKeyListener(steuerung);
         this.setFocusable(true);
 
-        this.player1 = new Player(32, 32, currentLevel.getPlayer1StartX(), currentLevel.getPlayer1StartY(), 5, currentLevel.getPlayer1ImagePath());
-        this.player2 = new Player(32, 32, currentLevel.getPlayer2StartX(), currentLevel.getPlayer2StartY(), 5, currentLevel.getPlayer2ImagePath());
-
-        this.backgroundImage = new ImageIcon(currentLevel.getBackgroundImage()).getImage();
+        this.player1 = new Player(32, 32, currentLevel.getPlayer1StartX(), currentLevel.getPlayer1StartY(), 5, currentLevel.getPlayer1Image());
+        this.player2 = new Player(32, 32, currentLevel.getPlayer2StartX(), currentLevel.getPlayer2StartY(), 5, currentLevel.getPlayer2Image());
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -33,7 +30,7 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.drawImage(backgroundImage, 0, currentLevel.getGroundY(), getWidth(), 50, this);
+        g2.drawImage(currentLevel.getGroundImage(), 0, currentLevel.getGroundY(), getWidth(), 50, this);
         g2.drawImage(player1.getImage(), player1.x, player1.y, player1.width, player1.height, this);
         g2.drawImage(player2.getImage(), player2.x, player2.y, player2.width, player2.height, this);
     }
@@ -48,7 +45,7 @@ public class GamePanel extends JPanel {
         if (steuerung.isLeft1Pressed()) {
             player1.moveLeft();
         }
-        player1.applyGravity();
+        player1.applyGravity(currentLevel.getGroundY());
 
         if (steuerung.isUp2Pressed() && !player2.isJumping) {
             player2.jump();
@@ -59,7 +56,7 @@ public class GamePanel extends JPanel {
         if (steuerung.isLeft2Pressed()) {
             player2.moveLeft();
         }
-        player2.applyGravity();
+        player2.applyGravity(currentLevel.getGroundY());
 
         repaint();
     }

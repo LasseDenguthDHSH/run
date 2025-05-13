@@ -13,19 +13,19 @@ public class Player {
     double jumpStrength = 12;
     double velocityY = 0;
     boolean isJumping = false;
-    private ImageIcon playerImage;
+    private Image playerImage;
 
-    public Player(int width, int height, int x, int y, double speed, String imagePath) {
+    public Player(int width, int height, int x, int y, double speed, Image image) {
         this.width = width;
         this.height = height;
         this.x = x;
         this.y = y;
         this.speed = speed;
-        this.playerImage = new ImageIcon(imagePath);
+        this.playerImage = image;
     }
 
     public Image getImage() {
-        return playerImage.getImage();
+        return playerImage;
     }
 
     public void jump() {
@@ -35,12 +35,14 @@ public class Player {
         }
     }
 
-    public void applyGravity() {
+    public void applyGravity(int groundY) {
         if (isJumping) {
             y += velocityY;
             velocityY += gravity;
-            if (y >= getGroundLevel()) {
-                y = getGroundLevel();
+
+            // Prüfen, ob der Spieler den Boden erreicht hat
+            if (y + height >= groundY) {
+                y = groundY - height; // Spieler auf den Boden setzen
                 isJumping = false;
                 velocityY = 0;
             }
