@@ -39,7 +39,6 @@ public class GamePanel extends JPanel {
         g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth(), 700, this);
         g2.drawImage(currentLevel.getSkyImage(), getWidth()-cameraX, 0, getWidth(), 700, this);
         g2.drawImage(currentLevel.getSkyImage(), getWidth()*2-cameraX, 0, getWidth(), 700, this);
-        g2.drawImage(currentLevel.getLevel2Image(), getWidth()*2-cameraX, 0, getWidth(), 800, this);
 
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {

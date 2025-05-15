@@ -8,7 +8,7 @@ public class Level2 extends Level {
         super(title);
         this.groundY = 700;
         this.groundImage = loadImage("src/images/groundLevel2.png");
-        this.skyImage = loadImage("src/images/skyLevel2.png");
+        this.skyImage = loadImage("src/images/Level2.png");
         this.player1Image = loadImage("src/images/player1.png");
         this.player2Image = loadImage("src/images/player2.png");
         this.platformColor = Color.gray;
