@@ -10,6 +10,7 @@ public abstract class Level {
     protected int groundY;
     protected Image groundImage;
     protected Image skyImage;
+    protected Image level2Image;
     protected Image player1Image;
     protected Image player2Image;
     protected ArrayList<Platform> platforms = new ArrayList<>();
@@ -46,6 +47,10 @@ public abstract class Level {
 
     public Image getSkyImage() {
         return skyImage;
+    }
+
+    public Image getLevel2Image() {
+        return level2Image;
     }
 
     public Image getPlayer1Image() {
