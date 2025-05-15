@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Main {
     static CardLayout cardLayout;
-    static JPanel mainPanel;
+    static JPanel panelManager;
     static JFrame frame;
 
     public static void main(String[] args) {
@@ -16,30 +16,31 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
+        // Panel Manager
         cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
+        panelManager = new JPanel(cardLayout);
 
         // Menüpanel erstellen
         MenuPanel menuPanel = new MenuPanel();
-        mainPanel.add(menuPanel, "Menu");
+        panelManager.add(menuPanel, "Menu");
 
         // Hauptpanel zum Frame hinzufügen
-        frame.add(mainPanel);
+        frame.add(panelManager);
         frame.setVisible(true);
     }
 
     public static void startGame(Level level) {
         // Spielpanel erstellen und hinzufügen
         GamePanel gamePanel = new GamePanel(level);
-        mainPanel.add(gamePanel, "Game");
+        panelManager.add(gamePanel, "Game");
 
         // Zum Spielpanel wechseln
-        cardLayout.show(mainPanel, "Game");
+        cardLayout.show(panelManager, "Game");
         gamePanel.requestFocusInWindow();
     }
 
     public static void showMenu() {
         // Zum Menüpanel wechseln
-        cardLayout.show(mainPanel, "Menu");
+        cardLayout.show(panelManager, "Menu");
     }
 }
