@@ -24,10 +24,11 @@ public class Level1 extends Level {
         platforms.add(new Platform(200, 600, platformWidth, platformHeight));
         platforms.add(new Platform(400, 500, platformWidth, platformHeight));
         platforms.add(new Platform(690, 500, platformWidth, platformHeight));
-        platforms.add(new SprungPlatform(1000, 500, platformWidth, platformHeight));
-        platforms.add(new Platform(1150, 200, platformWidth, platformHeight));
-        platforms.add(new BoostPlatform(1350, 500, platformWidth, platformHeight));
-        platforms.add(new Platform(1850, 600, platformWidth, platformHeight));
+        platforms.add(new SprungPlatform(950, 500, platformWidth, platformHeight));
+        platforms.add(new DeathPlatform(1150, 200, platformWidth+20, platformHeight));
+        platforms.add(new DeathPlatform(1340, 200, platformWidth+20, platformHeight));
+        platforms.add(new BoostPlatform(1250, 500, platformWidth, platformHeight));
+        platforms.add(new Platform(1750, 600, platformWidth, platformHeight));
     }
 }
 
