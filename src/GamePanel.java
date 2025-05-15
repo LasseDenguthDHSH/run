@@ -8,8 +8,11 @@ public class GamePanel extends JPanel {
     private Player player2;
     private Level currentLevel;
     private Steuerung steuerung;
-    private Timer gameTimer;
+    private Timer gameTimer;  // Swing-Game-Loop
     private int cameraX = 0;
+
+    private Stoppuhr timer;  // deine eigene Stoppuhr-Klasse für die Anzeige
+    private boolean timerStarted = false;
 
     public GamePanel(Level level) {
         this.currentLevel = level;
@@ -20,6 +23,8 @@ public class GamePanel extends JPanel {
 
         this.player1 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer1Image());
         this.player2 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer2Image());
+
+        this.timer = new Stoppuhr(); // dein Stoppuhr zur Zeitmessung
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -48,32 +53,53 @@ public class GamePanel extends JPanel {
         // Player
         g2.drawImage(player1.getImage(), player1.x - cameraX, player1.y, player1.width, player1.height, this);
         g2.drawImage(player2.getImage(), player2.x - cameraX, player2.y, player2.width, player2.height, this);
-    }
 
-    public void update() {
-        // Bewegung von Spieler 1
+
+    // Stoppuhr-Anzeige
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Arial", Font.BOLD, 20));
+        g2.drawString("Zeit: " + timer.getFormattedTime(), 20, 30);
+        }
+
+
+public void update() {
+        boolean moved = false;
+
+        // Spieler 1 Steuerung
         if (steuerung.isRight1Pressed()) {
             player1.moveRight();
+            moved = true;
         }
         if (steuerung.isLeft1Pressed()) {
             player1.moveLeft();
+            moved = true;
         }
-        if (steuerung.isUp1Pressed()){
+        if (steuerung.isUp1Pressed()) {
             player1.jump();
+            moved = true;
         }
         player1.applyGravity(currentLevel);
 
-        // Bewegung von Spieler 2
+        // Spieler 2 Steuerung
         if (steuerung.isRight2Pressed()) {
             player2.moveRight();
+            moved = true;
         }
         if (steuerung.isLeft2Pressed()) {
             player2.moveLeft();
+            moved = true;
         }
-        if (steuerung.isUp2Pressed()){
+        if (steuerung.isUp2Pressed()) {
             player2.jump();
+            moved = true;
         }
         player2.applyGravity(currentLevel);
+
+        // Stoppuhr starten bei erster Bewegung
+        if (!timerStarted && moved) {
+            timer.start();
+            timerStarted = true;
+        }
 
         // Immer den Spieler mit der höchsten X-Position auswählen
         Player leadingPlayer = (player1.x > player2.x) ? player1 : player2;
