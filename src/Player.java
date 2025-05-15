@@ -15,11 +15,11 @@ public class Player {
     boolean isOnPlatform = false;
     private Image playerImage;
 
-    public Player(int width, int height, int x, int y, double speed, Image image) {
+    public Player(int width, int height, Level level, double speed, Image image) {
         this.width = width;
         this.height = height;
-        this.x = x;
-        this.y = y;
+        this.x = level.getPlayerStartX();
+        this.y = level.getPlayerStartY();
         this.speed = speed;
         this.playerImage = image;
     }

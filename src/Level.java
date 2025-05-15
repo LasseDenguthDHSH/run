@@ -10,6 +10,9 @@ public abstract class Level {
     int groundY;
     int platformWidth;
     int platformHeight;
+    int skyHeight;
+    int playerStartX;
+    int playerStartY;
     Image groundImage;
     Image skyImage;
     Image player1Image;
@@ -20,6 +23,7 @@ public abstract class Level {
 
     public Level(String title) {
         this.title = title;
+        this.playerStartX = 50;
     }
 
     protected Image loadImage(String absolutePath) {
@@ -41,6 +45,9 @@ public abstract class Level {
     public int getGroundY() {
         return groundY;
     }
+    public int getSkyHeight() {
+        return skyHeight;
+    }
 
     public Image getGroundImage() {
         return groundImage;
@@ -58,20 +65,20 @@ public abstract class Level {
         return player2Image;
     }
 
-    public int getPlayer1StartX() {
-        return 50;
+    public int getPlayerStartX() {
+        return playerStartX;
     }
 
-    public int getPlayer1StartY() {
-        return groundY - 32;
+    public int getPlayerStartY() {
+        return playerStartY;
     }
 
-    public int getPlayer2StartX() {
-        return 50;
+    public void setPlayerStartX(int playerStartX) {
+        this.playerStartX = playerStartX;
     }
 
-    public int getPlayer2StartY() {
-        return groundY - 32;
+    public void setPlayerStartY(int playerStartY) {
+        this.playerStartY = playerStartY;
     }
 
     public String getTitle() {

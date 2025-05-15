@@ -6,7 +6,9 @@ import java.awt.*;
 public class Level2 extends Level {
     public Level2(String title) {
         super(title);
-        this.groundY = 800;
+        this.groundY = 832;
+        this.skyHeight = 800;
+        this.setPlayerStartY(groundY-164);
         this.groundImage = loadImage("src/images/groundLevel2.png");
         this.skyImage = loadImage("src/images/skyLevel2.png");
         this.player1Image = loadImage("src/images/player1.png");

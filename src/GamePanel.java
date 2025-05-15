@@ -11,8 +11,6 @@ public class GamePanel extends JPanel {
     private Timer gameTimer;
     private int cameraX = 0;
 
-
-
     public GamePanel(Level level) {
         this.currentLevel = level;
 
@@ -20,11 +18,12 @@ public class GamePanel extends JPanel {
         this.addKeyListener(steuerung);
         this.setFocusable(true);
 
-        this.player1 = new Player(32, 32, currentLevel.getPlayer1StartX(), currentLevel.getPlayer1StartY(), 5, currentLevel.getPlayer1Image());
-        this.player2 = new Player(32, 32, currentLevel.getPlayer2StartX(), currentLevel.getPlayer2StartY(), 5, currentLevel.getPlayer2Image());
+        this.player1 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer1Image());
+        this.player2 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer2Image());
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
+
     }
 
     @Override
@@ -36,9 +35,9 @@ public class GamePanel extends JPanel {
         g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
         g2.drawImage(currentLevel.getGroundImage(), getWidth()-cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
         g2.drawImage(currentLevel.getGroundImage(), getWidth()*2-cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
-        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth(), 700, this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth()-cameraX, 0, getWidth(), 700, this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth()*2-cameraX, 0, getWidth(), 700, this);
+        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth()-cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth()*2-cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
 
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {
@@ -84,6 +83,10 @@ public class GamePanel extends JPanel {
 
         // Falls dein Level eine feste Breite hat, Kamera begrenzen
         cameraX = Math.max(0, Math.min(cameraX, getWidth()*2));
+
+        if (steuerung.isEscapePressed()) {
+            Main.showMenu();
+        }
 
         repaint();
 

@@ -10,6 +10,7 @@ public class Steuerung implements KeyListener {
     private boolean right2Pressed = false;
     private boolean left1Pressed = false;
     private boolean left2Pressed = false;
+    private boolean escapePressed = false;
     private GamePanel gamePanel;
 
     public Steuerung(GamePanel gamePanel) {
@@ -39,9 +40,16 @@ public class Steuerung implements KeyListener {
     public boolean isLeft2Pressed() {
         return left2Pressed;
     }
+    public boolean isEscapePressed() {
+        return escapePressed;
+    }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+        switch (e.getKeyChar()) {
+            case KeyEvent.VK_ESCAPE -> escapePressed = true;
+        }
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {

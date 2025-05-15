@@ -8,6 +8,8 @@ public class Level3 extends Level{
         this.groundY = 700;
         this.platformWidth = 150;
         this.platformHeight = 20;
+        this.skyHeight = 700;
+        this.setPlayerStartY(groundY-32);
         this.groundImage = loadImage("src/images/groundLevel3.png");
         this.skyImage = loadImage("src/images/skyLevel3.png");
         this.player1Image = loadImage("src/images/player1.png");
