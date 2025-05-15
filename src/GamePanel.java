@@ -112,6 +112,7 @@ public void update() {
 
         if (steuerung.isEscapePressed()) {
             Main.showMenu();
+            gameTimer.stop();
         }
 
         repaint();

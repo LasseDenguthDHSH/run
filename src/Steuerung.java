@@ -46,9 +46,6 @@ public class Steuerung implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        switch (e.getKeyChar()) {
-            case KeyEvent.VK_ESCAPE -> escapePressed = true;
-        }
     }
 
     @Override
@@ -60,6 +57,7 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_UP -> up2Pressed = true;
             case KeyEvent.VK_RIGHT -> right2Pressed = true;
             case KeyEvent.VK_LEFT -> left2Pressed = true;
+            case KeyEvent.VK_ESCAPE -> escapePressed = true;
         }
         gamePanel.update();
     }
@@ -73,6 +71,7 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_UP -> up2Pressed = false;
             case KeyEvent.VK_RIGHT -> right2Pressed = false;
             case KeyEvent.VK_LEFT -> left2Pressed = false;
+            case KeyEvent.VK_ESCAPE -> escapePressed = false;
         }
     }
 }

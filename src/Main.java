@@ -20,10 +20,7 @@ public class Main {
         cardLayout = new CardLayout();
         panelManager = new JPanel(cardLayout);
 
-        // Menüpanel erstellen
-        MenuPanel menuPanel = new MenuPanel();
-        panelManager.add(menuPanel, "Menu");
-
+        showMenu();
         // Hauptpanel zum Frame hinzufügen
         frame.add(panelManager);
         frame.setVisible(true);
@@ -40,7 +37,9 @@ public class Main {
     }
 
     public static void showMenu() {
-        // Zum Menüpanel wechseln
+        MenuPanel menuPanel = new MenuPanel();
+        panelManager.add(menuPanel, "Menu");
         cardLayout.show(panelManager, "Menu");
+        menuPanel.requestFocusInWindow();
     }
 }
