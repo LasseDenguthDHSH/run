@@ -2,6 +2,7 @@ package src.panel;
 import src.*;
 import src.level.Level;
 import src.platform.Platform;
+import src.platform.SprungPlatform;
 import src.player.Player;
 import src.player.Steuerung;
 
@@ -73,11 +74,11 @@ public void update() {
 
         // Spieler 1 Steuerung
         if (steuerung.isRight1Pressed()) {
-            player1.moveRight();
+            player1.moveRight(player1.getSpeed());
             moved = true;
         }
         if (steuerung.isLeft1Pressed()) {
-            player1.moveLeft();
+            player1.moveLeft(player1.getSpeed());
             moved = true;
         }
         if (steuerung.isUp1Pressed()) {
@@ -88,11 +89,11 @@ public void update() {
 
         // Spieler 2 Steuerung
         if (steuerung.isRight2Pressed()) {
-            player2.moveRight();
+            player2.moveRight(player2.getSpeed());
             moved = true;
         }
         if (steuerung.isLeft2Pressed()) {
-            player2.moveLeft();
+            player2.moveLeft(player2.getSpeed());
             moved = true;
         }
         if (steuerung.isUp2Pressed()) {

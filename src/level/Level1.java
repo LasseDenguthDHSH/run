@@ -1,5 +1,7 @@
 package src.level;
 
+import src.platform.BoostPlatform;
+import src.platform.DeathPlatform;
 import src.platform.Platform;
 import src.platform.SprungPlatform;
 
@@ -22,7 +24,10 @@ public class Level1 extends Level {
         platforms.add(new Platform(200, 600, platformWidth, platformHeight));
         platforms.add(new Platform(400, 500, platformWidth, platformHeight));
         platforms.add(new Platform(690, 500, platformWidth, platformHeight));
-        platforms.add(new SprungPlatform(800, 500, platformWidth, platformHeight));
+        platforms.add(new SprungPlatform(1000, 500, platformWidth, platformHeight));
+        platforms.add(new Platform(1150, 200, platformWidth, platformHeight));
+        platforms.add(new BoostPlatform(1350, 500, platformWidth, platformHeight));
+        platforms.add(new Platform(1850, 600, platformWidth, platformHeight));
     }
 }
 

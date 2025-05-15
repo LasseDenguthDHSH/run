@@ -2,7 +2,6 @@ package src.player;
 
 import src.platform.Platform;
 import src.level.Level;
-import src.platform.SprungPlatform;
 
 import java.awt.*;
 
@@ -11,7 +10,7 @@ public class Player {
     int height;
     int x;
     int y;
-    double speed;
+    int speed;
     double gravity = 0.7;
     double jumpStrength = 12;
     double velocityY = 0;
@@ -19,8 +18,10 @@ public class Player {
     boolean isOnPlatform = false;
     boolean isOnGround = true;
     private Image playerImage;
+    private int lastX;
+    private int lastY;
 
-    public Player(int width, int height, Level level, double speed, Image image) {
+    public Player(int width, int height, Level level, int speed, Image image) {
         this.width = width;
         this.height = height;
         this.x = level.getPlayerStartX();
@@ -38,6 +39,8 @@ public class Player {
             isOnGround = false;
             isOnPlatform = false;
             isJumping = true;
+            lastX = x;
+            lastY = y;
             velocityY = -jumpStrength;
         }
     }
@@ -58,12 +61,19 @@ public class Player {
                 velocityY = 0;
             }
             for (Platform platform : level.getPlatforms()) {
-                if (y + height >= platform.getY() && y + height - velocityY < platform.getY() && x + width > platform.getX() && x < platform.getX() + platform.getWidth()) {
-                    y = platform.getY() - height; // Spieler auf Plattform setzen
+                if (y + height >= platform.getY() && y + height - velocityY < platform.getY() &&
+                        x + width > platform.getX() && x < platform.getX() + platform.getWidth()) {
+
+                    y = platform.getY() - height;
                     isJumping = false;
                     velocityY = 0;
                     isOnPlatform = true;
                     platform.applyEffect(this);
+
+                    // Speichert die letzte sichere Position
+                    lastX = x;
+                    lastY = y;
+
                     return;
                 }
             }
@@ -75,13 +85,13 @@ public class Player {
 
     }
 
-    public void moveLeft() {
+    public void moveLeft(int speed) {
         if (x >= 0) {
             x -= speed;
         }
     }
 
-    public void moveRight() {
+    public void moveRight(int speed) {
         x += speed;
     }
 
@@ -119,5 +129,42 @@ public class Player {
 
     public void setVelocityY(double velocityY) {
         this.velocityY = velocityY;
+    }
+
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getLastX() {
+        return lastX;
+    }
+
+    public int getLastY() {
+        return lastY;
+    }
+
+    public void setLastX(int lastX) {
+        this.lastX = lastX;
+    }
+
+    public void setLastY(int lastY) {
+        this.lastY = lastY;
+    }
+
+    public boolean isJumping() {
+        return isJumping;
+    }
+
+    public boolean isOnPlatform() {
+        return isOnPlatform;
+    }
+
+    public boolean isOnGround() {
+        return isOnGround;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 }
