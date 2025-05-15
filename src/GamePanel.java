@@ -8,10 +8,10 @@ public class GamePanel extends JPanel {
     private Player player2;
     private Level currentLevel;
     private Steuerung steuerung;
-    private Timer gameTimer;  // Swing-Game-Loop
+    private Timer gameTimer;
     private int cameraX = 0;
 
-    private Stoppuhr timer;  // deine eigene Stoppuhr-Klasse für die Anzeige
+    private Stoppuhr stoppuhr;  // deine eigene Stoppuhr-Klasse für die Anzeige
     private boolean timerStarted = false;
 
     public GamePanel(Level level) {
@@ -24,7 +24,7 @@ public class GamePanel extends JPanel {
         this.player1 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer1Image());
         this.player2 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer2Image());
 
-        this.timer = new Stoppuhr(); // dein Stoppuhr zur Zeitmessung
+        this.stoppuhr = new Stoppuhr(); // dein Stoppuhr zur Zeitmessung
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -58,7 +58,7 @@ public class GamePanel extends JPanel {
     // Stoppuhr-Anzeige
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 20));
-        g2.drawString("Zeit: " + timer.getFormattedTime(), 20, 30);
+        g2.drawString("Zeit: " + stoppuhr.getFormattedTime(), 20, 30);
         }
 
 
@@ -97,7 +97,7 @@ public void update() {
 
         // Stoppuhr starten bei erster Bewegung
         if (!timerStarted && moved) {
-            timer.start();
+            stoppuhr.start();
             timerStarted = true;
         }
 
