@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class Platform {
     int x, y, width, height;
+    protected Color platformColor = Color.BLUE;
 
     public Platform(int x, int y, int width, int height) {
         this.x = x;
@@ -34,4 +35,7 @@ public class Platform {
     public int getHeight() {
         return height;
     }
+
+    public Color getPlatformColor() { return platformColor; }
+
 }

@@ -17,7 +17,7 @@ public class Level1 extends Level {
         this.skyImage = loadImage("src/images/skyLevel1.png");
         this.player1Image = loadImage("src/images/player1.png");
         this.player2Image = loadImage("src/images/player2.png");
-        this.platformColor = Color.BLUE;
+
         // Plattformen hinzufügen
         platforms.add(new Platform(200, 600, platformWidth, platformHeight));
         platforms.add(new Platform(400, 500, platformWidth, platformHeight));

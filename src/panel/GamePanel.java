@@ -51,7 +51,7 @@ public class GamePanel extends JPanel {
 
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {
-            g2.setColor(currentLevel.getPlatformColor());
+            g2.setColor(platform.getPlatformColor());
             g2.fillRect(platform.getX() - cameraX, platform.getY(), platform.getWidth(), platform.getHeight());
         }
 
