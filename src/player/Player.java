@@ -1,4 +1,7 @@
-package src;
+package src.player;
+
+import src.Platform;
+import src.level.Level;
 
 import java.awt.*;
 
@@ -37,7 +40,7 @@ public class Player {
 
     public void applyGravity(Level level) {
         for (Platform platform : level.getPlatforms()) {
-            if (x <= platform.x || x > platform.x + platform.width) {
+            if (x <= platform.getX() || x > platform.getX() + platform.getWidth()) {
                 isOnPlatform = false;
             }
         }
@@ -50,8 +53,8 @@ public class Player {
                 velocityY = 0;
             }
             for (Platform platform : level.getPlatforms()) {
-                if (y + height >= platform.y && y + height - velocityY < platform.y && x + width > platform.x && x < platform.x + platform.width) {
-                    y = platform.y - height; // Spieler auf Plattform setzen
+                if (y + height >= platform.getY() && y + height - velocityY < platform.getY() && x + width > platform.getX() && x < platform.getX() + platform.getWidth()) {
+                    y = platform.getY() - height; // Spieler auf Plattform setzen
                     isJumping = false;
                     velocityY = 0;
                     isOnPlatform = true;
@@ -78,5 +81,21 @@ public class Player {
 
     private int getGroundLevel() {
         return y + height;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

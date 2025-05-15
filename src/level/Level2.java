@@ -1,6 +1,7 @@
-package src;
+package src.level;
 
-import javax.swing.*;
+import src.Platform;
+
 import java.awt.*;
 
 public class Level2 extends Level {

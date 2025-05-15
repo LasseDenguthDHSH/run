@@ -1,4 +1,8 @@
-package src;
+package src.panel;
+import src.*;
+import src.level.Level;
+import src.player.Player;
+import src.player.Steuerung;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,12 +51,12 @@ public class GamePanel extends JPanel {
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {
             g2.setColor(currentLevel.getPlatformColor());
-            g2.fillRect(platform.x - cameraX, platform.y, platform.width, platform.height);
+            g2.fillRect(platform.getX() - cameraX, platform.getY(), platform.getWidth(), platform.getHeight());
         }
 
         // Player
-        g2.drawImage(player1.getImage(), player1.x - cameraX, player1.y, player1.width, player1.height, this);
-        g2.drawImage(player2.getImage(), player2.x - cameraX, player2.y, player2.width, player2.height, this);
+        g2.drawImage(player1.getImage(), player1.getX() - cameraX, player1.getY(), player1.getWidth(), player1.getHeight(), this);
+        g2.drawImage(player2.getImage(), player2.getX() - cameraX, player2.getY(), player2.getWidth(), player2.getHeight(), this);
 
 
     // Stoppuhr-Anzeige
@@ -102,10 +106,10 @@ public void update() {
         }
 
         // Immer den Spieler mit der höchsten X-Position auswählen
-        Player leadingPlayer = (player1.x > player2.x) ? player1 : player2;
+        Player leadingPlayer = (player1.getX() > player2.getX()) ? player1 : player2;
 
         // Kamera folgt dem führenden Spieler in Echtzeit
-        cameraX = leadingPlayer.x - (getWidth() / 2) + leadingPlayer.width / 2;
+        cameraX = leadingPlayer.getX() - (getWidth() / 2) + leadingPlayer.getWidth() / 2;
 
         // Falls dein Level eine feste Breite hat, Kamera begrenzen
         cameraX = Math.max(0, Math.min(cameraX, getWidth()*2));

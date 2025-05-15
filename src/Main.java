@@ -1,5 +1,9 @@
 package src;
 
+import src.level.Level;
+import src.panel.GamePanel;
+import src.panel.MenuPanel;
+
 import javax.swing.*;
 import java.awt.*;
 

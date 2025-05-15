@@ -1,4 +1,9 @@
-package src;
+package src.panel;
+
+import src.level.Level1;
+import src.level.Level2;
+import src.level.Level3;
+import src.Main;
 
 import javax.swing.*;
 import java.awt.*;

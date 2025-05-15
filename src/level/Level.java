@@ -1,4 +1,6 @@
-package src;
+package src.level;
+
+import src.Platform;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
