@@ -7,17 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Level {
-    protected int groundY;
-    protected Image groundImage;
-    protected Image skyImage;
-    protected Image level2Image;
-    protected Image player1Image;
-    protected Image player2Image;
-    protected ArrayList<Platform> platforms = new ArrayList<>();
+    int groundY;
+    int platformWidth;
+    int platformHeight;
+    Image groundImage;
+    Image skyImage;
+    Image player1Image;
+    Image player2Image;
+    ArrayList<Platform> platforms = new ArrayList<>();
     String title;
     Color platformColor;
 
-    public Level(String title){
+    public Level(String title) {
         this.title = title;
     }
 
@@ -49,10 +50,6 @@ public abstract class Level {
         return skyImage;
     }
 
-    public Image getLevel2Image() {
-        return level2Image;
-    }
-
     public Image getPlayer1Image() {
         return player1Image;
     }
@@ -80,9 +77,11 @@ public abstract class Level {
     public String getTitle() {
         return title;
     }
+
     public ArrayList<Platform> getPlatforms() {
         return platforms;
     }
+
     public Color getPlatformColor() {
         return platformColor;
     }

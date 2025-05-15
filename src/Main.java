@@ -4,14 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
-    private static CardLayout cardLayout;
-    private static JPanel mainPanel;
-    private static JFrame frame;
+    static CardLayout cardLayout;
+    static JPanel mainPanel;
+    static JFrame frame;
 
     public static void main(String[] args) {
 
         frame = new JFrame("Spiel");
-        frame.setSize(1600, 839);
+        frame.setSize(1600, 837);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
