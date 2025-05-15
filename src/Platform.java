@@ -14,5 +14,6 @@ public class Platform {
 
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
+
     }
 }
