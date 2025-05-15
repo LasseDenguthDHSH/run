@@ -1,7 +1,8 @@
 package src.player;
 
-import src.Platform;
+import src.platform.Platform;
 import src.level.Level;
+import src.platform.SprungPlatform;
 
 import java.awt.*;
 
@@ -62,6 +63,7 @@ public class Player {
                     isJumping = false;
                     velocityY = 0;
                     isOnPlatform = true;
+                    platform.applyEffect(this);
                     return;
                 }
             }
@@ -101,5 +103,21 @@ public class Player {
 
     public int getWidth() {
         return width;
+    }
+
+    public double getJumpStrength() {
+        return jumpStrength;
+    }
+
+    public double getVelocityY() {
+        return velocityY;
+    }
+
+    public void setJumpStrength(double jumpStrength) {
+        this.jumpStrength = jumpStrength;
+    }
+
+    public void setVelocityY(double velocityY) {
+        this.velocityY = velocityY;
     }
 }

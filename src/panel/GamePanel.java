@@ -1,6 +1,7 @@
 package src.panel;
 import src.*;
 import src.level.Level;
+import src.platform.Platform;
 import src.player.Player;
 import src.player.Steuerung;
 
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel {
             g2.setColor(currentLevel.getPlatformColor());
             g2.fillRect(platform.getX() - cameraX, platform.getY(), platform.getWidth(), platform.getHeight());
         }
+
 
         // Player
         g2.drawImage(player1.getImage(), player1.getX() - cameraX, player1.getY(), player1.getWidth(), player1.getHeight(), this);

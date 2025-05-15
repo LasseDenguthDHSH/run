@@ -1,4 +1,6 @@
-package src;
+package src.platform;
+
+import src.player.Player;
 
 import java.awt.*;
 
@@ -14,8 +16,8 @@ public class Platform {
 
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
-
     }
+    public void applyEffect(Player player){}
 
     public int getX() {
         return x;

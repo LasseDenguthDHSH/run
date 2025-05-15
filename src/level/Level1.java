@@ -1,6 +1,7 @@
 package src.level;
 
-import src.Platform;
+import src.platform.Platform;
+import src.platform.SprungPlatform;
 
 import java.awt.*;
 
@@ -8,7 +9,7 @@ public class Level1 extends Level {
     public Level1(String title) {
         super(title);
         this.groundY = 700;
-        this.platformWidth = 150;
+        this.platformWidth = 100;
         this.platformHeight = 20;
         this.skyHeight = 700;
         this.setPlayerStartY(groundY-32);
@@ -19,8 +20,9 @@ public class Level1 extends Level {
         this.platformColor = Color.BLUE;
         // Plattformen hinzufügen
         platforms.add(new Platform(200, 600, platformWidth, platformHeight));
-        platforms.add(new Platform(450, 500, platformWidth, platformHeight));
-        platforms.add(new Platform(810, 500, platformWidth, platformHeight));
+        platforms.add(new Platform(400, 500, platformWidth, platformHeight));
+        platforms.add(new Platform(690, 500, platformWidth, platformHeight));
+        platforms.add(new SprungPlatform(800, 500, platformWidth, platformHeight));
     }
 }
 

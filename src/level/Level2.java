@@ -1,6 +1,6 @@
 package src.level;
 
-import src.Platform;
+import src.platform.Platform;
 
 import java.awt.*;
 
