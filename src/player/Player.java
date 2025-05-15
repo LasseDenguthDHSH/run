@@ -1,5 +1,8 @@
 package src.player;
 
+import src.level.Level1;
+import src.level.Level2;
+import src.level.Level3;
 import src.platform.Platform;
 import src.level.Level;
 
@@ -20,6 +23,7 @@ public class Player {
     private Image playerImage;
     private int lastX;
     private int lastY;
+    private double velocityX = 0;
 
     public Player(int width, int height, Level level, int speed, Image image) {
         this.width = width;
@@ -58,6 +62,14 @@ public class Player {
                 y = level.getGroundY() - height;
                 isJumping = false;
                 isOnGround = true;
+                // Checkpoint
+                if (x>level.getPlayerStartX()+100 && level instanceof Level1) {
+                    setPosition(getLastX(), getLastY());
+                } else if(x>level.getPlayerStartX() + 100 && level instanceof Level2) {
+
+                } else if (x>level.getPlayerStartX() + 100 && level instanceof Level3) {
+                    setPosition(level.getPlayerStartX(), level.getPlayerStartY());
+                }
                 velocityY = 0;
             }
             for (Platform platform : level.getPlatforms()) {
@@ -81,9 +93,21 @@ public class Player {
         // Prüfen, ob der Spieler auf einer Plattform landet
 
         // Prüfen, ob der Spieler auf dem Boden landet
-
-
     }
+
+    public void boostMovement() {
+        x += velocityX; // Bewegung nach rechts
+        velocityX *= 0.95; // Langsames Abbremsen
+
+        if (Math.abs(velocityX) < 0.2) {
+            velocityX = 0; // Stoppt die Bewegung, wenn sie zu langsam wird
+        }
+    }
+
+    public void setVelocityX(double velocityX) {
+        this.velocityX = velocityX;
+    }
+
 
     public void moveLeft(int speed) {
         if (x >= 0) {

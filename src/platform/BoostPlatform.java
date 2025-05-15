@@ -2,7 +2,10 @@ package src.platform;
 
 import src.player.Player;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BoostPlatform extends Platform {
     public BoostPlatform(int x, int y, int width, int height) {
@@ -11,6 +14,6 @@ public class BoostPlatform extends Platform {
     }
     @Override
     public void applyEffect(Player player) {
-        player.moveRight(player.getSpeed()*100);
+        player.setVelocityX(player.getSpeed() * 10); // Spieler bekommt einen Boost nach rechts
     }
 }

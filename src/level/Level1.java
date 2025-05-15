@@ -28,7 +28,7 @@ public class Level1 extends Level {
         platforms.add(new DeathPlatform(1150, 200, platformWidth+20, platformHeight));
         platforms.add(new DeathPlatform(1340, 200, platformWidth+20, platformHeight));
         platforms.add(new BoostPlatform(1250, 500, platformWidth, platformHeight));
-        platforms.add(new Platform(1750, 600, platformWidth, platformHeight));
+        platforms.add(new Platform(1950, 600, platformWidth*2, platformHeight));
     }
 }
 

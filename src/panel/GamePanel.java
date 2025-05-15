@@ -1,8 +1,8 @@
 package src.panel;
+
 import src.*;
 import src.level.Level;
 import src.platform.Platform;
-import src.platform.SprungPlatform;
 import src.player.Player;
 import src.player.Steuerung;
 
@@ -44,11 +44,11 @@ public class GamePanel extends JPanel {
 
         //Hintergrund
         g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
-        g2.drawImage(currentLevel.getGroundImage(), getWidth()-cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
-        g2.drawImage(currentLevel.getGroundImage(), getWidth()*2-cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), getWidth() - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), getWidth() * 2 - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
         g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth()-cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth()*2-cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth() - cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth() * 2 - cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
 
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {
@@ -62,14 +62,14 @@ public class GamePanel extends JPanel {
         g2.drawImage(player2.getImage(), player2.getX() - cameraX, player2.getY(), player2.getWidth(), player2.getHeight(), this);
 
 
-    // Stoppuhr-Anzeige
+        // Stoppuhr-Anzeige
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 20));
         g2.drawString("Zeit: " + stoppuhr.getFormattedTime(), 20, 30);
-        }
+    }
 
 
-public void update() {
+    public void update() {
         boolean moved = false;
 
         // Spieler 1 Steuerung
@@ -85,6 +85,7 @@ public void update() {
             player1.jump();
             moved = true;
         }
+        player1.boostMovement();
         player1.applyGravity(currentLevel);
 
         // Spieler 2 Steuerung
@@ -100,6 +101,7 @@ public void update() {
             player2.jump();
             moved = true;
         }
+        player2.boostMovement();
         player2.applyGravity(currentLevel);
 
         // Stoppuhr starten bei erster Bewegung
@@ -115,7 +117,7 @@ public void update() {
         cameraX = leadingPlayer.getX() - (getWidth() / 2) + leadingPlayer.getWidth() / 2;
 
         // Falls dein Level eine feste Breite hat, Kamera begrenzen
-        cameraX = Math.max(0, Math.min(cameraX, getWidth()*2));
+        cameraX = Math.max(0, Math.min(cameraX, getWidth() * 2));
 
         if (steuerung.isEscapePressed()) {
             Main.showMenu();
