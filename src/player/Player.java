@@ -16,6 +16,7 @@ public class Player {
     double velocityY = 0;
     boolean isJumping = false;
     boolean isOnPlatform = false;
+    boolean isOnGround = true;
     private Image playerImage;
 
     public Player(int width, int height, Level level, double speed, Image image) {
@@ -32,7 +33,9 @@ public class Player {
     }
 
     public void jump() {
-        if (!isJumping) {
+        if (!isJumping && isOnPlatform || isOnGround) {
+            isOnGround = false;
+            isOnPlatform = false;
             isJumping = true;
             velocityY = -jumpStrength;
         }
@@ -50,6 +53,7 @@ public class Player {
             if (y + height >= level.getGroundY()) {
                 y = level.getGroundY() - height;
                 isJumping = false;
+                isOnGround = true;
                 velocityY = 0;
             }
             for (Platform platform : level.getPlatforms()) {

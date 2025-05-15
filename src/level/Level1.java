@@ -20,7 +20,7 @@ public class Level1 extends Level {
         // Plattformen hinzufügen
         platforms.add(new Platform(200, 600, platformWidth, platformHeight));
         platforms.add(new Platform(450, 500, platformWidth, platformHeight));
-        platforms.add(new Platform(750, 500, platformWidth, platformHeight));
+        platforms.add(new Platform(810, 500, platformWidth, platformHeight));
     }
 }
 
