@@ -3,8 +3,11 @@ package src.player;
 import src.level.Level1;
 import src.level.Level2;
 import src.level.Level3;
+import src.platform.BoostPlatform;
+import src.platform.DeathPlatform;
 import src.platform.Platform;
 import src.level.Level;
+import src.platform.SprungPlatform;
 
 import java.awt.*;
 
@@ -43,8 +46,6 @@ public class Player {
             isOnGround = false;
             isOnPlatform = false;
             isJumping = true;
-            lastX = x;
-            lastY = y;
             velocityY = -jumpStrength;
         }
     }
@@ -83,8 +84,10 @@ public class Player {
                     platform.applyEffect(this);
 
                     // Speichert die letzte sichere Position
-                    lastX = x;
-                    lastY = y;
+                    if (!(platform instanceof SprungPlatform) && !(platform instanceof DeathPlatform) && !(platform instanceof BoostPlatform)) {
+                        lastX = platform.getX()+platform.getWidth()/2-32;
+                        lastY = platform.getY()-32;
+                    }
 
                     return;
                 }
