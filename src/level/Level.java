@@ -15,6 +15,7 @@ public abstract class Level {
     int skyHeight;
     int playerStartX;
     int playerStartY;
+    double gravity;
     Image groundImage;
     Image skyImage;
     Image player1Image;
@@ -26,6 +27,9 @@ public abstract class Level {
     public Level(String title) {
         this.title = title;
         this.playerStartX = 50;
+        this.gravity = 0.7;
+        this.platformWidth = 100;
+        this.platformHeight = 20;
     }
 
     protected Image loadImage(String absolutePath) {
@@ -95,4 +99,7 @@ public abstract class Level {
         return platformColor;
     }
 
+    public double getGravity() {
+        return gravity;
+    }
 }

@@ -1,14 +1,20 @@
 package src.level;
 
+import src.platform.CheckpointPlatform;
+import src.platform.DeathPlatform;
 import src.platform.Platform;
+import src.platform.SprungPlatform;
+import src.player.Player;
 
 import java.awt.*;
 
 public class Level2 extends Level {
     public Level2(String title) {
         super(title);
+        this.gravity = 0.25;
         this.groundY = 832;
         this.skyHeight = 800;
+        this.platformWidth = 120;
         this.setPlayerStartY(groundY-164);
         this.groundImage = loadImage("src/images/groundLevel2.png");
         this.skyImage = loadImage("src/images/skyLevel2.png");
@@ -16,9 +22,17 @@ public class Level2 extends Level {
         this.player2Image = loadImage("src/images/player2.png");
         this.platformColor = Color.gray;
         // Plattformen hinzufügen
-        platforms.add(new Platform(0, 700, 150, 20));
-        platforms.add(new Platform(200, 600, 150, 20));
-        platforms.add(new Platform(450, 500, 150, 20));
+        platforms.add(new CheckpointPlatform(0, 700, platformWidth, platformHeight));
+        platforms.add(new Platform(550, 600, platformWidth, platformHeight));
+        platforms.add(new Platform(1150, 500, platformWidth, platformHeight));
+        platforms.add(new Platform(1650, 300, platformWidth, platformHeight));
+        platforms.add(new SprungPlatform(1850, 800, platformWidth*3, platformHeight));
+        platforms.add(new Platform(2850, 650, platformWidth, platformHeight));
+        platforms.add(new Platform(3150, 350, platformWidth, platformHeight));
+        platforms.add(new Platform(3150, 100, platformWidth, platformHeight));
+        platforms.add(new CheckpointPlatform(3150, 450, platformWidth, platformHeight));
+        platforms.add(new DeathPlatform(3400, 550, platformWidth, platformHeight));
+        platforms.add(new Platform(3820, 250, platformWidth, platformHeight));
     }
 }
 
