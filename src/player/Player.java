@@ -14,15 +14,12 @@ public class Player {
     int x;
     int y;
     int speed;
-    double gravity = 0.7;
     double jumpStrength = 12;
     double velocityY = 0;
     boolean isJumping = false;
     boolean isOnPlatform = false;
     boolean isOnGround = true;
     private Image playerImage;
-    private int lastX;
-    private int lastY;
     private double velocityX = 0;
     private int checkpointX;
     private int checkpointY;
@@ -64,12 +61,12 @@ public class Player {
                 isJumping = false;
                 isOnGround = true;
                 // Checkpoint
-                if (x>level.getPlayerStartX()+100 && level instanceof Level1) {
-                    setPosition(getLastX(), getLastY());
+                if (x>level.getPlayerStartX()+250 && level instanceof Level1) {
+                    resetToCheckpoint();
                 } else if(x>level.getPlayerStartX() + 100 && level instanceof Level2) {
                     resetToCheckpoint();
-                } else if (x>level.getPlayerStartX() + 100 && level instanceof Level3) {
-                    setPosition(level.getPlayerStartX(), level.getPlayerStartY());
+                } else if (level instanceof Level3) {
+                    resetToCheckpoint();
                 }
                 velocityY = 0;
             }
@@ -84,12 +81,13 @@ public class Player {
                     platform.applyEffect(this);
 
                     // Speichert die letzte sichere Position
-                    if (!(platform instanceof SprungPlatform) && !(platform instanceof DeathPlatform) && !(platform instanceof BoostPlatform) && !(platform instanceof CheckpointPlatform)) {
-                        lastX = platform.getX()+platform.getWidth()/2-16;
-                        lastY = platform.getY()-32;
-                    } else if (platform instanceof CheckpointPlatform) {
-                        lastX = checkpointX;
-                        lastY = checkpointY;
+                    if (level instanceof Level1 && !(platform instanceof CheckpointPlatform) && !(platform instanceof DeathPlatform) &&
+                            !(platform instanceof SprungPlatform)) {
+                        checkpointX = platform.getX()+platform.getWidth()/2-16;
+                        checkpointY = platform.getY()-32;
+                    } else if (level instanceof Level3) {
+                        checkpointX = level.getPlayerStartX();
+                        checkpointY = level.getPlayerStartY();
                     }
 
                     return;
@@ -125,10 +123,6 @@ public class Player {
         x += speed;
     }
 
-    private int getGroundLevel() {
-        return y + height;
-    }
-
     public int getX() {
         return x;
     }
@@ -149,49 +143,8 @@ public class Player {
         return jumpStrength;
     }
 
-    public double getVelocityY() {
-        return velocityY;
-    }
-
-    public void setJumpStrength(double jumpStrength) {
-        this.jumpStrength = jumpStrength;
-    }
-
     public void setVelocityY(double velocityY) {
         this.velocityY = velocityY;
-    }
-
-    public void setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getLastX() {
-        return lastX;
-    }
-
-    public int getLastY() {
-        return lastY;
-    }
-
-    public void setLastX(int lastX) {
-        this.lastX = lastX;
-    }
-
-    public void setLastY(int lastY) {
-        this.lastY = lastY;
-    }
-
-    public boolean isJumping() {
-        return isJumping;
-    }
-
-    public boolean isOnPlatform() {
-        return isOnPlatform;
-    }
-
-    public boolean isOnGround() {
-        return isOnGround;
     }
 
     public int getSpeed() {
@@ -201,7 +154,6 @@ public class Player {
         this.checkpointX = x;
         this.checkpointY = y;
     }
-
     public void resetToCheckpoint() {
         this.x = checkpointX;
         this.y = checkpointY;

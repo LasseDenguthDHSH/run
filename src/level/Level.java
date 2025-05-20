@@ -102,4 +102,8 @@ public abstract class Level {
     public double getGravity() {
         return gravity;
     }
+
+    public int getPlatformWidth() {
+        return platformWidth;
+    }
 }

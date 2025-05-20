@@ -11,6 +11,6 @@ public class DeathPlatform extends Platform {
     }
     @Override
     public void applyEffect(Player player) {
-        player.setPosition(player.getLastX(), player.getLastY());
+        player.resetToCheckpoint();
     }
 }
