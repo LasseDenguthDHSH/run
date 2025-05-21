@@ -16,6 +16,7 @@ public class GamePanel extends JPanel {
     private Steuerung steuerung;
     private Timer gameTimer;
     private int cameraX = 0;
+    private Player leadingPlayer;
 
     private Stoppuhr stoppuhr;  // deine eigene Stoppuhr-Klasse für die Anzeige
     private boolean timerStarted = false;
@@ -113,7 +114,7 @@ public class GamePanel extends JPanel {
         }
 
         // Immer den Spieler mit der höchsten X-Position auswählen
-        Player leadingPlayer = (player1.getX() > player2.getX()) ? player1 : player2;
+        leadingPlayer = (player1.getX() > player2.getX()) ? player1 : player2;
 
         // Kamera folgt dem führenden Spieler in Echtzeit
         cameraX = leadingPlayer.getX() - (getWidth() / 2) + leadingPlayer.getWidth() / 2;
@@ -128,5 +129,9 @@ public class GamePanel extends JPanel {
 
         repaint();
 
+    }
+
+    public Player getLeadingPlayer() {
+        return leadingPlayer;
     }
 }

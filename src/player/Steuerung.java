@@ -61,7 +61,7 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_LEFT -> left2Pressed = true;
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
         }
-        gamePanel.update();
+        //gamePanel.update();
     }
 
     @Override
