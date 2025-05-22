@@ -50,6 +50,7 @@ public class GamePanel extends JPanel {
         g2.drawImage(currentLevel.getGroundImage(), getWidth() * 3 - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
         g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth()*2, currentLevel.getSkyHeight(), this);
         g2.drawImage(currentLevel.getSkyImage(), getWidth() * 2 - cameraX, 0, getWidth()*2, currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth() * 4 - cameraX, 0, getWidth()*2, currentLevel.getSkyHeight(), this);
 
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {
@@ -118,7 +119,7 @@ public class GamePanel extends JPanel {
         cameraX = leadingPlayer.getX() - (getWidth() / 2) + leadingPlayer.getWidth() / 2;
 
         // Falls dein Level eine feste Breite hat, Kamera begrenzen
-        cameraX = Math.max(0, Math.min(cameraX, getWidth() * 3));
+        cameraX = Math.max(0, Math.min(cameraX, getWidth() * 6));
 
         if (steuerung.isEscapePressed()) {
             Main.showMenu();
