@@ -31,8 +31,8 @@ public class Level2 extends Level {
         platforms.add(new Platform(3150, 350, platformWidth, platformHeight));
         platforms.add(new Platform(3150, 100, platformWidth, platformHeight));
         platforms.add(new CheckpointPlatform(3150, 450, platformWidth, platformHeight));
-        platforms.add(new DeathPlatform(3790, 250, 20, platformHeight));
-        platforms.add(new Platform(3810, 250, platformWidth, platformHeight));
+        platforms.add(new DeathPlatform(3780, 250, 20, platformHeight));
+        platforms.add(new Platform(3800, 250, platformWidth, platformHeight));
     }
 }
 
