@@ -16,7 +16,6 @@ public class GamePanel extends JPanel {
     private Steuerung steuerung;
     private Timer gameTimer;
     private int cameraX = 0;
-    private int cameraY = 0;
     private Player leadingPlayer;
 
     private Stoppuhr stoppuhr;  // deine eigene Stoppuhr-Klasse für die Anzeige
@@ -45,24 +44,23 @@ public class GamePanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
 
         //Hintergrund
-        g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY() - cameraY, getWidth(), 100, this);
-        g2.drawImage(currentLevel.getGroundImage(), getWidth() - cameraX, currentLevel.getGroundY() - cameraY, getWidth(), 100, this);
-        g2.drawImage(currentLevel.getGroundImage(), getWidth() * 2 - cameraX, currentLevel.getGroundY() - cameraY, getWidth(), 100, this);
-        g2.drawImage(currentLevel.getGroundImage(), getWidth() * 3 - cameraX, currentLevel.getGroundY() - cameraY, getWidth(), 100, this);
-        g2.drawImage(currentLevel.getSkyImage(), -cameraX, -cameraY, getWidth() * 2, currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth() * 2 - cameraX, -cameraY, getWidth() * 2, currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), getWidth() - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), getWidth() * 2 - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), getWidth() * 3 - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
+        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth()*2, currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth()*2 - cameraX, 0, getWidth()*2, currentLevel.getSkyHeight(), this);
 
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {
             g2.setColor(platform.getPlatformColor());
-            g2.fillRect(platform.getX() - cameraX, platform.getY() - cameraY, platform.getWidth(), platform.getHeight());
+            g2.fillRect(platform.getX() - cameraX, platform.getY(), platform.getWidth(), platform.getHeight());
         }
 
 
         // Player
-        g2.drawImage(player1.getImage(), player1.getX() - cameraX, player1.getY() - cameraY, player1.getWidth(), player1.getHeight(), this);
-        g2.drawImage(player2.getImage(), player2.getX() - cameraX, player2.getY() - cameraY, player2.getWidth(), player2.getHeight(), this);
-
+        g2.drawImage(player1.getImage(), player1.getX() - cameraX, player1.getY(), player1.getWidth(), player1.getHeight(), this);
+        g2.drawImage(player2.getImage(), player2.getX() - cameraX, player2.getY(), player2.getWidth(), player2.getHeight(), this);
 
 
         // Stoppuhr-Anzeige
@@ -118,11 +116,9 @@ public class GamePanel extends JPanel {
 
         // Kamera folgt dem führenden Spieler in Echtzeit
         cameraX = leadingPlayer.getX() - (getWidth() / 2) + leadingPlayer.getWidth() / 2;
-        cameraY = leadingPlayer.getY() - (getHeight() / 2 + getHeight() / 3) + leadingPlayer.getHeight() / 2;
 
         // Falls dein Level eine feste Breite hat, Kamera begrenzen
         cameraX = Math.max(0, Math.min(cameraX, getWidth() * 3));
-        cameraY = Math.max(0, Math.min(cameraY, currentLevel.getSkyHeight()));
 
         if (steuerung.isEscapePressed()) {
             Main.showMenu();

@@ -1,6 +1,7 @@
 package src.level;
 
 import src.platform.Platform;
+import src.player.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -23,6 +24,7 @@ public abstract class Level {
     ArrayList<Platform> platforms = new ArrayList<>();
     String title;
     Color platformColor;
+    double jumpPlatformEffect = -24;
 
     public Level(String title) {
         this.title = title;
@@ -105,5 +107,12 @@ public abstract class Level {
 
     public int getPlatformWidth() {
         return platformWidth;
+    }
+
+    public double getJumpPlatformEffect() {
+        return jumpPlatformEffect;
+    }
+    public void setJumpPlatformEffect(double jumpPlatformEffect) {
+        this.jumpPlatformEffect = jumpPlatformEffect;
     }
 }
