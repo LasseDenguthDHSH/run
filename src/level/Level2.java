@@ -1,9 +1,6 @@
 package src.level;
 
-import src.platform.CheckpointPlatform;
-import src.platform.DeathPlatform;
-import src.platform.Platform;
-import src.platform.SprungPlatform;
+import src.platform.*;
 import src.player.Player;
 
 import java.awt.*;
@@ -12,8 +9,8 @@ public class Level2 extends Level {
     public Level2(String title) {
         super(title);
         this.gravity = 0.25;
-        this.groundY = 832;
-        this.skyHeight = 800;
+        this.groundY = 1632;
+        this.skyHeight = 1600;
         this.platformWidth = 120;
         this.setPlayerStartY(groundY-164);
         this.groundImage = loadImage("src/images/groundLevel2.png");
@@ -36,10 +33,11 @@ public class Level2 extends Level {
         platforms.add(new DeathPlatform(3890, 318, 20, platformHeight+32, this));
         platforms.add(new SprungPlatform(4390, 350, platformWidth, platformHeight, this));
         platforms.add(new DeathPlatform(4390, 318, 20, platformHeight+32, this));
+        platforms.add(new CheckpointPlatform(4700, 750, platformWidth, platformHeight, this));
+        platforms.add(new DeathPlatform(4700, 600, platformWidth, platformHeight, this));
+        platforms.add(new Platform(5100, 500, platformWidth, platformHeight, this));
+        platforms.add(new Platform(5700, 400, platformWidth, platformHeight, this));
+        platforms.add(new Platform(6400, 400, platformWidth, platformHeight, this));
+
     }
 }
-
-
-
-
-
