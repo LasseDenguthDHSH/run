@@ -18,8 +18,8 @@ public class Level2 extends Level {
         this.setPlayerStartY(groundY-164);
         this.groundImage = loadImage("src/images/groundLevel2.png");
         this.skyImage = loadImage("src/images/skyLevel2.png");
-        this.player1Image = loadImage("src/images/player1.png");
-        this.player2Image = loadImage("src/images/player2.png");
+        this.player1Image = loadImage("src/images/player1_level2.png");
+        this.player2Image = loadImage("src/images/player2_level2.png");
         this.platformColor = new Color(220, 203, 255);
         // Plattformen hinzufügen
         platforms.add(new CheckpointPlatform(0, 700, platformWidth, platformHeight, this));
