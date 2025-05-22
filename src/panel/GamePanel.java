@@ -48,10 +48,8 @@ public class GamePanel extends JPanel {
         g2.drawImage(currentLevel.getGroundImage(), getWidth() - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
         g2.drawImage(currentLevel.getGroundImage(), getWidth() * 2 - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
         g2.drawImage(currentLevel.getGroundImage(), getWidth() * 3 - cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
-        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth() - cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth() * 2 - cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), getWidth() * 3 - cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth()*2, currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), getWidth() * 2 - cameraX, 0, getWidth()*2, currentLevel.getSkyHeight(), this);
 
         // Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {

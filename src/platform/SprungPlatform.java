@@ -1,12 +1,13 @@
 package src.platform;
 
+import src.level.Level;
 import src.player.Player;
 
 import java.awt.*;
 
 public class SprungPlatform extends Platform {
-    public SprungPlatform(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public SprungPlatform(int x, int y, int width, int height, Level level) {
+        super(x, y, width, height, level);
         this.platformColor = new Color(200, 100, 0);
     }
 

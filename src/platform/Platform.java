@@ -1,18 +1,20 @@
 package src.platform;
 
+import src.level.Level;
 import src.player.Player;
 
 import java.awt.*;
 
 public class Platform {
     int x, y, width, height;
-    protected Color platformColor = Color.BLUE;
+    protected Color platformColor;
 
-    public Platform(int x, int y, int width, int height) {
+    public Platform(int x, int y, int width, int height, Level level) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.platformColor = level.getPlatformColor();
     }
 
     public Rectangle getBounds() {
@@ -37,5 +39,6 @@ public class Platform {
     }
 
     public Color getPlatformColor() { return platformColor; }
+    public void setPlatformColor(Color platformColor) { this.platformColor = platformColor; }
 
 }
