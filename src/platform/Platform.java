@@ -17,9 +17,6 @@ public class Platform {
         this.platformColor = level.getPlatformColor();
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
-    }
     public void applyEffect(Player player){}
 
     public int getX() {
@@ -39,6 +36,4 @@ public class Platform {
     }
 
     public Color getPlatformColor() { return platformColor; }
-    public void setPlatformColor(Color platformColor) { this.platformColor = platformColor; }
-
 }

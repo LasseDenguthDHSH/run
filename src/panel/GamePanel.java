@@ -1,10 +1,9 @@
 package src.panel;
 
 import src.*;
-import src.level.Level;
+import src.level.*;
 import src.platform.Platform;
-import src.player.Player;
-import src.player.Steuerung;
+import src.player.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +16,15 @@ public class GamePanel extends JPanel {
     private Timer gameTimer;
     private int cameraX = 0;
     private Player leadingPlayer;
+    private Image pfeil;
 
-    private Stoppuhr stoppuhr;  // deine eigene Stoppuhr-Klasse für die Anzeige
+    private Stoppuhr stoppuhr;
     private boolean timerStarted = false;
 
     public GamePanel(Level level) {
         this.currentLevel = level;
-
-        this.steuerung = new Steuerung(this);
+        this.pfeil = new ImageIcon("src/images/pfeil.png").getImage();
+        this.steuerung = new Steuerung();
         this.addKeyListener(steuerung);
         this.setFocusable(true);
 
@@ -67,6 +67,12 @@ public class GamePanel extends JPanel {
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 20));
         g2.drawString("Zeit: " + stoppuhr.getFormattedTime(), 20, 30);
+
+        //Level Spezifisch
+        if (currentLevel instanceof Level2){
+            g2.drawImage(pfeil, 2080 - cameraX, getHeight()/2, pfeil.getWidth(this)* 3/7,
+                    pfeil.getHeight(this)* 3/7, this);
+        }
     }
 
 
@@ -114,10 +120,10 @@ public class GamePanel extends JPanel {
         // Immer den Spieler mit der höchsten X-Position auswählen
         leadingPlayer = (player1.getX() > player2.getX()) ? player1 : player2;
 
-        // Kamera folgt dem führenden Spieler in Echtzeit
+        // Kamera folgt dem führenden Spieler
         cameraX = leadingPlayer.getX() - (getWidth() / 2) + leadingPlayer.getWidth() / 2;
 
-        // Falls dein Level eine feste Breite hat, Kamera begrenzen
+        // Kamera begrenzen
         cameraX = Math.max(0, Math.min(cameraX, getWidth() * 3));
 
         if (steuerung.isEscapePressed()) {

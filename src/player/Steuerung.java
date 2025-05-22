@@ -2,8 +2,7 @@ package src.player;
 
 import src.panel.GamePanel;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class Steuerung implements KeyListener {
     private boolean up1Pressed = false;
@@ -13,10 +12,8 @@ public class Steuerung implements KeyListener {
     private boolean left1Pressed = false;
     private boolean left2Pressed = false;
     private boolean escapePressed = false;
-    private GamePanel gamePanel;
 
-    public Steuerung(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+    public Steuerung() {
     }
 
     public boolean isUp1Pressed() {
@@ -49,7 +46,6 @@ public class Steuerung implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -61,7 +57,6 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_LEFT -> left2Pressed = true;
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
         }
-        //gamePanel.update();
     }
 
     @Override

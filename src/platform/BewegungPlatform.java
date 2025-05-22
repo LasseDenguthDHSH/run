@@ -1,7 +1,6 @@
 package src.platform;
 
 import src.level.Level;
-import src.player.Player;
 
 import java.awt.*;
 

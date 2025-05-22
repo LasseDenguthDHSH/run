@@ -1,8 +1,6 @@
 package src.level;
 
-import src.platform.Platform;
-import src.player.Player;
-
+import src.platform.*;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
@@ -81,16 +79,8 @@ public abstract class Level {
         return playerStartY;
     }
 
-    public void setPlayerStartX(int playerStartX) {
-        this.playerStartX = playerStartX;
-    }
-
     public void setPlayerStartY(int playerStartY) {
         this.playerStartY = playerStartY;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public ArrayList<Platform> getPlatforms() {
@@ -105,14 +95,7 @@ public abstract class Level {
         return gravity;
     }
 
-    public int getPlatformWidth() {
-        return platformWidth;
-    }
-
     public double getJumpPlatformEffect() {
         return jumpPlatformEffect;
-    }
-    public void setJumpPlatformEffect(double jumpPlatformEffect) {
-        this.jumpPlatformEffect = jumpPlatformEffect;
     }
 }

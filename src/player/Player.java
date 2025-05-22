@@ -1,10 +1,7 @@
 package src.player;
 
-import src.level.Level1;
-import src.level.Level2;
-import src.level.Level3;
 import src.platform.*;
-import src.level.Level;
+import src.level.*;
 
 import java.awt.*;
 
@@ -48,6 +45,8 @@ public class Player {
     }
 
     public void applyGravity(Level level) {
+
+        //Spieler runter von Platform
         for (Platform platform : level.getPlatforms()) {
             if (x <= platform.getX() || x > platform.getX() + platform.getWidth()) {
                 isOnPlatform = false;
@@ -60,7 +59,8 @@ public class Player {
                 y = level.getGroundY() - height;
                 isJumping = false;
                 isOnGround = true;
-                // Checkpoint
+
+                // Zurücksetzen zu Checkpoint
                 if (x>level.getPlayerStartX()+250 && level instanceof Level1) {
                     resetToCheckpoint();
                 } else if(x>level.getPlayerStartX() + 100 && level instanceof Level2) {
@@ -70,6 +70,8 @@ public class Player {
                 }
                 velocityY = 0;
             }
+
+            //Spieler auf Platform
             for (Platform platform : level.getPlatforms()) {
                 if (y + height >= platform.getY() && y + height - velocityY < platform.getY() &&
                         x + width > platform.getX() && x < platform.getX() + platform.getWidth()) {
@@ -94,17 +96,14 @@ public class Player {
                 }
             }
         }
-        // Prüfen, ob der Spieler auf einer Plattform landet
-
-        // Prüfen, ob der Spieler auf dem Boden landet
     }
 
     public void boostMovement() {
-        x += velocityX; // Bewegung nach rechts
-        velocityX *= 0.95; // Langsames Abbremsen
+        x += velocityX;
+        velocityX *= 0.95;
 
         if (Math.abs(velocityX) < 0.2) {
-            velocityX = 0; // Stoppt die Bewegung, wenn sie zu langsam wird
+            velocityX = 0;
         }
     }
 
@@ -137,10 +136,6 @@ public class Player {
 
     public int getWidth() {
         return width;
-    }
-
-    public double getJumpStrength() {
-        return jumpStrength;
     }
 
     public void setVelocityY(double velocityY) {

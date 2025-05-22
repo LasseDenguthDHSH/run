@@ -11,11 +11,12 @@ public class Main {
     static CardLayout cardLayout;
     static JPanel panelManager;
     static JFrame frame;
+    static int fensterLeiste = 37;
 
     public static void main(String[] args) {
 
         frame = new JFrame("Spiel");
-        frame.setSize(1600, 837);
+        frame.setSize(1600, 800 + fensterLeiste);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);

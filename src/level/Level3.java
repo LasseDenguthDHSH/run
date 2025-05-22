@@ -2,8 +2,6 @@ package src.level;
 
 import src.platform.*;
 
-import java.awt.*;
-
 public class Level3 extends Level{
     public Level3(String title) {
         super(title);
