@@ -12,8 +12,8 @@ public class Level2 extends Level {
     public Level2(String title) {
         super(title);
         this.gravity = 0.25;
-        this.groundY = 832;
-        this.skyHeight = 800;
+        this.groundY = 1632;
+        this.skyHeight = 1600;
         this.platformWidth = 120;
         this.setPlayerStartY(groundY-164);
         this.groundImage = loadImage("src/images/groundLevel2.png");
