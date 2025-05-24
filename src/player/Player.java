@@ -59,22 +59,14 @@ public class Player {
                 y = level.getGroundY() - height;
                 isJumping = false;
                 isOnGround = true;
-
-                // Zurücksetzen zu Checkpoint
-                if (x>level.getPlayerStartX()+250 && level instanceof Level1) {
-                    resetToCheckpoint();
-                } else if(x>level.getPlayerStartX() + 100 && level instanceof Level2) {
-                    resetToCheckpoint();
-                } else if (level instanceof Level3) {
-                    resetToCheckpoint();
-                }
+                resetToCheckpoint();
                 velocityY = 0;
             }
 
             //Spieler auf Platform
             for (Platform platform : level.getPlatforms()) {
                 if (y + height >= platform.getY() && y + height - velocityY < platform.getY() &&
-                        x + width > platform.getX() && x < platform.getX() + platform.getWidth()) {
+                        x + width-10 > platform.getX() && x < platform.getX() + platform.getWidth()) {
 
                     y = platform.getY() - height;
                     isJumping = false;

@@ -57,7 +57,7 @@ public class GamePanel extends JPanel {
         // Split
         g2.setClip(null);
         g2.setColor(Color.white);
-        g2.drawLine(getWidth() / 2, 55, getWidth() / 2, getHeight());
+        g2.drawLine(getWidth() / 2, 58, getWidth() / 2, getHeight());
         // Stoppuhr
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 25));

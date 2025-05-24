@@ -15,7 +15,7 @@ public class MenuPanel extends JPanel {
         ImageIcon titleIcon = new ImageIcon("src/images/JumpAndRunAndMoor.png");
         JLabel titleLabel = new JLabel(titleIcon);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(140, 0, 0, 0)); // Abstand hinzufügen
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(140, 50, 0, 0)); // Abstand hinzufügen
         add(titleLabel, BorderLayout.NORTH);
 
 
