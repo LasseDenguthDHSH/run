@@ -18,6 +18,7 @@ public class GamePanel extends JPanel {
     private int cameraX2;
     private Stoppuhr stoppuhr;
     private boolean timerStarted = false;
+    private Image pfeil;
 
     public GamePanel(Level level) {
         this.currentLevel = level;
@@ -28,11 +29,11 @@ public class GamePanel extends JPanel {
         this.player1 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer1Image());
         this.player2 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer2Image());
 
+        this.pfeil = new ImageIcon("src/images/pfeil.png").getImage();
         this.stoppuhr = new Stoppuhr();
 
-        // **Fix: Korrekte Startwerte für die Kameras**
         cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
-        cameraX2 = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2); // **Spieler 2 sichtbar setzen**
+        cameraX2 = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2);
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -45,43 +46,52 @@ public class GamePanel extends JPanel {
 
         int halfWidth = getWidth() / 2;
 
-        // **Linke Hälfte für Spieler 1**
+        // Linke Hälfte für Spieler 1
         g2.setClip(0, 0, halfWidth, getHeight());
         renderScene(g2, player1, cameraX1, 20);
 
-        // **Rechte Hälfte für Spieler 2**
+        // Rechte Hälfte für Spieler 2
         g2.setClip(halfWidth, 0, halfWidth, getHeight());
         renderScene(g2, player2, cameraX2, halfWidth + 20);
     }
 
     private void renderScene(Graphics2D g2, Player player, int cameraX, int textOffset) {
-        // **Kamera für Spieler 1 bleibt normal**
+        // Kamera für Spieler 1
         if (player == player1) {
-            cameraX = Math.max(player.getX() - (getWidth() / 4), 0);
+            cameraX = cameraX1;
         }
-        // **Fix: Kamera für Spieler 2 startet direkt sichtbar**
+        // Kamera für Spieler 2
         else {
-            cameraX = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2);
+            cameraX = cameraX2;
         }
 
-        cameraX = Math.min(cameraX, getWidth() * 3);
+        cameraX = Math.min(cameraX, getWidth() * 6);
 
-        // **Umgebung rendern**
-        g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY(), getWidth(), 100, this);
-        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth(), currentLevel.getSkyHeight(), this);
+        // Umgebung
+        g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY(), getWidth() * 2, 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), -cameraX + getWidth() * 2, currentLevel.getGroundY(), getWidth() * 2, 100, this);
+        g2.drawImage(currentLevel.getGroundImage(), -cameraX + getWidth() * 4, currentLevel.getGroundY(), getWidth() * 2, 100, this);
+        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), -cameraX + getWidth() * 2, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
+        g2.drawImage(currentLevel.getSkyImage(), -cameraX + getWidth() * 4, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
 
         for (Platform platform : currentLevel.getPlatforms()) {
             g2.setColor(platform.getPlatformColor());
             g2.fillRect(platform.getX() - cameraX, platform.getY(), platform.getWidth(), platform.getHeight());
         }
 
-        // **Spieler rendern**
+        // Spieler
         g2.drawImage(player.getImage(), player.getX() - cameraX, player.getY(), player.getWidth(), player.getHeight(), this);
 
-        // **Stoppuhr anzeigen**
+        // Stoppuhr
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 20));
         g2.drawString("Zeit: " + stoppuhr.getFormattedTime(), textOffset, 30);
+
+        //Level Spezifisch
+        if (currentLevel instanceof Level2) {
+            g2.drawImage(pfeil, 2080 - cameraX, getHeight() / 2, pfeil.getWidth(this) * 3 / 7, pfeil.getHeight(this) * 3 / 7, this);
+        }
     }
 
     public void update() {
