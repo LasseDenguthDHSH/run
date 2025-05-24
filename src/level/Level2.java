@@ -25,13 +25,13 @@ public class Level2 extends Level {
         platforms.add(new Platform(550, 600, platformWidth, platformHeight, this));
         platforms.add(new Platform(1150, 500, platformWidth, platformHeight, this));
         platforms.add(new Platform(1650, 300, platformWidth, platformHeight, this));
-        platforms.add(new SprungPlatform(1950, 800, platformWidth*3, platformHeight, this));
+        platforms.add(new JumpPlatform(1950, 800, platformWidth*3, platformHeight, this));
         platforms.add(new Platform(2750, 650, platformWidth, platformHeight, this));
         platforms.add(new DeathPlatform(3200, 500, platformWidth, platformHeight, this));
         platforms.add(new Platform(3200, 300, platformWidth, platformHeight, this));
         platforms.add(new CheckpointPlatform(3200, 600, platformWidth, platformHeight, this));
         platforms.add(new Platform(3840, 350, platformWidth+30, platformHeight, this));
-        platforms.add(new SprungPlatform(4540, 350, platformWidth, platformHeight, this));
+        platforms.add(new JumpPlatform(4550, 650, platformWidth, platformHeight, this));
 
     }
 }

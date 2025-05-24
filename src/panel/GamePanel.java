@@ -48,14 +48,24 @@ public class GamePanel extends JPanel {
 
         // Linke Hälfte für Spieler 1
         g2.setClip(0, 0, halfWidth, getHeight());
-        renderScene(g2, player1, cameraX1, 20);
+        renderScene(g2, player1, cameraX1, 60);
 
         // Rechte Hälfte für Spieler 2
         g2.setClip(halfWidth, 0, halfWidth, getHeight());
-        renderScene(g2, player2, cameraX2, halfWidth + 20);
+        renderScene(g2, player2, cameraX2, halfWidth + 60);
+
+        // Split
+        g2.setClip(null);
+        g2.setColor(Color.white);
+        g2.drawLine(getWidth() / 2, 55, getWidth() / 2, getHeight());
+        // Stoppuhr
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Arial", Font.BOLD, 25));
+        g2.drawString(stoppuhr.getFormattedTime(), halfWidth-31, 32);
+
     }
 
-    private void renderScene(Graphics2D g2, Player player, int cameraX, int textOffset) {
+    private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand) {
         // Kamera für Spieler 1
         if (player == player1) {
             cameraX = cameraX1;
@@ -83,10 +93,17 @@ public class GamePanel extends JPanel {
         // Spieler
         g2.drawImage(player.getImage(), player.getX() - cameraX, player.getY(), player.getWidth(), player.getHeight(), this);
 
-        // Stoppuhr
+
+        // Fortschrittsbalken
+        int progressBarWidth = getWidth() / 2 - 120;
+        int progressBarHeight = 8;
+        int startY = 18;
+        int zielX = currentLevel.getZielX();
+        int progress = (int) ((double) player.getX() / zielX * progressBarWidth);
         g2.setColor(Color.WHITE);
-        g2.setFont(new Font("Arial", Font.BOLD, 20));
-        g2.drawString("Zeit: " + stoppuhr.getFormattedTime(), textOffset, 30);
+        g2.drawRect(abstand, startY, progressBarWidth, progressBarHeight);
+        g2.setColor(Color.GREEN);
+        g2.fillRect(abstand, startY, progress, progressBarHeight);
 
         //Level Spezifisch
         if (currentLevel instanceof Level2) {
@@ -127,6 +144,8 @@ public class GamePanel extends JPanel {
 
         player1.applyGravity(currentLevel);
         player2.applyGravity(currentLevel);
+        player1.boostMovement();
+        player2.boostMovement();
 
         // **Stoppuhr starten bei erster Bewegung**
         if (!timerStarted && moved) {

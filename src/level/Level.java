@@ -14,6 +14,7 @@ public abstract class Level {
     int skyHeight;
     int playerStartX;
     int playerStartY;
+    int zielX;
     double gravity;
     Image groundImage;
     Image skyImage;
@@ -30,6 +31,7 @@ public abstract class Level {
         this.gravity = 0.7;
         this.platformWidth = 100;
         this.platformHeight = 20;
+        this.zielX = 5000;
     }
 
     protected Image loadImage(String absolutePath) {
@@ -97,5 +99,8 @@ public abstract class Level {
 
     public double getJumpPlatformEffect() {
         return jumpPlatformEffect;
+    }
+    public int getZielX() {
+        return zielX;
     }
 }

@@ -4,13 +4,13 @@ import src.level.Level;
 
 import java.awt.*;
 
-public class BewegungPlatform extends Platform {
+public class MovingPlatform extends Platform {
     private int speed;
     private boolean movingRight;
     private int leftBoundary;
     private int rightBoundary;
 
-    public BewegungPlatform(int x, int y, int width, int height, Level level, int speed, boolean movingRight, int leftBoundary, int rightBoundary) {
+    public MovingPlatform(int x, int y, int width, int height, Level level, int speed, boolean movingRight, int leftBoundary, int rightBoundary) {
         super(x, y, width, height, level);
         this.speed = speed;
         this.movingRight = movingRight;

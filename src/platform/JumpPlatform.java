@@ -5,9 +5,9 @@ import src.player.Player;
 
 import java.awt.*;
 
-public class SprungPlatform extends Platform {
+public class JumpPlatform extends Platform {
     double jumpPlatformEffect;
-    public SprungPlatform(int x, int y, int width, int height, Level level) {
+    public JumpPlatform(int x, int y, int width, int height, Level level) {
         super(x, y, width, height, level);
         this.platformColor = new Color(200, 100, 0);
         this.jumpPlatformEffect= level.getJumpPlatformEffect();
