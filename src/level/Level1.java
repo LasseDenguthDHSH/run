@@ -17,12 +17,12 @@ public class Level1 extends Level {
 
         // Plattformen hinzufügen
         platforms.add(new Platform(0, 700, platformWidth, platformHeight, this));
-        platforms.add(new Platform(200, 600, platformWidth, platformHeight, this));
-        platforms.add(new Platform(400, 500, platformWidth, platformHeight, this));
-        platforms.add(new Platform(690, 500, platformWidth, platformHeight, this));
-        platforms.add(new JumpPlatform(950, 500, platformWidth, platformHeight, this));
-        platforms.add(new BoostPlatform(1250, 500, platformWidth, platformHeight, this));
-        platforms.add(new Platform(1950, 600, platformWidth*3, platformHeight, this));
+        platforms.add(new JumpPlatform(200-70, 600+80, platformWidth, platformHeight, this));
+        platforms.add(new Platform(400-70, 500+80, platformWidth, platformHeight, this));
+        platforms.add(new Platform(690-70, 500+80, platformWidth, platformHeight, this));
+        platforms.add(new JumpPlatform(950-70, 500 +80, platformWidth, platformHeight, this));
+        platforms.add(new BoostPlatform(1250-70, 500+80, platformWidth, platformHeight, this));
+        platforms.add(new Platform(1950-70, 600+80, platformWidth*3, platformHeight, this));
     }
 }
 

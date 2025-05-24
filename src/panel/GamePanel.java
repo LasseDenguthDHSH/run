@@ -26,8 +26,8 @@ public class GamePanel extends JPanel {
         this.addKeyListener(steuerung);
         this.setFocusable(true);
 
-        this.player1 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer1Image());
-        this.player2 = new Player(32, 32, currentLevel, 5, currentLevel.getPlayer2Image());
+        this.player1 = new Player(32, 32, currentLevel, currentLevel.getPlayer1Image());
+        this.player2 = new Player(32, 32, currentLevel, currentLevel.getPlayer2Image());
 
         this.pfeil = new ImageIcon("src/images/pfeil.png").getImage();
         this.stoppuhr = new Stoppuhr();

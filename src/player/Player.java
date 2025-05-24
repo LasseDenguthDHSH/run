@@ -10,8 +10,8 @@ public class Player {
     int height;
     int x;
     int y;
-    int speed;
-    double jumpStrength = 12;
+    double speed;
+    double jumpStrength = 11;
     double velocityY = 0;
     boolean isJumping = false;
     boolean isOnPlatform = false;
@@ -22,12 +22,12 @@ public class Player {
     private int checkpointY;
 
 
-    public Player(int width, int height, Level level, int speed, Image image) {
+    public Player(int width, int height, Level level, Image image) {
         this.width = width;
         this.height = height;
         this.x = level.getPlayerStartX();
         this.y = level.getPlayerStartY();
-        this.speed = speed;
+        this.speed = level.getPlayerSpeed();
         this.playerImage = image;
     }
 
@@ -104,13 +104,13 @@ public class Player {
     }
 
 
-    public void moveLeft(int speed) {
+    public void moveLeft(double speed) {
         if (x >= 0) {
             x -= speed;
         }
     }
 
-    public void moveRight(int speed) {
+    public void moveRight(double speed) {
         x += speed;
     }
 
@@ -134,7 +134,7 @@ public class Player {
         this.velocityY = velocityY;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
     public void setCheckpoint(int x, int y) {

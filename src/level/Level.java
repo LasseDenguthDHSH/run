@@ -16,6 +16,7 @@ public abstract class Level {
     int playerStartY;
     int zielX;
     double gravity;
+    double playerSpeed;
     Image groundImage;
     Image skyImage;
     Image player1Image;
@@ -30,8 +31,9 @@ public abstract class Level {
         this.playerStartX = 50;
         this.gravity = 0.7;
         this.platformWidth = 100;
-        this.platformHeight = 20;
+        this.platformHeight = 10;
         this.zielX = 5000;
+        this.playerSpeed = 3.5;
     }
 
     protected Image loadImage(String absolutePath) {
@@ -102,5 +104,8 @@ public abstract class Level {
     }
     public int getZielX() {
         return zielX;
+    }
+    public double getPlayerSpeed() {
+        return playerSpeed;
     }
 }
