@@ -1,10 +1,14 @@
 package src.level;
 
+import src.Music;
+import src.panel.GamePanel;
 import src.platform.*;
 
 import java.awt.*;
 
 public class Level1 extends Level {
+    private Music backgroundMusic;
+
     public Level1(String title) {
         super(title);
         this.groundY = 832;
@@ -14,6 +18,10 @@ public class Level1 extends Level {
         this.player1Image = loadImage("src/images/player1_level1.png");
         this.player2Image = loadImage("src/images/player2_level1.png");
         this.platformColor = new Color(30, 30, 100);
+
+        // Hintergrundmusik starten
+        backgroundMusic = new Music("src/music/background.wav");
+        backgroundMusic.play();
 
         // Plattformen hinzufügen
         platforms.add(new Platform(0, 700, platformWidth, platformHeight, this));

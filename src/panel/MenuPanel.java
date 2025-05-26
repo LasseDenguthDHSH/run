@@ -18,7 +18,6 @@ public class MenuPanel extends JPanel {
         titleLabel.setBorder(BorderFactory.createEmptyBorder(140, 50, 0, 0)); // Abstand hinzufügen
         add(titleLabel, BorderLayout.NORTH);
 
-
         // Panel für die Level-Schaltflächen
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 70)); // Buttons nebeneinander mit Abstand
@@ -26,7 +25,7 @@ public class MenuPanel extends JPanel {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50)); // Abstand zu den Rändern
 
         // Schaltflächen erstellen
-        JButton level1Button = createButton("Level 1");
+        JButton level1Button = createImageButton("src/images/level1.png");
         JButton level2Button = createButton("Level 2");
         JButton level3Button = createButton("Level 3");
 
@@ -53,6 +52,16 @@ public class MenuPanel extends JPanel {
                 BorderFactory.createLineBorder(Color.BLACK, 4), // Dicke Ränder
                 BorderFactory.createEmptyBorder(10, 20, 10, 20) // Größerer Innenabstand
         ));
+        return button;
+    }
+
+    private JButton createImageButton(String imagePath) {
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image scaledImage = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        JButton button = new JButton(new ImageIcon(scaledImage));
+        button.setPreferredSize(new Dimension(200, 200)); // Buttongröße anpassen
+        button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4)); // Dicke Ränder
+        button.setFocusPainted(false);
         return button;
     }
 }
