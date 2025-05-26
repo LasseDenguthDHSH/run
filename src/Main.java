@@ -3,6 +3,7 @@ package src;
 import src.level.Level;
 import src.panel.GamePanel;
 import src.panel.MenuPanel;
+import src.panel.WinPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,11 @@ public class Main {
     static JPanel panelManager;
     static JFrame frame;
     static int fensterLeiste = 37;
+    static GamePanel gamePanel;
 
     public static void main(String[] args) {
 
-        frame = new JFrame("Spiel");
+        frame = new JFrame();
         frame.setSize(1600, 800 + fensterLeiste);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -33,11 +35,12 @@ public class Main {
 
     public static void startGame(Level level) {
         // Spielpanel erstellen und hinzufügen
-        GamePanel gamePanel = new GamePanel(level);
-        panelManager.add(gamePanel, "Game");
+        gamePanel = new GamePanel(level, frame);
+        panelManager.add(gamePanel, level.getTitle());
+        frame.setTitle(level.getTitle());
 
         // Zum Spielpanel wechseln
-        cardLayout.show(panelManager, "Game");
+        cardLayout.show(panelManager, level.getTitle());
         gamePanel.requestFocusInWindow();
     }
 
@@ -46,5 +49,14 @@ public class Main {
         panelManager.add(menuPanel, "Menu");
         cardLayout.show(panelManager, "Menu");
         menuPanel.requestFocusInWindow();
+        frame.setTitle("Menu");
+    }
+
+    public static void showWinPanel() {
+        WinPanel winPanel = new WinPanel(gamePanel);
+        panelManager.add(winPanel, "Winner");
+        cardLayout.show(panelManager, "Winner");
+        winPanel.requestFocusInWindow();
+        frame.setTitle("Winner");
     }
 }

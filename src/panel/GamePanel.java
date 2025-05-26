@@ -2,6 +2,8 @@ package src.panel;
 
 import src.*;
 import src.level.*;
+import src.platform.CheckpointPlatform;
+import src.platform.MovingPlatform;
 import src.platform.Platform;
 import src.player.*;
 
@@ -19,12 +21,19 @@ public class GamePanel extends JPanel {
     private Stoppuhr stoppuhr;
     private boolean timerStarted = false;
     private Image pfeil;
+    int anzahlHintergrunde;
+    int totalWidth;
+    Player winner;
+    String endZeit;
 
-    public GamePanel(Level level) {
+    public GamePanel(Level level, JFrame frame) {
         this.currentLevel = level;
         this.steuerung = new Steuerung();
         this.addKeyListener(steuerung);
         this.setFocusable(true);
+
+        this.anzahlHintergrunde = currentLevel.getZielX()/frame.getWidth() + 2;
+        this.totalWidth = frame.getWidth()*anzahlHintergrunde;
 
         this.player1 = new Player(32, 32, currentLevel, currentLevel.getPlayer1Image());
         this.player2 = new Player(32, 32, currentLevel, currentLevel.getPlayer2Image());
@@ -75,35 +84,42 @@ public class GamePanel extends JPanel {
             cameraX = cameraX2;
         }
 
-        cameraX = Math.min(cameraX, getWidth() * 6);
+        cameraX = Math.min(cameraX, totalWidth);
 
         // Umgebung
-        g2.drawImage(currentLevel.getGroundImage(), -cameraX, currentLevel.getGroundY(), getWidth() * 2, 100, this);
-        g2.drawImage(currentLevel.getGroundImage(), -cameraX + getWidth() * 2, currentLevel.getGroundY(), getWidth() * 2, 100, this);
-        g2.drawImage(currentLevel.getGroundImage(), -cameraX + getWidth() * 4, currentLevel.getGroundY(), getWidth() * 2, 100, this);
-        g2.drawImage(currentLevel.getSkyImage(), -cameraX, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), -cameraX + getWidth() * 2, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
-        g2.drawImage(currentLevel.getSkyImage(), -cameraX + getWidth() * 4, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
+        for (int i = 0; i < anzahlHintergrunde; i += 2) {
+            g2.drawImage(currentLevel.getGroundImage(), -cameraX + getWidth() * i, currentLevel.getGroundY(), getWidth() * 2, 100, this);
+            g2.drawImage(currentLevel.getSkyImage(), -cameraX + getWidth() * i, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
+        }
 
+        // Fortschrittsbalken
+        int progressBarWidth = getWidth() / 2 - 120;
+        int progressBarHeight = 8;
+        int barY = 18;
+        int progress = (int) ((double) player.getX() / currentLevel.getZielX() * progressBarWidth);
+        g2.setColor(Color.BLACK);
+        g2.drawRect(abstand, barY, progressBarWidth, progressBarHeight);
+        g2.setColor(Color.WHITE);
+        g2.fillRect(abstand, barY, progress, progressBarHeight);
+        g2.setColor(new Color(255, 212, 50));
+        g2.fillRect(abstand + progressBarWidth - 8, barY, 8, progressBarHeight);
+
+        //Plattformen
         for (Platform platform : currentLevel.getPlatforms()) {
             g2.setColor(platform.getPlatformColor());
-            g2.fillRect(platform.getX() - cameraX, platform.getY(), platform.getWidth(), platform.getHeight());
+            g2.fillRect((platform.getX() - cameraX), platform.getY(), platform.getWidth(),
+                    platform.getHeight());
+            if (platform instanceof MovingPlatform){
+                platform.move();
+            } else if (platform instanceof CheckpointPlatform) {
+                g2.fillRect(abstand + (platform.getX() * progressBarWidth / currentLevel.getZielX()), barY, 8, 8);
+            }
         }
 
         // Spieler
         g2.drawImage(player.getImage(), player.getX() - cameraX, player.getY(), player.getWidth(), player.getHeight(), this);
 
 
-        // Fortschrittsbalken
-        int progressBarWidth = getWidth() / 2 - 120;
-        int progressBarHeight = 8;
-        int startY = 18;
-        int zielX = currentLevel.getZielX();
-        int progress = (int) ((double) player.getX() / zielX * progressBarWidth);
-        g2.setColor(Color.WHITE);
-        g2.drawRect(abstand, startY, progressBarWidth, progressBarHeight);
-        g2.setColor(Color.GREEN);
-        g2.fillRect(abstand, startY, progress, progressBarHeight);
 
         //Level Spezifisch
         if (currentLevel instanceof Level2) {
@@ -113,6 +129,19 @@ public class GamePanel extends JPanel {
 
     public void update() {
         boolean moved = false;
+
+        if (player1.getX()>= currentLevel.getZielX()){
+            winner = player1;
+            endZeit = stoppuhr.getFormattedTime();
+            gameTimer.stop();
+
+            Main.showWinPanel();
+
+        } else if (player2.getX()>= currentLevel.getZielX()){
+            winner = player2;
+            gameTimer.stop();
+            Main.showWinPanel();
+        }
 
         // **Steuerung für Spieler 1**
         if (steuerung.isRight1Pressed()) {
@@ -166,5 +195,12 @@ public class GamePanel extends JPanel {
         }
 
         repaint();
+    }
+    public int getTotalWidth() {
+        return totalWidth;
+    }
+
+    public String getEndZeit() {
+        return endZeit;
     }
 }

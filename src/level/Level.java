@@ -16,7 +16,6 @@ public abstract class Level {
     int playerStartY;
     int zielX;
     double gravity;
-    double playerSpeed;
     Image groundImage;
     Image skyImage;
     Image player1Image;
@@ -25,13 +24,14 @@ public abstract class Level {
     String title;
     Color platformColor;
     double jumpPlatformEffect = -24;
+    double playerSpeed;
 
     public Level(String title) {
         this.title = title;
         this.playerStartX = 50;
         this.gravity = 0.7;
         this.platformWidth = 100;
-        this.platformHeight = 10;
+        this.platformHeight = 18;
         this.zielX = 5000;
         this.playerSpeed = 3.5;
     }
@@ -105,6 +105,10 @@ public abstract class Level {
     public int getZielX() {
         return zielX;
     }
+    public String getTitle() {
+        return title;
+    }
+
     public double getPlayerSpeed() {
         return playerSpeed;
     }

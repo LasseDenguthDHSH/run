@@ -8,7 +8,10 @@ import java.awt.*;
 public class Platform {
     int x, y, width, height;
     protected Color platformColor;
-
+    protected boolean movingRight = true;
+    protected int speed;
+    protected int leftBoundary;
+    protected int rightBoundary;
     public Platform(int x, int y, int width, int height, Level level) {
         this.x = x;
         this.y = y;
@@ -36,4 +39,18 @@ public class Platform {
     }
 
     public Color getPlatformColor() { return platformColor; }
+
+    public void move() {
+        if (movingRight) {
+            x += speed;
+            if (x > rightBoundary - width) {
+                movingRight = false;
+            }
+        } else {
+            x -= speed;
+            if (x < leftBoundary) {
+                movingRight = true;
+            }
+        }
+    }
 }
