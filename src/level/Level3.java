@@ -18,11 +18,11 @@ public class Level3 extends Level{
         this.player2Image = loadImage("src/images/player2_level3.png");
         this.platformColor = new Color(40, 40, 60);
 
-        platforms.add(new Platform(0, groundY-10, platformWidth, platformHeight, this)); // STANDPLATFORM
+        platforms.add(new Platform(0, groundY-platformHeight, platformWidth, platformHeight, this)); // STANDPLATFORM
         platforms.add(new Platform(300, 500, platformWidth, platformHeight, this));
         platforms.add(new Platform(600, 300, platformWidth, platformHeight, this));
         platforms.add(new JumpPlatform(800, 600, platformWidth, platformHeight, this));
-        this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2;
+        this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2 - 16;
         this.zielY = platforms.getLast().getY();
     }
 }

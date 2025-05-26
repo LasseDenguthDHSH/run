@@ -142,7 +142,7 @@ public class GamePanel extends JPanel {
 
             Main.showWinPanel();
 
-        } else if (player2.getX()>= currentLevel.getZielX()){
+        } else if (player2.getX()>= currentLevel.getZielX() && player1.getY()<= currentLevel.getZielY()){
             winner = player2;
             gameTimer.stop();
             Main.showWinPanel();
