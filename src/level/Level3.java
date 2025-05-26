@@ -22,5 +22,7 @@ public class Level3 extends Level{
         platforms.add(new Platform(300, 500, platformWidth, platformHeight, this));
         platforms.add(new Platform(600, 300, platformWidth, platformHeight, this));
         platforms.add(new JumpPlatform(800, 600, platformWidth, platformHeight, this));
+        this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2;
+        this.zielY = platforms.getLast().getY();
     }
 }

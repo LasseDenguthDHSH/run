@@ -8,7 +8,7 @@ import java.awt.*;
 public class Platform {
     int x, y, width, height;
     protected Color platformColor;
-    protected boolean movingRight = true;
+    protected boolean movingRight = false;
     protected int speed;
     protected int leftBoundary;
     protected int rightBoundary;

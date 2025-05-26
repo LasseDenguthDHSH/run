@@ -12,7 +12,7 @@ public class Level2 extends Level {
         this.skyHeight = 800;
         this.platformWidth = 120;
         this.setPlayerStartY(groundY-164);
-        this.playerSpeed = 4.5;
+        this.playerSpeed = 5;
         this.skyImage = loadImage("src/images/sky_Level2.png");
         this.player1Image = loadImage("src/images/player1_level2.png");
         this.player2Image = loadImage("src/images/player2_level2.png");
@@ -34,5 +34,6 @@ public class Level2 extends Level {
         platforms.add(new JumpPlatform(4530, 650, platformWidth, platformHeight, this));
         platforms.add(new Platform(4740, 350, platformWidth, platformHeight, this));
         this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2;
+        this.zielY = platforms.getLast().getY();
     }
 }

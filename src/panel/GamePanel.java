@@ -21,6 +21,7 @@ public class GamePanel extends JPanel {
     private Stoppuhr stoppuhr;
     private boolean timerStarted = false;
     private Image pfeil;
+    private Image goalFlag;
     int anzahlHintergrunde;
     int totalWidth;
     Player winner;
@@ -39,6 +40,7 @@ public class GamePanel extends JPanel {
         this.player2 = new Player(32, 32, currentLevel, currentLevel.getPlayer2Image());
 
         this.pfeil = new ImageIcon("src/images/pfeil.png").getImage();
+        this.goalFlag = new ImageIcon("src/images/goalflag.png").getImage();
         this.stoppuhr = new Stoppuhr();
 
         cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
@@ -77,13 +79,12 @@ public class GamePanel extends JPanel {
     private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand) {
         // Kamera für Spieler 1
         if (player == player1) {
-            cameraX = cameraX1;
+            cameraX = Math.max(player1.getX() - (getWidth() / 4), 0);
         }
         // Kamera für Spieler 2
         else {
-            cameraX = cameraX2;
+            cameraX = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2);
         }
-
         cameraX = Math.min(cameraX, totalWidth);
 
         // Umgebung
@@ -124,7 +125,11 @@ public class GamePanel extends JPanel {
         //Level Spezifisch
         if (currentLevel instanceof Level2) {
             g2.drawImage(pfeil, 2080 - cameraX, getHeight() / 2, pfeil.getWidth(this) * 3 / 7, pfeil.getHeight(this) * 3 / 7, this);
+        } else if (currentLevel instanceof Level1) {
+            g2.drawImage(pfeil, 4110 - cameraX, 720, pfeil.getWidth(this) * 1 / 7, pfeil.getHeight(this) * 1 / 7, this);
         }
+        g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this)+5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
+
     }
 
     public void update() {
@@ -176,19 +181,11 @@ public class GamePanel extends JPanel {
         player1.boostMovement();
         player2.boostMovement();
 
-        // **Stoppuhr starten bei erster Bewegung**
+        // Stoppuhr starten bei erster Bewegung
         if (!timerStarted && moved) {
             stoppuhr.start();
             timerStarted = true;
         }
-
-        // **Fixierte Kamera für Spieler 2 von Anfang an!**
-        cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
-        cameraX2 = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2); // **Fix: Spieler 2 bleibt sichtbar!**
-
-        cameraX1 = Math.min(cameraX1, getWidth() * 3);
-        cameraX2 = Math.min(cameraX2, getWidth() * 3);
-
         if (steuerung.isEscapePressed()) {
             Main.showMenu();
             gameTimer.stop();
