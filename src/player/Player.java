@@ -1,5 +1,6 @@
 package src.player;
 
+import src.Sounds;
 import src.platform.*;
 import src.level.*;
 
@@ -20,6 +21,8 @@ public class Player {
     private double velocityX = 0;
     private int checkpointX;
     private int checkpointY;
+    private Sounds jumpingSound;
+    private Sounds respawnSound;
 
 
     public Player(int width, int height, Level level, Image image) {
@@ -29,6 +32,8 @@ public class Player {
         this.y = level.getPlayerStartY();
         this.speed = level.getPlayerSpeed();
         this.playerImage = image;
+        this.jumpingSound = new Sounds("src/sounds/jump.wav");
+        this.respawnSound = level.getRespawnSound();
     }
 
     public Image getImage() {
@@ -37,6 +42,7 @@ public class Player {
 
     public void jump() {
         if (!isJumping && isOnPlatform || isOnGround) {
+            jumpingSound.play();
             isOnGround = false;
             isOnPlatform = false;
             isJumping = true;
@@ -44,8 +50,7 @@ public class Player {
         }
     }
 
-    public void applyGravity(Level level) {
-        //Spieler runter von Platform
+    public void applyGravity(Level level) { //Spieler runter von Platform
         for (Platform platform : level.getPlatforms()) {
             if (x <= platform.getX() || x > platform.getX() + platform.getWidth()) {
                 isOnPlatform = false;
@@ -58,15 +63,12 @@ public class Player {
                 y = level.getGroundY() - height;
                 isJumping = false;
                 isOnGround = true;
-                resetToCheckpoint();
+                resetToCheckpoint(level, respawnSound);
                 velocityY = 0;
             }
-
-            //Spieler auf Platform
+            //Spieler aufPlatform
             for (Platform platform : level.getPlatforms()) {
-                if (y + height >= platform.getY() && y + height - velocityY < platform.getY() &&
-                        x + width-10 > platform.getX() && x < platform.getX() + platform.getWidth()) {
-
+                if (y + height >= platform.getY() && y + height - velocityY < platform.getY() && x + width - 10 > platform.getX() && x < platform.getX() + platform.getWidth()) {
                     y = platform.getY() - height;
                     isJumping = false;
                     velocityY = 0;
@@ -74,21 +76,19 @@ public class Player {
                     platform.applyEffect(this);
 
                     // Speichert die letzte sichere Position
-                    if (level instanceof Level1 && !(platform instanceof CheckpointPlatform) &&
-                            !(platform instanceof DeathPlatform) && !(platform instanceof JumpPlatform) &&
-                            !(platform instanceof BoostPlatform) && !(platform instanceof MovingPlatform)) {
-                        checkpointX = platform.getX()+platform.getWidth()/2-16;
-                        checkpointY = platform.getY()-32;
+                    if (level instanceof Level1 && !(platform instanceof CheckpointPlatform) && !(platform instanceof DeathPlatform) && !(platform instanceof JumpPlatform) && !(platform instanceof BoostPlatform) && !(platform instanceof MovingPlatform)) {
+                        checkpointX = platform.getX() + platform.getWidth() / 2 - 16;
+                        checkpointY = platform.getY() - 32;
                     } else if (level instanceof Level3) {
                         checkpointX = level.getPlayerStartX();
                         checkpointY = level.getPlayerStartY();
                     }
-
                     return;
                 }
             }
         }
-    }
+
+}
 
     public void boostMovement() {
         x += velocityX;
@@ -141,9 +141,10 @@ public class Player {
         this.checkpointX = x;
         this.checkpointY = y;
     }
-    public void resetToCheckpoint() {
+    public void resetToCheckpoint(Level level, Sounds respawnSound) {
         this.x = checkpointX;
         this.y = checkpointY;
+        respawnSound.play();
         this.velocityX = 0;
     }
 

@@ -23,8 +23,6 @@ public class GamePanel extends JPanel {
     private Image arrowVertical;
     private Image arrowHorizontal;
     private Image goalFlag;
-
-
     int anzahlHintergrunde;
     int totalWidth;
     Player winner;
@@ -128,30 +126,27 @@ public class GamePanel extends JPanel {
 
         // Steuerungsbilder für Spieler 1 (WASD)
         if (player == player1) {
-            g2.drawImage(steuerung.getControlWASD(), 105 - cameraX1, 280, steuerung.getControlWASD().getWidth(this) / 4, steuerung.getControlWASD().getHeight(this) / 4, this);
-            g2.drawImage(arrowHorizontal, 100 - cameraX1, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
+            g2.drawImage(steuerung.getControlWASD(), 85 - cameraX1, 280, steuerung.getControlWASD().getWidth(this) / 4, steuerung.getControlWASD().getHeight(this) / 4, this);
+            g2.drawImage(arrowHorizontal, 83 - cameraX1, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
         // Steuerungsbilder für Spieler 2 (Pfeiltasten)
         if (player == player2) {
-            g2.drawImage(steuerung.getControlArrows(), 105 - cameraX2, 280, steuerung.getControlArrows().getWidth(this) / 4, steuerung.getControlArrows().getHeight(this) / 4, this);
-            g2.drawImage(arrowHorizontal, 100 - cameraX2, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
+            g2.drawImage(steuerung.getControlArrows(), 85 - cameraX2, 280, steuerung.getControlArrows().getWidth(this) / 4, steuerung.getControlArrows().getHeight(this) / 4, this);
+            g2.drawImage(arrowHorizontal, 83 - cameraX2, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
     }
 
     public void update() {
         boolean moved = false;
-
         if (player1.getX()>= currentLevel.getZielX()){
             winner = player1;
-            endZeit = stoppuhr.getFormattedTime();
-            gameTimer.stop();
-
-            Main.showWinPanel();
-
         } else if (player2.getX()>= currentLevel.getZielX()){
             winner = player2;
+        }
+        if (winner != null){
             gameTimer.stop();
             endZeit = stoppuhr.getFormattedTime();
+            currentLevel.getBackgroundMusic().stop();
             Main.showWinPanel();
         }
 
@@ -192,10 +187,12 @@ public class GamePanel extends JPanel {
         if (!timerStarted && moved) {
             stoppuhr.start();
             timerStarted = true;
+            currentLevel.getBackgroundMusic().play();
         }
         if (steuerung.isEscapePressed()) {
-            Main.showMenu();
             gameTimer.stop();
+            currentLevel.getBackgroundMusic().stop();
+            Main.showMenu();
         }
 
         repaint();

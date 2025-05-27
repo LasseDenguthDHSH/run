@@ -1,5 +1,6 @@
 package src.platform;
 
+import src.Sounds;
 import src.level.Level;
 import src.player.Player;
 
@@ -13,11 +14,14 @@ public class Platform {
     protected int leftBoundary;
     protected int rightBoundary;
     protected int frameCounter = 0;
+    protected Sounds platformSound;
+    Level level;
     public Platform(int x, int y, int width, int height, Level level) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.level = level;
         this.platformColor = level.getPlatformColor();
     }
 

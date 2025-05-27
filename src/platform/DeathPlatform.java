@@ -1,5 +1,7 @@
 package src.platform;
 
+import src.Music;
+import src.Sounds;
 import src.level.Level;
 import src.player.Player;
 
@@ -9,9 +11,10 @@ public class DeathPlatform extends Platform {
     public DeathPlatform(int x, int y, int width, int height, Level level) {
         super(x, y, width, height, level);
         this.platformColor = new Color(250, 100, 100);
+        this.platformSound = new Sounds("src/sounds/error_sound2.wav");
     }
     @Override
     public void applyEffect(Player player) {
-        player.resetToCheckpoint();
+        player.resetToCheckpoint(level, platformSound);
     }
 }

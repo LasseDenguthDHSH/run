@@ -1,5 +1,6 @@
 package src.panel;
 
+import src.Sounds;
 import src.level.*;
 import src.Main;
 
@@ -7,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MenuPanel extends JPanel {
+
+    Sounds buttonSound = new Sounds("src/sounds/button_sound.wav");
     public MenuPanel() {
         setLayout(new BorderLayout());
         setBackground(new Color(39, 78, 99)); // Hintergrundfarbe setzen
@@ -37,8 +40,12 @@ public class MenuPanel extends JPanel {
         add(buttonPanel, BorderLayout.CENTER);
 
         level1Button.addActionListener(e -> Main.startGame(new Level1("Level 1")));
+        playSound(level1Button);
         level2Button.addActionListener(e -> Main.startGame(new Level2("Level 2")));
+        playSound(level2Button);
         level3Button.addActionListener(e -> Main.startGame(new Level3("Level 3")));
+        playSound(level3Button);
+
     }
 
     private JButton createButton(String text) {
@@ -63,5 +70,9 @@ public class MenuPanel extends JPanel {
         button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4)); // Dicke Ränder
         button.setFocusPainted(false);
         return button;
+    }
+
+    private void playSound(JButton button) {
+        button.addActionListener(e -> buttonSound.play());
     }
 }

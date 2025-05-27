@@ -1,13 +1,13 @@
 package src.level;
 
 import src.Music;
-import src.panel.GamePanel;
+import src.Sounds;
 import src.platform.*;
 
 import java.awt.*;
 
 public class Level1 extends Level {
-    private Music backgroundMusic;
+
 
     public Level1(String title) {
         super(title);
@@ -20,8 +20,11 @@ public class Level1 extends Level {
         this.platformColor = new Color(30, 30, 100);
 
         // Hintergrundmusik starten
-        backgroundMusic = new Music("src/music/background.wav");
-        backgroundMusic.play();
+        this.backgroundMusic = new Music("src/music/background.wav");
+        backgroundMusic.setVolume(0.5f); // 50% Lautstärke
+
+        this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
+
 
         // Plattformen hinzufügen
         platforms.add(new Platform(0, 700, platformWidth, platformHeight, this));

@@ -1,5 +1,6 @@
 package src.platform;
 
+import src.Sounds;
 import src.level.Level;
 import src.player.Player;
 
@@ -9,9 +10,11 @@ public class BoostPlatform extends Platform {
     public BoostPlatform(int x, int y, int width, int height, Level level) {
         super(x, y, width, height, level);
         this.platformColor = new Color(0, 200, 150);
+        this.platformSound = new Sounds("src/sounds/boost_sound.wav");
     }
     @Override
     public void applyEffect(Player player) {
         player.setVelocityX(player.getSpeed() * 10);
+        platformSound.play();
     }
 }

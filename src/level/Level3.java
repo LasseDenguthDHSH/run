@@ -1,5 +1,6 @@
 package src.level;
 
+import src.Music;
 import src.platform.*;
 
 import java.awt.*;
@@ -17,6 +18,9 @@ public class Level3 extends Level{
         this.player1Image = loadImage("src/images/player1_level3.png");
         this.player2Image = loadImage("src/images/player2_level3.png");
         this.platformColor = new Color(40, 40, 60);
+        this.backgroundMusic = new Music("src/music/lava_music.wav");
+        backgroundMusic.setVolume(0.6f); // 50% Lautstärke
+
 
         platforms.add(new Platform(0, groundY-platformHeight, platformWidth, platformHeight, this)); // STANDPLATFORM
         platforms.add(new Platform(300, 500, platformWidth, platformHeight, this));

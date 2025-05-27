@@ -1,5 +1,7 @@
 package src.level;
 
+import src.Music;
+import src.Sounds;
 import src.platform.*;
 import java.awt.*;
 
@@ -19,6 +21,10 @@ public class Level2 extends Level {
         this.platformColor = new Color(220, 203, 255);
         this.jumpPlatformEffect= getJumpPlatformEffect()/1.5;
         this.pfeil = loadImage("src/images/arrowVertical.png");
+        this.backgroundMusic = new Music("src/music/Moon_music.wav");
+        backgroundMusic.setVolume(0.7f); // 80% Lautstärke
+        this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
+
 
         // Plattformen hinzufügen
         platforms.add(new CheckpointPlatform(0, 700, platformWidth, platformHeight, this));

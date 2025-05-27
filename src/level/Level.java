@@ -1,5 +1,7 @@
 package src.level;
 
+import src.Music;
+import src.Sounds;
 import src.platform.*;
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -26,6 +28,8 @@ public abstract class Level {
     Color platformColor;
     double jumpPlatformEffect = -24;
     double playerSpeed;
+    Music backgroundMusic;
+    Sounds respawnSound;
 
     public Level(String title) {
         this.title = title;
@@ -116,4 +120,11 @@ public abstract class Level {
         return playerSpeed;
     }
 
+    public Music getBackgroundMusic() {
+        return backgroundMusic;
+    }
+
+    public Sounds getRespawnSound() {
+        return respawnSound;
+    }
 }
