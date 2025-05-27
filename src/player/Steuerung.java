@@ -2,6 +2,8 @@ package src.player;
 
 import src.panel.GamePanel;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Steuerung implements KeyListener {
@@ -12,8 +14,12 @@ public class Steuerung implements KeyListener {
     private boolean left1Pressed = false;
     private boolean left2Pressed = false;
     private boolean escapePressed = false;
+    private Image controlWASD;
+    private Image controlArrows;
 
     public Steuerung() {
+        this.controlWASD = new ImageIcon("src/images/controlWASD.png").getImage();
+        this.controlArrows = new ImageIcon("src/images/controlArrows.png").getImage();
     }
 
     public boolean isUp1Pressed() {
@@ -70,5 +76,12 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_LEFT -> left2Pressed = false;
             case KeyEvent.VK_ESCAPE -> escapePressed = false;
         }
+    }
+
+    public Image getControlWASD() {
+        return controlWASD;
+    }
+    public Image getControlArrows() {
+        return controlArrows;
     }
 }

@@ -23,8 +23,8 @@ public class GamePanel extends JPanel {
     private Image arrowVertical;
     private Image arrowHorizontal;
     private Image goalFlag;
-    private Image controlWASD;
-    private Image controlArrows;
+
+
     int anzahlHintergrunde;
     int totalWidth;
     Player winner;
@@ -45,8 +45,6 @@ public class GamePanel extends JPanel {
         this.arrowVertical = new ImageIcon("src/images/arrowVertical.png").getImage();
         this.arrowHorizontal = new ImageIcon("src/images/arrowHorizontal.png").getImage();
         this.goalFlag = new ImageIcon("src/images/goalflag.png").getImage();
-        this.controlWASD = new ImageIcon("src/images/controlWASD.png").getImage();
-        this.controlArrows = new ImageIcon("src/images/controlArrows.png").getImage();
         this.stoppuhr = new Stoppuhr();
 
         gameTimer = new Timer(16, e -> update());
@@ -62,11 +60,11 @@ public class GamePanel extends JPanel {
 
         // Linke Hälfte für Spieler 1
         g2.setClip(0, 0, halfWidth, getHeight());
-        renderScene(g2, player1, cameraX1, 60);
+        renderScene(g2, player1, cameraX1, 60, steuerung);
 
         // Rechte Hälfte für Spieler 2
         g2.setClip(halfWidth, 0, halfWidth, getHeight());
-        renderScene(g2, player2, cameraX2, halfWidth + 60);
+        renderScene(g2, player2, cameraX2, halfWidth + 60, steuerung);
 
         // Split
         g2.setClip(null);
@@ -76,10 +74,9 @@ public class GamePanel extends JPanel {
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(stoppuhr.getFormattedTime(), halfWidth-31, 32);
-
     }
 
-    private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand) {
+    private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand, Steuerung steuerung) {
         // Kamera für Spieler 1
         if (player == player1) {
             cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
@@ -95,7 +92,6 @@ public class GamePanel extends JPanel {
             g2.drawImage(currentLevel.getGroundImage(), -cameraX + getWidth() * i, currentLevel.getGroundY(), getWidth() * 2, 100, this);
             g2.drawImage(currentLevel.getSkyImage(), -cameraX + getWidth() * i, 0, getWidth() * 2, currentLevel.getSkyHeight(), this);
         }
-
         // Fortschrittsbalken
         int progressBarWidth = getWidth() / 2 - 120;
         int progressBarHeight = 8;
@@ -119,11 +115,8 @@ public class GamePanel extends JPanel {
                 g2.fillRect(abstand + (platform.getX() * progressBarWidth / currentLevel.getZielX()), barY, 8, 8);
             }
         }
-
         // Spieler
         g2.drawImage(player.getImage(), player.getX() - cameraX, player.getY(), player.getWidth(), player.getHeight(), this);
-
-
 
         //Level Spezifisch
         if (currentLevel instanceof Level2) {
@@ -133,11 +126,16 @@ public class GamePanel extends JPanel {
         }
         g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this)+5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
 
-        g2.drawImage(controlWASD, 120-cameraX1, 280, controlWASD.getWidth(this)/4, controlWASD.getHeight(this)/4, this);
-        g2.drawImage(arrowHorizontal, 115-cameraX1, 365, arrowHorizontal.getWidth(this) /4, arrowHorizontal.getHeight(this) / 6, this);
-        g2.drawImage(controlArrows, 120-cameraX2, 280, controlArrows.getWidth(this)/4, controlArrows.getHeight(this)/4, this);
-        g2.drawImage(arrowHorizontal, 115-cameraX2, 365, arrowHorizontal.getWidth(this) /4, arrowHorizontal.getHeight(this) / 6, this);
-
+        // Steuerungsbilder für Spieler 1 (WASD)
+        if (player == player1) {
+            g2.drawImage(steuerung.getControlWASD(), 105 - cameraX1, 280, steuerung.getControlWASD().getWidth(this) / 4, steuerung.getControlWASD().getHeight(this) / 4, this);
+            g2.drawImage(arrowHorizontal, 100 - cameraX1, 365, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
+        }
+        // Steuerungsbilder für Spieler 2 (Pfeiltasten)
+        if (player == player2) {
+            g2.drawImage(steuerung.getControlArrows(), 105 - cameraX2, 280, steuerung.getControlArrows().getWidth(this) / 4, steuerung.getControlArrows().getHeight(this) / 4, this);
+            g2.drawImage(arrowHorizontal, 100 - cameraX2, 365, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
+        }
     }
 
     public void update() {
