@@ -13,6 +13,6 @@ public class MovingPlatform extends Platform {
         this.movingRight = movingRight;
         this.leftBoundary = leftBoundary;
         this.rightBoundary = rightBoundary;
-        this.platformColor = new Color(170, 170, 170);
+        this.platformColor = level.getPlatformColor();
     }
 }

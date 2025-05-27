@@ -129,12 +129,12 @@ public class GamePanel extends JPanel {
         // Steuerungsbilder für Spieler 1 (WASD)
         if (player == player1) {
             g2.drawImage(steuerung.getControlWASD(), 105 - cameraX1, 280, steuerung.getControlWASD().getWidth(this) / 4, steuerung.getControlWASD().getHeight(this) / 4, this);
-            g2.drawImage(arrowHorizontal, 100 - cameraX1, 365, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
+            g2.drawImage(arrowHorizontal, 100 - cameraX1, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
         // Steuerungsbilder für Spieler 2 (Pfeiltasten)
         if (player == player2) {
             g2.drawImage(steuerung.getControlArrows(), 105 - cameraX2, 280, steuerung.getControlArrows().getWidth(this) / 4, steuerung.getControlArrows().getHeight(this) / 4, this);
-            g2.drawImage(arrowHorizontal, 100 - cameraX2, 365, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
+            g2.drawImage(arrowHorizontal, 100 - cameraX2, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
     }
 
