@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
     private boolean timerStarted = false;
     private Image pfeil;
     private Image goalFlag;
+    private Image controls;
     int anzahlHintergrunde;
     int totalWidth;
     Player winner;
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel {
 
         this.pfeil = new ImageIcon("src/images/pfeil.png").getImage();
         this.goalFlag = new ImageIcon("src/images/goalflag.png").getImage();
+        this.controls = new ImageIcon("src/images/controls.png").getImage();
         this.stoppuhr = new Stoppuhr();
 
         cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
@@ -129,7 +131,7 @@ public class GamePanel extends JPanel {
             g2.drawImage(pfeil, 3880 - cameraX, 720, pfeil.getWidth(this) /6, pfeil.getHeight(this) / 6, this);
         }
         g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this)+5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
-
+        g2.drawImage(controls, 80, 200, controls.getWidth(this), controls.getHeight(this), this);
     }
 
     public void update() {
