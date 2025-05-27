@@ -23,7 +23,8 @@ public class GamePanel extends JPanel {
     private Image arrowVertical;
     private Image arrowHorizontal;
     private Image goalFlag;
-    private Image controls;
+    private Image controlWASD;
+    private Image controlArrows;
     int anzahlHintergrunde;
     int totalWidth;
     Player winner;
@@ -44,7 +45,8 @@ public class GamePanel extends JPanel {
         this.arrowVertical = new ImageIcon("src/images/arrowVertical.png").getImage();
         this.arrowHorizontal = new ImageIcon("src/images/arrowHorizontal.png").getImage();
         this.goalFlag = new ImageIcon("src/images/goalflag.png").getImage();
-        this.controls = new ImageIcon("src/images/controls.png").getImage();
+        this.controlWASD = new ImageIcon("src/images/controlWASD.png").getImage();
+        this.controlArrows = new ImageIcon("src/images/controlArrows.png").getImage();
         this.stoppuhr = new Stoppuhr();
 
         gameTimer = new Timer(16, e -> update());
@@ -131,8 +133,10 @@ public class GamePanel extends JPanel {
         }
         g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this)+5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
 
-        g2.drawImage(controls, 120-cameraX1, 280, controls.getWidth(this)/4, controls.getHeight(this)/4, this);
+        g2.drawImage(controlWASD, 120-cameraX1, 280, controlWASD.getWidth(this)/4, controlWASD.getHeight(this)/4, this);
         g2.drawImage(arrowHorizontal, 115-cameraX1, 365, arrowHorizontal.getWidth(this) /4, arrowHorizontal.getHeight(this) / 6, this);
+        g2.drawImage(controlArrows, 120-cameraX2, 280, controlArrows.getWidth(this)/4, controlArrows.getHeight(this)/4, this);
+        g2.drawImage(arrowHorizontal, 115-cameraX2, 365, arrowHorizontal.getWidth(this) /4, arrowHorizontal.getHeight(this) / 6, this);
 
     }
 
