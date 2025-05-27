@@ -145,6 +145,7 @@ public class GamePanel extends JPanel {
         } else if (player2.getX()>= currentLevel.getZielX()){
             winner = player2;
             gameTimer.stop();
+            endZeit = stoppuhr.getFormattedTime();
             Main.showWinPanel();
         }
 
