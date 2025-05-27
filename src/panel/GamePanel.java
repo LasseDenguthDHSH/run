@@ -20,7 +20,8 @@ public class GamePanel extends JPanel {
     private int cameraX2;
     private Stoppuhr stoppuhr;
     private boolean timerStarted = false;
-    private Image pfeil;
+    private Image arrowVertical;
+    private Image arrowHorizontal;
     private Image goalFlag;
     private Image controls;
     int anzahlHintergrunde;
@@ -40,13 +41,11 @@ public class GamePanel extends JPanel {
         this.player1 = new Player(32, 32, currentLevel, currentLevel.getPlayer1Image());
         this.player2 = new Player(32, 32, currentLevel, currentLevel.getPlayer2Image());
 
-        this.pfeil = new ImageIcon("src/images/pfeil.png").getImage();
+        this.arrowVertical = new ImageIcon("src/images/arrowVertical.png").getImage();
+        this.arrowHorizontal = new ImageIcon("src/images/arrowHorizontal.png").getImage();
         this.goalFlag = new ImageIcon("src/images/goalflag.png").getImage();
         this.controls = new ImageIcon("src/images/controls.png").getImage();
         this.stoppuhr = new Stoppuhr();
-
-        cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
-        cameraX2 = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2);
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -81,11 +80,11 @@ public class GamePanel extends JPanel {
     private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand) {
         // Kamera für Spieler 1
         if (player == player1) {
-            cameraX = Math.max(player1.getX() - (getWidth() / 4), 0);
+            cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
         }
         // Kamera für Spieler 2
         else {
-            cameraX = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2);
+            cameraX2 = Math.max(player2.getX() - (getWidth() / 4), 0) - (getWidth() / 2);
         }
         cameraX = Math.min(cameraX, totalWidth);
 
@@ -126,12 +125,15 @@ public class GamePanel extends JPanel {
 
         //Level Spezifisch
         if (currentLevel instanceof Level2) {
-            g2.drawImage(pfeil, 2080 - cameraX, getHeight() / 2, pfeil.getWidth(this) * 3 / 7, pfeil.getHeight(this) * 3 / 7, this);
+            g2.drawImage(arrowVertical, 2080 - cameraX, getHeight() / 2, arrowVertical.getWidth(this) * 3 / 7, arrowVertical.getHeight(this) * 3 / 7, this);
         } else if (currentLevel instanceof Level1) {
-            g2.drawImage(pfeil, 3880 - cameraX, 720, pfeil.getWidth(this) /6, pfeil.getHeight(this) / 6, this);
+            g2.drawImage(arrowVertical, 3880 - cameraX, 720, arrowVertical.getWidth(this) /6, arrowVertical.getHeight(this) / 6, this);
         }
         g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this)+5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
-        g2.drawImage(controls, 80, 200, controls.getWidth(this), controls.getHeight(this), this);
+
+        g2.drawImage(controls, 120-cameraX1, 280, controls.getWidth(this)/4, controls.getHeight(this)/4, this);
+        g2.drawImage(arrowHorizontal, 115-cameraX1, 365, arrowHorizontal.getWidth(this) /4, arrowHorizontal.getHeight(this) / 6, this);
+
     }
 
     public void update() {

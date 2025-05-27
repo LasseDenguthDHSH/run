@@ -18,7 +18,7 @@ public class Level2 extends Level {
         this.player2Image = loadImage("src/images/player2_level2.png");
         this.platformColor = new Color(220, 203, 255);
         this.jumpPlatformEffect= getJumpPlatformEffect()/1.5;
-        this.pfeil = loadImage("src/images/pfeil.png");
+        this.pfeil = loadImage("src/images/arrowVertical.png");
 
         // Plattformen hinzufügen
         platforms.add(new CheckpointPlatform(0, 700, platformWidth, platformHeight, this));
