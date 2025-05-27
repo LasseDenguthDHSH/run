@@ -22,7 +22,7 @@ public class Level2 extends Level {
         this.jumpPlatformEffect= getJumpPlatformEffect()/1.5;
         this.pfeil = loadImage("src/images/arrowVertical.png");
         this.backgroundMusic = new Music("src/music/Moon_music.wav");
-        backgroundMusic.setVolume(0.7f); // 80% Lautstärke
+        backgroundMusic.setVolume(0.8);
         this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
 
 

@@ -13,11 +13,11 @@ public class JumpPlatform extends Platform {
         this.platformColor = new Color(200, 100, 0);
         this.jumpPlatformEffect= level.getJumpPlatformEffect();
         this.platformSound = new Sounds("src/sounds/jump.wav");
+        platformSound.setVolume(1);
     }
 
     @Override
     public void applyEffect(Player player) {
-
         player.setVelocityY(jumpPlatformEffect);
         platformSound.play();
     }

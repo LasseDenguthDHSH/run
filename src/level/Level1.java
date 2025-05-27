@@ -21,7 +21,7 @@ public class Level1 extends Level {
 
         // Hintergrundmusik starten
         this.backgroundMusic = new Music("src/music/background.wav");
-        backgroundMusic.setVolume(0.5f); // 50% Lautstärke
+        backgroundMusic.setVolume(0.6);
 
         this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
 

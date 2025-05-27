@@ -15,7 +15,7 @@ public class Music {
             clip = AudioSystem.getClip();
             clip.open(audioStream);
 
-            // Lautstärkekontrolle abrufen
+            // Lautstärkekontrolle
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -36,12 +36,12 @@ public class Music {
         }
     }
 
-    public void setVolume(float level) {
+    public void setVolume(double level) {
         if (volumeControl != null) {
-            float min = volumeControl.getMinimum();
-            float max = volumeControl.getMaximum();
-            float volume = min + (max - min) * level;
-            volumeControl.setValue(volume);
+            double min = volumeControl.getMinimum();
+            double max = volumeControl.getMaximum();
+            double volume = min + (max - min) * level;
+            volumeControl.setValue( (float)volume);
         }
     }
 }

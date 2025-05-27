@@ -33,6 +33,7 @@ public class Player {
         this.speed = level.getPlayerSpeed();
         this.playerImage = image;
         this.jumpingSound = new Sounds("src/sounds/jump.wav");
+        jumpingSound.setVolume(1);
         this.respawnSound = level.getRespawnSound();
     }
 
