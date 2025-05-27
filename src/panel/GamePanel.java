@@ -37,8 +37,8 @@ public class GamePanel extends JPanel {
         this.anzahlHintergrunde = currentLevel.getZielX()/frame.getWidth() + 2;
         this.totalWidth = frame.getWidth()*anzahlHintergrunde;
 
-        this.player1 = new Player(32, 32, currentLevel, currentLevel.getPlayer1Image());
-        this.player2 = new Player(32, 32, currentLevel, currentLevel.getPlayer2Image());
+        this.player1 = new Player("Player 1", 32, 32, currentLevel, currentLevel.getPlayer1Image());
+        this.player2 = new Player("Player 2", 32, 32, currentLevel, currentLevel.getPlayer2Image());
 
         this.arrowVertical = new ImageIcon("src/images/arrowVertical.png").getImage();
         this.arrowHorizontal = new ImageIcon("src/images/arrowHorizontal.png").getImage();
@@ -147,7 +147,7 @@ public class GamePanel extends JPanel {
             gameTimer.stop();
             endZeit = stoppuhr.getFormattedTime();
             currentLevel.getBackgroundMusic().stop();
-            Main.showWinPanel();
+            Main.showWinPanel(this);
         }
 
         // **Steuerung für Spieler 1**
@@ -178,6 +178,13 @@ public class GamePanel extends JPanel {
             moved = true;
         }
 
+        if (steuerung.isSpezialButtonPressed()){
+            if (winner == null){
+                winner = player1;
+            }
+            Main.showWinPanel(this);
+        }
+
         player1.applyGravity(currentLevel);
         player2.applyGravity(currentLevel);
         player1.boostMovement();
@@ -203,5 +210,21 @@ public class GamePanel extends JPanel {
 
     public String getEndZeit() {
         return endZeit;
+    }
+
+    public Level getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
     }
 }

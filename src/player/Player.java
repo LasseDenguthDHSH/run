@@ -1,12 +1,13 @@
 package src.player;
 
-import src.Sounds;
+import src.sounds.Sounds;
 import src.platform.*;
 import src.level.*;
 
 import java.awt.*;
 
 public class Player {
+    String name;
     int width;
     int height;
     int x;
@@ -25,7 +26,8 @@ public class Player {
     private Sounds respawnSound;
 
 
-    public Player(int width, int height, Level level, Image image) {
+    public Player(String name, int width, int height, Level level, Image image) {
+        this.name = name;
         this.width = width;
         this.height = height;
         this.x = level.getPlayerStartX();
@@ -104,7 +106,6 @@ public class Player {
         this.velocityX = velocityX;
     }
 
-
     public void moveLeft(double speed) {
         if (x >= 0) {
             x -= speed;
@@ -115,6 +116,9 @@ public class Player {
         x += speed;
     }
 
+    public String getName() {
+        return name;
+    }
     public int getX() {
         return x;
     }

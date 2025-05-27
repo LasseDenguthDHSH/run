@@ -14,6 +14,7 @@ public class Steuerung implements KeyListener {
     private boolean left1Pressed = false;
     private boolean left2Pressed = false;
     private boolean escapePressed = false;
+    private boolean spezialButtonPressed = false;
     private Image controlWASD;
     private Image controlArrows;
 
@@ -48,6 +49,7 @@ public class Steuerung implements KeyListener {
     public boolean isEscapePressed() {
         return escapePressed;
     }
+    public boolean isSpezialButtonPressed() { return spezialButtonPressed; }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -62,6 +64,7 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_RIGHT -> right2Pressed = true;
             case KeyEvent.VK_LEFT -> left2Pressed = true;
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
+            case KeyEvent.VK_P -> spezialButtonPressed = true;
         }
     }
 
@@ -75,6 +78,7 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_RIGHT -> right2Pressed = false;
             case KeyEvent.VK_LEFT -> left2Pressed = false;
             case KeyEvent.VK_ESCAPE -> escapePressed = false;
+            case KeyEvent.VK_P -> spezialButtonPressed = false;
         }
     }
 

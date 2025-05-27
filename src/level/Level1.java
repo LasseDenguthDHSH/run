@@ -1,7 +1,7 @@
 package src.level;
 
-import src.Music;
-import src.Sounds;
+import src.music.Music;
+import src.sounds.Sounds;
 import src.platform.*;
 
 import java.awt.*;

@@ -28,7 +28,7 @@ public class Main {
         panelManager = new JPanel(cardLayout);
 
         showMenu();
-        // Hauptpanel zum Frame hinzufügen
+        // Hauptpanel zum Frame hinzdufügen
         frame.add(panelManager);
         frame.setVisible(true);
     }
@@ -52,7 +52,7 @@ public class Main {
         frame.setTitle("Menu");
     }
 
-    public static void showWinPanel() {
+    public static void showWinPanel(GamePanel gamePanel) {
         WinPanel winPanel = new WinPanel(gamePanel);
         panelManager.add(winPanel, "Winner");
         cardLayout.show(panelManager, "Winner");

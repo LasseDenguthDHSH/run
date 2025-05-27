@@ -1,7 +1,6 @@
 package src.platform;
 
-import src.Music;
-import src.Sounds;
+import src.sounds.Sounds;
 import src.level.Level;
 import src.player.Player;
 

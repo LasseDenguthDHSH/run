@@ -1,6 +1,6 @@
 package src.panel;
 
-import src.Sounds;
+import src.sounds.Sounds;
 import src.level.*;
 import src.Main;
 
