@@ -12,6 +12,7 @@ public class Platform {
     protected int speed;
     protected int leftBoundary;
     protected int rightBoundary;
+    protected int frameCounter = 0;
     public Platform(int x, int y, int width, int height, Level level) {
         this.x = x;
         this.y = y;
@@ -42,12 +43,18 @@ public class Platform {
 
     public void move() {
         if (movingRight) {
-            x += speed;
-            if (x > rightBoundary - width) {
+            frameCounter++;
+            if (frameCounter % 3 == 0) { // Jede zweite Aktualisierung bewegen
+                x += speed;
+            }
+            if (x > rightBoundary) {
                 movingRight = false;
             }
-        } else {
-            x -= speed;
+        } else if (!movingRight) {
+            frameCounter++;
+            if (frameCounter % 3 == 0) { // Jede zweite Aktualisierung bewegen
+                x -= speed;
+            }
             if (x < leftBoundary) {
                 movingRight = true;
             }

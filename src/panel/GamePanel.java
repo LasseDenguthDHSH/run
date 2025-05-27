@@ -126,7 +126,7 @@ public class GamePanel extends JPanel {
         if (currentLevel instanceof Level2) {
             g2.drawImage(pfeil, 2080 - cameraX, getHeight() / 2, pfeil.getWidth(this) * 3 / 7, pfeil.getHeight(this) * 3 / 7, this);
         } else if (currentLevel instanceof Level1) {
-            g2.drawImage(pfeil, 4110 - cameraX, 720, pfeil.getWidth(this) * 1 / 7, pfeil.getHeight(this) * 1 / 7, this);
+            g2.drawImage(pfeil, 3880 - cameraX, 720, pfeil.getWidth(this) /6, pfeil.getHeight(this) / 6, this);
         }
         g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this)+5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
 

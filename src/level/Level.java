@@ -33,7 +33,7 @@ public abstract class Level {
         this.gravity = 0.7;
         this.platformWidth = 100;
         this.platformHeight = 18;
-        this.playerSpeed = 4;
+        this.playerSpeed = 3;
     }
 
     protected Image loadImage(String absolutePath) {
