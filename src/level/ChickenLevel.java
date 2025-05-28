@@ -16,9 +16,9 @@ public class ChickenLevel extends Level{
         this.playerStartX = 784;
         this.skyImage = loadImage("src/images/sky_Level1.png");
         this.bullets = 5;
-        this.playerSpeed = 7;
-        this.gravity = 3;
-        this.playerJumpStrength = 20;
+        this.playerSpeed = 5;
+        this.gravity = 1;
+        this.playerJumpStrength = 13;
 
         this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
         this.backgroundMusic = new Music("src/music/background.wav");
