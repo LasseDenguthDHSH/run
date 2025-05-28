@@ -19,6 +19,7 @@ public abstract class Level {
     int zielX;
     int zielY;
     double gravity;
+    double playerJumpStrength;
     Image groundImage;
     Image skyImage;
     Image player1Image;
@@ -38,6 +39,7 @@ public abstract class Level {
         this.platformWidth = 100;
         this.platformHeight = 18;
         this.playerSpeed = 3;
+        this.playerJumpStrength = 11;
     }
 
     protected Image loadImage(String absolutePath) {
@@ -126,5 +128,9 @@ public abstract class Level {
 
     public Sounds getRespawnSound() {
         return respawnSound;
+    }
+
+    public double getPlayerJumpStrength() {
+        return playerJumpStrength;
     }
 }

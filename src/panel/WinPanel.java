@@ -6,17 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class WinPanel extends JPanel {
-    GamePanel gamePanel;
+    JumpPanel jumpPanel;
     Player winner, loser;
     Image winnerImage, loserImage;
     ImageIcon rainCloudGif;
 
-    public WinPanel(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-        this.winner = gamePanel.getWinner();
-        this.loser = (gamePanel.getPlayer1() == winner) ? gamePanel.getPlayer2() : gamePanel.getPlayer1();
+    public WinPanel(JumpPanel jumpPanel) {
+        this.jumpPanel = jumpPanel;
+        this.winner = jumpPanel.getWinner();
+        this.loser = (jumpPanel.getPlayer1() == winner) ? jumpPanel.getPlayer2() : jumpPanel.getPlayer1();
 
-        // Bilder laden (Pfad anpassen!)
         winnerImage = winner.getImage();
         loserImage = loser.getImage();
         rainCloudGif = new ImageIcon("src/images/raincloud.gif"); // GIF der Regenwolke

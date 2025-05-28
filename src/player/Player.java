@@ -5,6 +5,7 @@ import src.platform.*;
 import src.level.*;
 
 import java.awt.*;
+import java.nio.charset.CharacterCodingException;
 
 public class Player {
     String name;
@@ -13,7 +14,7 @@ public class Player {
     int x;
     int y;
     double speed;
-    double jumpStrength = 11;
+    double jumpStrength;
     double velocityY = 0;
     boolean isJumping = false;
     boolean isOnPlatform = false;
@@ -24,15 +25,18 @@ public class Player {
     private int checkpointY;
     private Sounds jumpingSound;
     private Sounds respawnSound;
+    private Level level;
 
 
     public Player(String name, int width, int height, Level level, Image image) {
         this.name = name;
         this.width = width;
         this.height = height;
+        this.level = level;
         this.x = level.getPlayerStartX();
         this.y = level.getPlayerStartY();
         this.speed = level.getPlayerSpeed();
+        this.jumpStrength = level.getPlayerJumpStrength();
         this.playerImage = image;
         this.jumpingSound = new Sounds("src/sounds/jump.wav");
         jumpingSound.setVolume(1);
@@ -44,13 +48,22 @@ public class Player {
     }
 
     public void jump() {
-        if (!isJumping && isOnPlatform || isOnGround) {
-            jumpingSound.play();
-            isOnGround = false;
-            isOnPlatform = false;
-            isJumping = true;
-            velocityY = -jumpStrength;
+        if (level instanceof ChickenLevel){
+                jumpingSound.play();
+                isOnGround = false;
+                isOnPlatform = false;
+                isJumping = true;
+                velocityY = -jumpStrength;
+        }else{
+            if (!isJumping && isOnPlatform || isOnGround) {
+                jumpingSound.play();
+                isOnGround = false;
+                isOnPlatform = false;
+                isJumping = true;
+                velocityY = -jumpStrength;
+            }
         }
+
     }
 
     public void applyGravity(Level level) { //Spieler runter von Platform
@@ -66,7 +79,9 @@ public class Player {
                 y = level.getGroundY() - height;
                 isJumping = false;
                 isOnGround = true;
-                resetToCheckpoint(level, respawnSound);
+                if (!(level instanceof ChickenLevel)){
+                    resetToCheckpoint(level, respawnSound);
+                }
                 velocityY = 0;
             }
             //Spieler aufPlatform
@@ -152,6 +167,4 @@ public class Player {
         respawnSound.play();
         this.velocityX = 0;
     }
-
-
 }

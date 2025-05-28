@@ -1,12 +1,10 @@
 package src.player;
 
-import src.panel.GamePanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Steuerung implements KeyListener {
+public class Steuerung implements KeyListener, MouseListener {
     private boolean up1Pressed = false;
     private boolean up2Pressed = false;
     private boolean right1Pressed = false;
@@ -15,6 +13,7 @@ public class Steuerung implements KeyListener {
     private boolean left2Pressed = false;
     private boolean escapePressed = false;
     private boolean spezialButtonPressed = false;
+    private boolean mouseClicked = false;
     private Image controlWASD;
     private Image controlArrows;
 
@@ -49,6 +48,7 @@ public class Steuerung implements KeyListener {
     public boolean isEscapePressed() {
         return escapePressed;
     }
+    public boolean isMouseClicked() { return mouseClicked; }
     public boolean isSpezialButtonPressed() { return spezialButtonPressed; }
 
     @Override
@@ -65,6 +65,7 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_LEFT -> left2Pressed = true;
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
             case KeyEvent.VK_P -> spezialButtonPressed = true;
+
         }
     }
 
@@ -81,11 +82,40 @@ public class Steuerung implements KeyListener {
             case KeyEvent.VK_P -> spezialButtonPressed = false;
         }
     }
-
     public Image getControlWASD() {
         return controlWASD;
     }
     public Image getControlArrows() {
         return controlArrows;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            mouseClicked = true;
+        }
+    }
+
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            mouseClicked = false;
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

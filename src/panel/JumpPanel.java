@@ -10,7 +10,7 @@ import src.player.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel {
+public class JumpPanel extends JPanel {
     private Player player1;
     private Player player2;
     private Level currentLevel;
@@ -27,8 +27,10 @@ public class GamePanel extends JPanel {
     int totalWidth;
     Player winner;
     String endZeit;
+    JumpPanel jumpPanel;
 
-    public GamePanel(Level level, JFrame frame) {
+    public JumpPanel(Level level, JFrame frame, JumpPanel jumpPanel) {
+        this.jumpPanel = jumpPanel;
         this.currentLevel = level;
         this.steuerung = new Steuerung();
         this.addKeyListener(steuerung);
@@ -54,15 +56,13 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        int halfWidth = getWidth() / 2;
-
         // Linke Hälfte für Spieler 1
-        g2.setClip(0, 0, halfWidth, getHeight());
+        g2.setClip(0, 0, getWidth() / 2, getHeight());
         renderScene(g2, player1, cameraX1, 60, steuerung);
 
         // Rechte Hälfte für Spieler 2
-        g2.setClip(halfWidth, 0, halfWidth, getHeight());
-        renderScene(g2, player2, cameraX2, halfWidth + 60, steuerung);
+        g2.setClip(getWidth() / 2, 0, getWidth() / 2, getHeight());
+        renderScene(g2, player2, cameraX2, getWidth() / 2 + 60, steuerung);
 
         // Split
         g2.setClip(null);
@@ -71,7 +71,7 @@ public class GamePanel extends JPanel {
         // Stoppuhr
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 25));
-        g2.drawString(stoppuhr.getFormattedTime(), halfWidth-31, 32);
+        g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2-31, 32);
     }
 
     private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand, Steuerung steuerung) {
@@ -147,7 +147,7 @@ public class GamePanel extends JPanel {
             gameTimer.stop();
             endZeit = stoppuhr.getFormattedTime();
             currentLevel.getBackgroundMusic().stop();
-            Main.showWinPanel(this);
+            Main.startChickenGame();
         }
 
         // **Steuerung für Spieler 1**
@@ -182,7 +182,7 @@ public class GamePanel extends JPanel {
             if (winner == null){
                 winner = player1;
             }
-            Main.showWinPanel(this);
+            Main.startChickenGame();
         }
 
         player1.applyGravity(currentLevel);
@@ -226,5 +226,8 @@ public class GamePanel extends JPanel {
 
     public Player getPlayer2() {
         return player2;
+    }
+    public JumpPanel getPanel(){
+        return this;
     }
 }

@@ -24,8 +24,9 @@ public class Sounds {
 
     public void play() {
         if (clip != null) {
-            clip.start();
             clip.setFramePosition(0);
+            clip.start();
+
         }
     }
     public void setVolume(double level) {

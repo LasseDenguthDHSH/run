@@ -1,7 +1,9 @@
 package src;
 
+import src.level.ChickenLevel;
 import src.level.Level;
-import src.panel.GamePanel;
+import src.panel.ChickenPanel;
+import src.panel.JumpPanel;
 import src.panel.MenuPanel;
 import src.panel.WinPanel;
 
@@ -13,7 +15,8 @@ public class Main {
     static JPanel panelManager;
     static JFrame frame;
     static int fensterLeiste = 37;
-    static GamePanel gamePanel;
+    static JumpPanel jumpPanel;
+    static ChickenPanel chickenPanel;
 
     public static void main(String[] args) {
 
@@ -35,13 +38,13 @@ public class Main {
 
     public static void startGame(Level level) {
         // Spielpanel erstellen und hinzufügen
-        gamePanel = new GamePanel(level, frame);
-        panelManager.add(gamePanel, level.getTitle());
+        jumpPanel = new JumpPanel(level, frame, jumpPanel);
+        panelManager.add(jumpPanel, level.getTitle());
         frame.setTitle(level.getTitle());
 
         // Zum Spielpanel wechseln
         cardLayout.show(panelManager, level.getTitle());
-        gamePanel.requestFocusInWindow();
+        jumpPanel.requestFocusInWindow();
     }
 
     public static void showMenu() {
@@ -52,11 +55,22 @@ public class Main {
         frame.setTitle("Menu");
     }
 
-    public static void showWinPanel(GamePanel gamePanel) {
+    public static void showWinPanel(JumpPanel gamePanel) {
         WinPanel winPanel = new WinPanel(gamePanel);
         panelManager.add(winPanel, "Winner");
         cardLayout.show(panelManager, "Winner");
         winPanel.requestFocusInWindow();
         frame.setTitle("Winner");
+    }
+    public static void startChickenGame() {
+        chickenPanel = new ChickenPanel(frame, jumpPanel);
+        panelManager.add(chickenPanel, chickenPanel.getCurrentLevel().getTitle());
+        frame.setTitle(chickenPanel.getCurrentLevel().getTitle());
+
+        // Zum Spielpanel wechseln
+        cardLayout.show(panelManager, chickenPanel.getCurrentLevel().getTitle());
+        chickenPanel.requestFocusInWindow();
+
+
     }
 }
