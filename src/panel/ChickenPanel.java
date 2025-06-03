@@ -6,6 +6,7 @@ import src.level.ChickenLevel;
 import src.level.Level;
 import src.player.Player;
 import src.player.Steuerung;
+import src.sounds.Sounds;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,8 @@ public class ChickenPanel extends JPanel {
     private Image [] ammo = new Image[6];
     private Image [] hits = new Image[6];
     private Image hitLetters;
+    JPanel buttonPanel;
+
 
     public ChickenPanel(JFrame frame, JumpPanel jumpPanel) {
         this.jumpPanel = jumpPanel;
@@ -72,7 +75,7 @@ public class ChickenPanel extends JPanel {
 
 
         setLayout(new BorderLayout());
-        JPanel buttonPanel = new JPanel();
+        buttonPanel = new JPanel();
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -101,11 +104,11 @@ public class ChickenPanel extends JPanel {
         g2.drawImage(skyImage, 0, 0, getWidth(), currentLevel.getSkyHeight(), this);
         g2.drawImage(groundImage, 0, currentLevel.getGroundY(), getWidth(), 100, this);
 
-        // Draw chicken player
-        g2.drawImage(chicken.getImage(), chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
 
-        int bulletX = 40;
-        int bulletY = 680;
+
+
+        int bulletX = getWidth()/2 + getWidth()/4 + 150;
+        int bulletY = getHeight()/2 + getHeight()/4 - 130;
         switch (currentLevel.getBullets()){
             case 0 -> g2.drawImage(ammo[0], bulletX, bulletY, ammo[0].getWidth(this)/2, ammo[0].getHeight(this)/2, this);
             case 1 -> g2.drawImage(ammo[1], bulletX, bulletY, ammo[1].getWidth(this)/2, ammo[1].getHeight(this)/2, this);
@@ -115,22 +118,27 @@ public class ChickenPanel extends JPanel {
             case 5 -> g2.drawImage(ammo[5], bulletX, bulletY, ammo[5].getWidth(this)/2, ammo[5].getHeight(this)/2, this);
 
         }
+        int hitsX = getWidth()/2-90;
+        int hitsY = 64;
+        g2.drawImage(hitLetters, hitsX , hitsY, hitLetters.getWidth(this), hitLetters.getHeight(this), this);
+        switch (currentLevel.getHits()){
+            case 0 -> g2.drawImage(hits[0], hitsX+ ammo[3].getWidth(this)/2 -15, hitsY, hits[0].getWidth(this)*3/4, hits[0].getHeight(this)*4/6, this);
+            case 1 -> g2.drawImage(hits[1], hitsX + ammo[3].getWidth(this)/2 -15, hitsY, hits[1].getWidth(this)*3/4, hits[1].getHeight(this)*4/6, this);
+            case 2 -> g2.drawImage(hits[2], hitsX + ammo[3].getWidth(this)/2 -15, hitsY, hits[2].getWidth(this)*3/4, hits[2].getHeight(this)*4/6, this);
+            case 3 -> g2.drawImage(hits[3], hitsX + ammo[3].getWidth(this)/2 -15, hitsY, hits[3].getWidth(this)*3/4, hits[3].getHeight(this)*4/6, this);
+            case 4 -> g2.drawImage(hits[4], hitsX + ammo[3].getWidth(this)/2 -15, hitsY, hits[4].getWidth(this)*3/4, hits[4].getHeight(this)*4/6, this);
+            case 5 -> g2.drawImage(hits[5], hitsX + ammo[3].getWidth(this)/2 -15, hitsY, hits[5].getWidth(this)*3/4, hits[5].getHeight(this)*4/6, this);
+
+        }
         // Draw stopwatch
         g2.setColor(Color.WHITE);
-        g2.setFont(new Font("Arial", Font.BOLD, 25));
-        g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2 - 31, 32);
+        g2.setFont(new Font("Arial", Font.BOLD, 35));
+        g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2 - 40, 170);
 
-        // Draw Hits Counter
-
-        g2.drawImage(hitLetters, bulletX , bulletY- 50, hitLetters.getWidth(this), hitLetters.getHeight(this), this);
-        switch (currentLevel.getHits()){
-            case 0 -> g2.drawImage(hits[0], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[0].getWidth(this)*3/4, hits[0].getHeight(this)*4/6, this);
-            case 1 -> g2.drawImage(hits[1], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[1].getWidth(this)*3/4, hits[1].getHeight(this)*4/6, this);
-            case 2 -> g2.drawImage(hits[2], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[2].getWidth(this)*3/4, hits[2].getHeight(this)*4/6, this);
-            case 3 -> g2.drawImage(hits[3], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[3].getWidth(this)*3/4, hits[3].getHeight(this)*4/6, this);
-            case 4 -> g2.drawImage(hits[4], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[4].getWidth(this)*3/4, hits[4].getHeight(this)*4/6, this);
-            case 5 -> g2.drawImage(hits[5], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[5].getWidth(this)*3/4, hits[5].getHeight(this)*4/6, this);
-
+        // Draw chicken player
+        g2.drawImage(chicken.getImage(), chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
+        if (!timerStarted) {
+            g2.drawImage(currentLevel.getInformations(), getWidth()/2-600, 60, currentLevel.getInformations().getWidth(this)*6/5, currentLevel.getInformations().getHeight(this)*6/5, this);
         }
     }
 
@@ -138,7 +146,6 @@ public class ChickenPanel extends JPanel {
         if (startButton.isEnabled()) {
             return;
         }
-
         boolean moved = false;
         if (currentLevel.getBullets() == 0) {
             if (currentLevel.getHits() >= 3) {
@@ -168,8 +175,10 @@ public class ChickenPanel extends JPanel {
         if (steuerung.isMouseClicked()) {
             if (!justShot) {
                 currentLevel.setBullets(currentLevel.getBullets() - 1);
+                currentLevel.getGun_sound().play();
                 Rectangle hitbox = new Rectangle(chicken.getX(), chicken.getY(), 64, 64);
                 if (hitbox.contains(steuerung.getMouseX(), steuerung.getMouseY())) {
+                    currentLevel.getChicken_sound().play();
                     currentLevel.setHits(currentLevel.getHits() + 1);
                 }
                 justShot = true;

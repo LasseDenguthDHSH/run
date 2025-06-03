@@ -31,6 +31,8 @@ public abstract class Level {
     double playerSpeed;
     Music backgroundMusic;
     Sounds respawnSound;
+    Sounds jumpSound;
+    Sounds winSound;
 
     public Level(String title) {
         this.title = title;
@@ -40,6 +42,9 @@ public abstract class Level {
         this.platformHeight = 18;
         this.playerSpeed = 3;
         this.playerJumpStrength = 11;
+        this.jumpSound = new Sounds("src/sounds/jump.wav");
+        this.winSound = new Sounds("src/sounds/win_sound.wav");
+        winSound.setVolume(0.8);
     }
 
     protected Image loadImage(String absolutePath) {
@@ -132,5 +137,13 @@ public abstract class Level {
 
     public double getPlayerJumpStrength() {
         return playerJumpStrength;
+    }
+
+    public Sounds getJumpSound() {
+        return jumpSound;
+    }
+
+    public Sounds getWinSound() {
+        return winSound;
     }
 }

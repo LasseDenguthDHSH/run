@@ -5,7 +5,6 @@ import src.platform.*;
 import src.level.*;
 
 import java.awt.*;
-import java.nio.charset.CharacterCodingException;
 
 public class Player {
     String name;
@@ -23,24 +22,21 @@ public class Player {
     private double velocityX = 0;
     private int checkpointX;
     private int checkpointY;
-    private Sounds jumpingSound;
     private Sounds respawnSound;
-    private Level level;
+    private Level currentLevel;
 
 
-    public Player(String name, int width, int height, Level level, Image image) {
+    public Player(String name, int width, int height, Level currentLevel, Image image) {
         this.name = name;
         this.width = width;
         this.height = height;
-        this.level = level;
-        this.x = level.getPlayerStartX();
-        this.y = level.getPlayerStartY();
-        this.speed = level.getPlayerSpeed();
-        this.jumpStrength = level.getPlayerJumpStrength();
+        this.currentLevel = currentLevel;
+        this.x = currentLevel.getPlayerStartX();
+        this.y = currentLevel.getPlayerStartY();
+        this.speed = currentLevel.getPlayerSpeed();
+        this.jumpStrength = currentLevel.getPlayerJumpStrength();
         this.playerImage = image;
-        this.jumpingSound = new Sounds("src/sounds/jump.wav");
-        jumpingSound.setVolume(1);
-        this.respawnSound = level.getRespawnSound();
+        this.respawnSound = currentLevel.getRespawnSound();
     }
 
     public Image getImage() {
@@ -48,15 +44,15 @@ public class Player {
     }
 
     public void jump() {
-        if (level instanceof ChickenLevel){
-                jumpingSound.play();
+        if (currentLevel instanceof ChickenLevel){
+                currentLevel.getJumpSound().play();
                 isOnGround = false;
                 isOnPlatform = false;
                 isJumping = true;
                 velocityY = -jumpStrength;
         }else{
             if (!isJumping && isOnPlatform || isOnGround) {
-                jumpingSound.play();
+                currentLevel.getJumpSound().play();
                 isOnGround = false;
                 isOnPlatform = false;
                 isJumping = true;

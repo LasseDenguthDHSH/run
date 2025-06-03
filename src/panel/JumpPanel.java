@@ -150,6 +150,7 @@ public class JumpPanel extends JPanel {
             gameTimer.stop();
             endZeit = stoppuhr.getFormattedTime();
             currentLevel.getBackgroundMusic().stop();
+            currentLevel.getWinSound().play();
             Main.startChickenGame();
         }
 

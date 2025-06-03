@@ -24,11 +24,16 @@ public class Sounds {
 
     public void play() {
         if (clip != null) {
+            clip.stop();
             clip.setFramePosition(0);
             clip.start();
-
+        }
+    }public void stop() {
+        if (clip != null) {
+            clip.stop();
         }
     }
+
     public void setVolume(double level) {
         if (volumeControl != null) {
             double min = volumeControl.getMinimum();
