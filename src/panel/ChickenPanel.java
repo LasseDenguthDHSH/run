@@ -26,6 +26,9 @@ public class ChickenPanel extends JPanel {
     private JButton startButton;
     private Player winner;
     private Player loser;
+    private Image [] ammo = new Image[6];
+    private Image [] hits = new Image[6];
+    private Image hitLetters;
 
     public ChickenPanel(JFrame frame, JumpPanel jumpPanel) {
         this.jumpPanel = jumpPanel;
@@ -39,6 +42,21 @@ public class ChickenPanel extends JPanel {
         this.chicken = new Player("Chicken", 64, 64, currentLevel, chickenImage);
         this.winner = jumpPanel.getWinner();
         this.loser = jumpPanel.getLoser();
+
+        this.ammo[0] = new ImageIcon("src/images/ammo0.png").getImage();
+        this.ammo[1] = new ImageIcon("src/images/ammo1.png").getImage();
+        this.ammo[2] = new ImageIcon("src/images/ammo2.png").getImage();
+        this.ammo[3] = new ImageIcon("src/images/ammo3.png").getImage();
+        this.ammo[4] = new ImageIcon("src/images/ammo4.png").getImage();
+        this.ammo[5] = new ImageIcon("src/images/ammo5.png").getImage();
+
+        this.hitLetters = new ImageIcon("src/images/hits.png").getImage();
+        this.hits[0] = new ImageIcon("src/images/hits0.png").getImage();
+        this.hits[1] = new ImageIcon("src/images/hits1.png").getImage();
+        this.hits[2] = new ImageIcon("src/images/hits2.png").getImage();
+        this.hits[3] = new ImageIcon("src/images/hits3.png").getImage();
+        this.hits[4] = new ImageIcon("src/images/hits4.png").getImage();
+        this.hits[5] = new ImageIcon("src/images/hits5.png").getImage();
 
         this.steuerung = new Steuerung();
         this.addKeyListener(steuerung);
@@ -86,18 +104,34 @@ public class ChickenPanel extends JPanel {
         // Draw chicken player
         g2.drawImage(chicken.getImage(), chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
 
+        int bulletX = 40;
+        int bulletY = 680;
+        switch (currentLevel.getBullets()){
+            case 0 -> g2.drawImage(ammo[0], bulletX, bulletY, ammo[0].getWidth(this)/2, ammo[0].getHeight(this)/2, this);
+            case 1 -> g2.drawImage(ammo[1], bulletX, bulletY, ammo[1].getWidth(this)/2, ammo[1].getHeight(this)/2, this);
+            case 2 -> g2.drawImage(ammo[2], bulletX, bulletY, ammo[2].getWidth(this)/2, ammo[2].getHeight(this)/2, this);
+            case 3 -> g2.drawImage(ammo[3], bulletX, bulletY, ammo[3].getWidth(this)/2, ammo[3].getHeight(this)/2, this);
+            case 4 -> g2.drawImage(ammo[4], bulletX, bulletY, ammo[4].getWidth(this)/2, ammo[4].getHeight(this)/2, this);
+            case 5 -> g2.drawImage(ammo[5], bulletX, bulletY, ammo[5].getWidth(this)/2, ammo[5].getHeight(this)/2, this);
+
+        }
         // Draw stopwatch
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2 - 31, 32);
 
-        // Draw Bullet Counter
-        g2.setFont(new Font("Arial", Font.BOLD, 25));
-        g2.drawString(""+ currentLevel.getBullets(), 50, 50);
-
         // Draw Hits Counter
-        g2.setFont(new Font("Arial", Font.BOLD, 25));
-        g2.drawString(""+ currentLevel.getHits(), 120, 50);
+
+        g2.drawImage(hitLetters, bulletX , bulletY- 50, hitLetters.getWidth(this), hitLetters.getHeight(this), this);
+        switch (currentLevel.getHits()){
+            case 0 -> g2.drawImage(hits[0], bulletX + 150, bulletY - 50, hits[0].getWidth(this), hits[0].getHeight(this)/2, this);
+            case 1 -> g2.drawImage(hits[1], bulletX + 150, bulletY - 50, hits[1].getWidth(this), hits[1].getHeight(this)/2, this);
+            case 2 -> g2.drawImage(hits[2], bulletX + 150, bulletY - 50, hits[2].getWidth(this), hits[2].getHeight(this)/2, this);
+            case 3 -> g2.drawImage(hits[3], bulletX + 150, bulletY - 50, hits[3].getWidth(this), hits[3].getHeight(this)/2, this);
+            case 4 -> g2.drawImage(hits[4], bulletX + 150, bulletY - 50, hits[4].getWidth(this), hits[4].getHeight(this)/2, this);
+            case 5 -> g2.drawImage(hits[5], bulletX + 150, bulletY - 50, hits[5].getWidth(this), hits[5].getHeight(this)/2, this);
+
+        }
     }
 
     public void update() {
