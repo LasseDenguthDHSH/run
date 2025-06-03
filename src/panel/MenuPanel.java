@@ -48,7 +48,7 @@ public class MenuPanel extends JPanel {
 
     }
 
-    private JButton createButton(String text) {
+    JButton createButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 24)); // Größere Schrift
         button.setBackground(new Color(70, 130, 180)); // Hintergrundfarbe setzen

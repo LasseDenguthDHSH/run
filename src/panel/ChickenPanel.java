@@ -22,6 +22,10 @@ public class ChickenPanel extends JPanel {
     private Image groundImage;
     private Image skyImage;
     private boolean justShot = false;
+    private MenuPanel menuPanel = Main.menuPanel;
+    private JButton startButton;
+    private Player winner;
+    private Player loser;
 
     public ChickenPanel(JFrame frame, JumpPanel jumpPanel) {
         this.jumpPanel = jumpPanel;
@@ -33,6 +37,8 @@ public class ChickenPanel extends JPanel {
         this.skyImage = currentLevel.getSkyImage();
 
         this.chicken = new Player("Chicken", 64, 64, currentLevel, chickenImage);
+        this.winner = jumpPanel.getWinner();
+        this.loser = jumpPanel.getLoser();
 
         this.steuerung = new Steuerung();
         this.addKeyListener(steuerung);
@@ -42,6 +48,29 @@ public class ChickenPanel extends JPanel {
 
         this.stoppuhr = new Stoppuhr();
         gameTimer = new Timer(16, e -> update());
+
+        // Initialize button
+        startButton = new JButton("Start");
+
+
+        setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        this.add(startButton, gbc);
+        buttonPanel.add(startButton);
+
+        this.add(buttonPanel);
+        startButton.addActionListener(e -> {
+            timerStarted = true;
+            gameTimer.start();
+            stoppuhr.start();
+            startButton.setEnabled(false);
+            this.remove(buttonPanel);
+        });
         gameTimer.start();
     }
 
@@ -66,51 +95,57 @@ public class ChickenPanel extends JPanel {
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(""+ currentLevel.getBullets(), 50, 50);
 
-        //Draw Hits Counter
+        // Draw Hits Counter
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(""+ currentLevel.getHits(), 120, 50);
     }
 
     public void update() {
+        if (startButton.isEnabled()) {
+            return;
+        }
+
         boolean moved = false;
         if (currentLevel.getBullets() == 0) {
-            if (currentLevel.getHits() >= 4) {
-                jumpPanel.setWinner(jumpPanel.getLoser());
+            if (currentLevel.getHits() >= 3) {
+                this.winner = jumpPanel.getLoser();
+                this.loser  = jumpPanel.getWinner();
             }
-            Main.showWinPanel(jumpPanel);
+            Main.showWinPanel(this);
         }
+
         // Player movement
         if (steuerung.isRight1Pressed()) {
-
-            chicken.moveRight(chicken.getSpeed());
-            moved = true;
+            if(chicken.getX()<= getWidth() - 64){
+                chicken.moveRight(chicken.getSpeed());
+                moved = true;
+            }
         }
         if (steuerung.isLeft1Pressed()) {
             chicken.moveLeft(chicken.getSpeed());
             moved = true;
         }
         if (steuerung.isUp1Pressed()) {
-            chicken.jump();
-            moved = true;
+            if (chicken.getY() >= 64){
+                chicken.jump();
+                moved = true;
+            }
         }
-        if (steuerung.isMouseClicked()){
-            System.out.println("clicked");
+        if (steuerung.isMouseClicked()) {
             if (!justShot) {
-                currentLevel.setBullets(currentLevel.getBullets()-1);
+                currentLevel.setBullets(currentLevel.getBullets() - 1);
                 Rectangle hitbox = new Rectangle(chicken.getX(), chicken.getY(), 64, 64);
-                System.out.println(steuerung.getMouseX());
                 if (hitbox.contains(steuerung.getMouseX(), steuerung.getMouseY())) {
                     currentLevel.setHits(currentLevel.getHits() + 1);
-                    System.out.println("Hit!");
                 }
                 justShot = true;
             }
-        }else {
+        } else {
             justShot = false;
         }
 
         if (steuerung.isSpezialButtonPressed()) {
-            Main.showWinPanel(jumpPanel);
+            Main.showWinPanel(this);
         }
 
         chicken.applyGravity(currentLevel);
@@ -132,5 +167,13 @@ public class ChickenPanel extends JPanel {
 
     public Level getCurrentLevel() {
         return currentLevel;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public Player getLoser() {
+        return loser;
     }
 }

@@ -6,15 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class WinPanel extends JPanel {
-    JumpPanel jumpPanel;
+    ChickenPanel chickenPanel;
     Player winner, loser;
     Image winnerImage, loserImage;
     ImageIcon rainCloudGif;
 
-    public WinPanel(JumpPanel jumpPanel) {
-        this.jumpPanel = jumpPanel;
-        this.winner = jumpPanel.getWinner();
-        this.loser = (jumpPanel.getPlayer1() == winner) ? jumpPanel.getPlayer2() : jumpPanel.getPlayer1();
+    public WinPanel(ChickenPanel chickenPanel) {
+        this.chickenPanel = chickenPanel;
+        this.winner = chickenPanel.getWinner();
+        this.loser = chickenPanel.getLoser();
 
         winnerImage = winner.getImage();
         loserImage = loser.getImage();

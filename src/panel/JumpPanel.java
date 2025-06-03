@@ -140,11 +140,11 @@ public class JumpPanel extends JPanel {
     public void update() {
         boolean moved = false;
         if (player1.getX()>= currentLevel.getZielX()){
-            winner = player1;
-            loser = player2;
+            this.winner = player1;
+            this.loser = player2;
         } else if (player2.getX()>= currentLevel.getZielX()){
-            winner = player2;
-            loser = player1;
+            this.winner = player2;
+            this.loser = player1;
         }
         if (winner != null){
             gameTimer.stop();
@@ -182,9 +182,8 @@ public class JumpPanel extends JPanel {
         }
 
         if (steuerung.isSpezialButtonPressed()){
-            if (winner == null){
-                winner = player1;
-            }
+                this.winner = player1;
+                this.loser = player2;
             Main.startChickenGame();
         }
 

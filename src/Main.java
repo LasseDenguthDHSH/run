@@ -16,7 +16,8 @@ public class Main {
     static JFrame frame;
     static int fensterLeiste = 37;
     static JumpPanel jumpPanel;
-    static ChickenPanel chickenPanel;
+    public static ChickenPanel chickenPanel;
+    public static MenuPanel menuPanel;
 
     public static void main(String[] args) {
 
@@ -48,15 +49,15 @@ public class Main {
     }
 
     public static void showMenu() {
-        MenuPanel menuPanel = new MenuPanel();
+        menuPanel = new MenuPanel();
         panelManager.add(menuPanel, "Menu");
         cardLayout.show(panelManager, "Menu");
         menuPanel.requestFocusInWindow();
         frame.setTitle("Menu");
     }
 
-    public static void showWinPanel(JumpPanel gamePanel) {
-        WinPanel winPanel = new WinPanel(gamePanel);
+    public static void showWinPanel(ChickenPanel chickenPanel) {
+        WinPanel winPanel = new WinPanel(chickenPanel);
         panelManager.add(winPanel, "Winner");
         cardLayout.show(panelManager, "Winner");
         winPanel.requestFocusInWindow();
