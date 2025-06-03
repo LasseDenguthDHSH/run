@@ -124,12 +124,12 @@ public class ChickenPanel extends JPanel {
 
         g2.drawImage(hitLetters, bulletX , bulletY- 50, hitLetters.getWidth(this), hitLetters.getHeight(this), this);
         switch (currentLevel.getHits()){
-            case 0 -> g2.drawImage(hits[0], bulletX + 150, bulletY - 50, hits[0].getWidth(this), hits[0].getHeight(this)/2, this);
-            case 1 -> g2.drawImage(hits[1], bulletX + 150, bulletY - 50, hits[1].getWidth(this), hits[1].getHeight(this)/2, this);
-            case 2 -> g2.drawImage(hits[2], bulletX + 150, bulletY - 50, hits[2].getWidth(this), hits[2].getHeight(this)/2, this);
-            case 3 -> g2.drawImage(hits[3], bulletX + 150, bulletY - 50, hits[3].getWidth(this), hits[3].getHeight(this)/2, this);
-            case 4 -> g2.drawImage(hits[4], bulletX + 150, bulletY - 50, hits[4].getWidth(this), hits[4].getHeight(this)/2, this);
-            case 5 -> g2.drawImage(hits[5], bulletX + 150, bulletY - 50, hits[5].getWidth(this), hits[5].getHeight(this)/2, this);
+            case 0 -> g2.drawImage(hits[0], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[0].getWidth(this)*3/4, hits[0].getHeight(this)*4/6, this);
+            case 1 -> g2.drawImage(hits[1], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[1].getWidth(this)*3/4, hits[1].getHeight(this)*4/6, this);
+            case 2 -> g2.drawImage(hits[2], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[2].getWidth(this)*3/4, hits[2].getHeight(this)*4/6, this);
+            case 3 -> g2.drawImage(hits[3], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[3].getWidth(this)*3/4, hits[3].getHeight(this)*4/6, this);
+            case 4 -> g2.drawImage(hits[4], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[4].getWidth(this)*3/4, hits[4].getHeight(this)*4/6, this);
+            case 5 -> g2.drawImage(hits[5], bulletX + ammo[3].getWidth(this)/2 -15, bulletY - 48, hits[5].getWidth(this)*3/4, hits[5].getHeight(this)*4/6, this);
 
         }
     }
