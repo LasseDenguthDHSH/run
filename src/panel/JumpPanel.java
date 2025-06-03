@@ -26,6 +26,7 @@ public class JumpPanel extends JPanel {
     int anzahlHintergrunde;
     int totalWidth;
     Player winner;
+    Player loser;
     String endZeit;
     JumpPanel jumpPanel;
 
@@ -140,8 +141,10 @@ public class JumpPanel extends JPanel {
         boolean moved = false;
         if (player1.getX()>= currentLevel.getZielX()){
             winner = player1;
+            loser = player2;
         } else if (player2.getX()>= currentLevel.getZielX()){
             winner = player2;
+            loser = player1;
         }
         if (winner != null){
             gameTimer.stop();
@@ -219,7 +222,15 @@ public class JumpPanel extends JPanel {
     public Player getWinner() {
         return winner;
     }
-
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+    public Player getLoser(){
+        return loser;
+    }
+    public void setLoser(Player loser){
+        this.loser = loser;
+    }
     public Player getPlayer1() {
         return player1;
     }

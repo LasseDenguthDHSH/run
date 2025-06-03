@@ -6,6 +6,7 @@ import src.sounds.Sounds;
 public class ChickenLevel extends Level{
 
     int bullets;
+    int hits = 0;
 
     public ChickenLevel(String title) {
         super(title);
@@ -30,5 +31,13 @@ public class ChickenLevel extends Level{
     }
     public void setBullets(int bullets) {
         this.bullets = bullets;
+    }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
     }
 }

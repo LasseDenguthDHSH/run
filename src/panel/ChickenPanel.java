@@ -37,6 +37,7 @@ public class ChickenPanel extends JPanel {
         this.steuerung = new Steuerung();
         this.addKeyListener(steuerung);
         this.addMouseListener(steuerung);
+        this.addMouseMotionListener(steuerung);
         this.setFocusable(true);
 
         this.stoppuhr = new Stoppuhr();
@@ -64,11 +65,18 @@ public class ChickenPanel extends JPanel {
         // Draw Bullet Counter
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(""+ currentLevel.getBullets(), 50, 50);
+
+        //Draw Hits Counter
+        g2.setFont(new Font("Arial", Font.BOLD, 25));
+        g2.drawString(""+ currentLevel.getHits(), 120, 50);
     }
 
     public void update() {
         boolean moved = false;
         if (currentLevel.getBullets() == 0) {
+            if (currentLevel.getHits() >= 4) {
+                jumpPanel.setWinner(jumpPanel.getLoser());
+            }
             Main.showWinPanel(jumpPanel);
         }
         // Player movement
@@ -89,6 +97,12 @@ public class ChickenPanel extends JPanel {
             System.out.println("clicked");
             if (!justShot) {
                 currentLevel.setBullets(currentLevel.getBullets()-1);
+                Rectangle hitbox = new Rectangle(chicken.getX(), chicken.getY(), 64, 64);
+                System.out.println(steuerung.getMouseX());
+                if (hitbox.contains(steuerung.getMouseX(), steuerung.getMouseY())) {
+                    currentLevel.setHits(currentLevel.getHits() + 1);
+                    System.out.println("Hit!");
+                }
                 justShot = true;
             }
         }else {
