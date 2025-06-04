@@ -31,7 +31,7 @@ public class Level2 extends Level {
         platforms.add(new CheckpointPlatform(0, 700, platformWidth, platformHeight, this));
         platforms.add(new Platform(500, 600, platformWidth, platformHeight, this));
         platforms.add(new Platform(1020, 500, platformWidth, platformHeight, this));
-        platforms.add(new EntityPlatform(1450, 300, platformWidth*2, platformHeight, this));
+        platforms.add(new EntityPlatform(1250, 300, platformWidth*3, platformHeight, this));
         entities.add(new Entity(platforms.getLast(), 3));
         platforms.add(new JumpPlatform(1950, 800, platformWidth*3, platformHeight, this));
         platforms.add(new Platform(2650, 650, platformWidth, platformHeight, this));
