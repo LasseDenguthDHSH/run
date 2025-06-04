@@ -24,13 +24,15 @@ public class Level2 extends Level {
         this.backgroundMusic = new Music("src/music/Moon_music.wav");
         backgroundMusic.setVolume(0.8);
         this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
+        this.platformSpeed = 3;
 
 
         // Plattformen hinzufügen
         platforms.add(new CheckpointPlatform(0, 700, platformWidth, platformHeight, this));
         platforms.add(new Platform(500, 600, platformWidth, platformHeight, this));
         platforms.add(new Platform(1020, 500, platformWidth, platformHeight, this));
-        platforms.add(new Platform(1450, 300, platformWidth, platformHeight, this));
+        platforms.add(new EntityPlatform(1450, 300, platformWidth*2, platformHeight, this));
+        entities.add(new Entity(platforms.getLast(), 3));
         platforms.add(new JumpPlatform(1950, 800, platformWidth*3, platformHeight, this));
         platforms.add(new Platform(2650, 650, platformWidth, platformHeight, this));
         platforms.add(new DeathPlatform(3100, 500, platformWidth, platformHeight, this));

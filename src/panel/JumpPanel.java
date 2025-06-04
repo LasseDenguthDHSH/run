@@ -3,6 +3,7 @@ package src.panel;
 import src.*;
 import src.level.*;
 import src.platform.CheckpointPlatform;
+import src.platform.Entity;
 import src.platform.MovingPlatform;
 import src.platform.Platform;
 import src.player.*;
@@ -109,10 +110,14 @@ public class JumpPanel extends JPanel {
             g2.fillRect((platform.getX() - cameraX), platform.getY(), platform.getWidth(),
                     platform.getHeight());
             if (platform instanceof MovingPlatform){
-                platform.move();
+                platform.move(currentLevel.getPlatformSpeed());
             } else if (platform instanceof CheckpointPlatform) {
                 g2.fillRect(abstand + (platform.getX() * progressBarWidth / currentLevel.getZielX()), barY, 8, 8);
             }
+        }
+        for (Entity entity : currentLevel.getEntities()) {
+            g2.drawImage(entity.getEntityImage(), entity.getX()-cameraX, entity.getY(), entity.getSize(), entity.getSize(), this);
+            entity.move(currentLevel.getPlatformSpeed());
         }
         // Spieler
         g2.drawImage(player.getImage(), player.getX() - cameraX, player.getY(), player.getWidth(), player.getHeight(), this);
@@ -192,6 +197,8 @@ public class JumpPanel extends JPanel {
         player2.applyGravity(currentLevel);
         player1.boostMovement();
         player2.boostMovement();
+        checkCollision(player1);
+        checkCollision(player2);
 
         // Stoppuhr starten bei erster Bewegung
         if (!timerStarted && moved) {
@@ -240,5 +247,17 @@ public class JumpPanel extends JPanel {
     }
     public JumpPanel getPanel(){
         return this;
+    }
+    private void checkCollision(Player player) {
+        for (Entity entity : currentLevel.getEntities()) {
+            if (player.getX() < entity.getX() + entity.getSize() &&
+                    player.getX() + player.getWidth() > entity.getX() &&
+                    player.getY() < entity.getY() + entity.getSize() &&
+                    player.getY() + player.getHeight() > entity.getY()) {
+
+                // Respawn am letzten Checkpoint oder Startposition
+                player.resetToCheckpoint(currentLevel, currentLevel.getRespawnSound());
+            }
+        }
     }
 }

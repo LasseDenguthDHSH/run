@@ -45,18 +45,18 @@ public class Platform {
 
     public Color getPlatformColor() { return platformColor; }
 
-    public void move() {
+    public void move(int platformSpeed) {
         if (movingRight) {
             frameCounter++;
-            if (frameCounter % 3 == 0) { // Jede zweite Aktualisierung bewegen
+            if (frameCounter % platformSpeed == 0) { // Jede zweite Aktualisierung bewegen
                 x += speed;
             }
             if (x > rightBoundary) {
                 movingRight = false;
             }
-        } else if (!movingRight) {
+        } else {
             frameCounter++;
-            if (frameCounter % 3 == 0) { // Jede zweite Aktualisierung bewegen
+            if (frameCounter % platformSpeed == 0) { // Jede zweite Aktualisierung bewegen
                 x -= speed;
             }
             if (x < leftBoundary) {

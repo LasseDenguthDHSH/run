@@ -33,6 +33,8 @@ public abstract class Level {
     Sounds respawnSound;
     Sounds jumpSound;
     Sounds winSound;
+    ArrayList<Entity> entities = new ArrayList<>();
+    int platformSpeed;
 
     public Level(String title) {
         this.title = title;
@@ -145,5 +147,13 @@ public abstract class Level {
 
     public Sounds getWinSound() {
         return winSound;
+    }
+
+    public ArrayList<Entity> getEntities() {
+        return entities;
+    }
+
+    public int getPlatformSpeed() {
+        return platformSpeed;
     }
 }

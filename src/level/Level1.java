@@ -19,18 +19,20 @@ public class Level1 extends Level {
         this.player2Image = loadImage("src/images/player2_level1.png");
         this.platformColor = new Color(30, 30, 100);
 
+
         // Hintergrundmusik starten
         this.backgroundMusic = new Music("src/music/background.wav");
         backgroundMusic.setVolume(0.6);
 
         this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
 
-
+        this.platformSpeed = 3;
         // Plattformen hinzufügen
         platforms.add(new Platform(0, 700, platformWidth, platformHeight, this));
         platforms.add(new MovingPlatform(350, 600, platformWidth, platformHeight, this, 1, false, 120, 580));
         platforms.add(new Platform(650, 500, platformWidth, platformHeight, this));
-        platforms.add(new Platform(800, 500, platformWidth, platformHeight, this));
+        platforms.add(new EntityPlatform(800, 500, platformWidth, platformHeight, this));
+        entities.add(new Entity(platforms.getLast(), 1));
         platforms.add(new JumpPlatform(1020, 700, platformWidth/2, platformHeight, this));
         platforms.add(new BoostPlatform(1220, 600, platformWidth, platformHeight, this));
         platforms.add(new Platform(1750, 750, platformWidth*2, platformHeight, this));
