@@ -74,6 +74,11 @@ public class JumpPanel extends JPanel {
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2-31, 32);
+
+        g2.setFont(new Font("Arial", Font.BOLD, 18));
+        g2.setColor(Color.white);
+        g2.drawString("Spieler 1: " + currentLevel.getPlayer1Name(), 20, 60);
+        g2.drawString("Spieler 2: " + currentLevel.getPlayer2Name(), getWidth() / 2 + 20, 60);
     }
 
     private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand, Steuerung steuerung) {

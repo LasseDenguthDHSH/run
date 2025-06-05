@@ -4,10 +4,10 @@ import src.music.Music;
 import src.sounds.Sounds;
 import src.platform.*;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Level1 extends Level {
-
 
     public Level1(String title) {
         super(title);
@@ -18,7 +18,6 @@ public class Level1 extends Level {
         this.player1Image = loadImage("src/images/player1_level1.png");
         this.player2Image = loadImage("src/images/player2_level1.png");
         this.platformColor = new Color(30, 30, 100);
-
 
         // Hintergrundmusik starten
         this.backgroundMusic = new Music("src/music/background.wav");
