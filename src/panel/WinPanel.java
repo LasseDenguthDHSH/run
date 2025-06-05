@@ -1,5 +1,6 @@
 package src.panel;
 
+import src.Main;
 import src.player.Player;
 
 import javax.swing.*;
@@ -10,6 +11,8 @@ public class WinPanel extends JPanel {
     Player winner, loser;
     Image winnerImage, loserImage;
     ImageIcon rainCloudGif;
+    JButton playAgain;
+    JPanel buttonPanel;
 
     public WinPanel(ChickenPanel chickenPanel) {
         this.chickenPanel = chickenPanel;
@@ -19,6 +22,19 @@ public class WinPanel extends JPanel {
         winnerImage = winner.getImage();
         loserImage = loser.getImage();
         rainCloudGif = new ImageIcon("src/images/raincloud.gif"); // GIF der Regenwolke
+
+        playAgain = new JButton("Start");
+        buttonPanel = new JPanel();
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        this.add(playAgain, gbc);
+        buttonPanel.add(playAgain);
+        playAgain.addActionListener(e -> {
+            Main.showMenu();
+        });
     }
 
     @Override
@@ -27,7 +43,7 @@ public class WinPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
 
         // Hintergrund-Farbverlauf
-        GradientPaint gradient = new GradientPaint(0, 0, Color.GRAY, getWidth(), getHeight(), Color.LIGHT_GRAY);
+        GradientPaint gradient = new GradientPaint(0, 0, Color.BLUE, getWidth(), getHeight(), Color.YELLOW);
         g2.setPaint(gradient);
         g2.fillRect(0, 0, getWidth(), getHeight());
 
@@ -40,27 +56,18 @@ public class WinPanel extends JPanel {
         int textY = getHeight() / 2;
         g2.drawString(winnerText, textX, textY);
 
-        // Krone über Gewinnernamen
-        g2.setColor(Color.YELLOW);
-        int crownX = textX + textWidth / 2 - 25;
-        int crownY = textY - 60;
-        int[] xPoints = {crownX, crownX + 10, crownX + 20, crownX + 30, crownX + 40};
-        int[] yPoints = {crownY + 30, crownY, crownY + 20, crownY, crownY + 30};
-        g2.fillPolygon(xPoints, yPoints, xPoints.length);
-
-        // Gewinnerbild unter Krone
         if (winnerImage != null) {
-            g2.drawImage(winnerImage, textX + textWidth / 2 - 50, textY + 20, 100, 100, this);
+            g2.drawImage(winnerImage, getWidth()-164, 400, 64, 64, this);
         }
 
         // GIF-Regenwolke
         if (rainCloudGif != null) {
-            rainCloudGif.paintIcon(this, g, 50, 50);
-}
+            rainCloudGif.paintIcon(this, g, -20, 75);
+        }
 
-            // Verliererbild unter der Wolke
+        // Verliererbild unter der Wolke
         if (loserImage != null) {
-            g2.drawImage(loserImage, 100, 160, 100, 100, this);
+            g2.drawImage(loserImage, 132, 400, 64, 64, this);
         }
     }
 }

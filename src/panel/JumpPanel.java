@@ -30,6 +30,8 @@ public class JumpPanel extends JPanel {
     Player loser;
     String endZeit;
     JumpPanel jumpPanel;
+    protected String player1Name = "Spieler 1";
+    protected String player2Name = "Spieler 2";
 
     public JumpPanel(Level level, JFrame frame, JumpPanel jumpPanel) {
         this.jumpPanel = jumpPanel;
@@ -41,8 +43,13 @@ public class JumpPanel extends JPanel {
         this.anzahlHintergrunde = currentLevel.getZielX()/frame.getWidth() + 2;
         this.totalWidth = frame.getWidth()*anzahlHintergrunde;
 
-        this.player1 = new Player("Player 1", 32, 32, currentLevel, currentLevel.getPlayer1Image());
-        this.player2 = new Player("Player 2", 32, 32, currentLevel, currentLevel.getPlayer2Image());
+            this.player1Name = JOptionPane.showInputDialog(null, "Name für Spieler 1:");
+            if (player1Name == null || player1Name.trim().isEmpty()) player1Name = "Spieler 1";
+            this.player2Name = JOptionPane.showInputDialog(null, "Name für Spieler 2:");
+            if (player2Name == null || player2Name.trim().isEmpty()) player2Name = "Spieler 2";
+
+        this.player1 = new Player(player1Name, 32, 32, currentLevel, currentLevel.getPlayer1Image());
+        this.player2 = new Player(player2Name, 32, 32, currentLevel, currentLevel.getPlayer2Image());
 
         this.arrowVertical = new ImageIcon("src/images/arrowVertical.png").getImage();
         this.arrowHorizontal = new ImageIcon("src/images/arrowHorizontal.png").getImage();
@@ -75,10 +82,9 @@ public class JumpPanel extends JPanel {
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2-31, 32);
 
-        g2.setFont(new Font("Arial", Font.BOLD, 18));
+        g2.setFont(new Font("Arial", Font.BOLD, 12));
         g2.setColor(Color.white);
-        g2.drawString("Spieler 1: " + currentLevel.getPlayer1Name(), 20, 60);
-        g2.drawString("Spieler 2: " + currentLevel.getPlayer2Name(), getWidth() / 2 + 20, 60);
+
     }
 
     private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand, Steuerung steuerung) {
@@ -126,6 +132,13 @@ public class JumpPanel extends JPanel {
         }
         // Spieler
         g2.drawImage(player.getImage(), player.getX() - cameraX, player.getY(), player.getWidth(), player.getHeight(), this);
+        g2.setColor(Color.WHITE);
+        if(player.getName().length() <= 4){
+            g2.drawString(player.getName(), player.getX()+5-cameraX, player.getY()-10);
+        } else{
+            g2.drawString(player.getName(), player.getX()- cameraX, player.getY()-10);
+        }
+
 
         //Level Spezifisch
         if (currentLevel instanceof Level2) {
@@ -264,5 +277,13 @@ public class JumpPanel extends JPanel {
                 player.resetToCheckpoint(currentLevel, currentLevel.getRespawnSound());
             }
         }
+    }
+
+    public int getCameraX1() {
+        return cameraX1;
+    }
+
+    public int getCameraX2() {
+        return cameraX2;
     }
 }

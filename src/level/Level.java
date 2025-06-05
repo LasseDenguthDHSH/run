@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Level {
-    protected String player1Name = "Spieler 1";
-    protected String player2Name = "Spieler 2";
     int groundY;
     int platformWidth;
     int platformHeight;
@@ -41,12 +39,7 @@ public abstract class Level {
 
     public Level(String title) {
 
-        if(!(this instanceof ChickenLevel)){
-            this.player1Name = JOptionPane.showInputDialog(null, "Name für Spieler 1:");
-            if (player1Name == null || player1Name.trim().isEmpty()) player1Name = "Spieler 1";
-            this.player2Name = JOptionPane.showInputDialog(null, "Name für Spieler 2:");
-            if (player2Name == null || player2Name.trim().isEmpty()) player2Name = "Spieler 2";
-        }
+
         this.title = title;
         this.playerStartX = 50;
         this.gravity = 0.7;
@@ -73,14 +66,6 @@ public abstract class Level {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public String getPlayer1Name() {
-        return player1Name;
-    }
-
-    public String getPlayer2Name() {
-        return player2Name;
     }
 
     public int getGroundY() {
