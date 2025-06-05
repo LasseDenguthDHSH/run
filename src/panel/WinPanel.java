@@ -23,18 +23,20 @@ public class WinPanel extends JPanel {
         loserImage = loser.getImage();
         rainCloudGif = new ImageIcon("src/images/raincloud.gif"); // GIF der Regenwolke
 
-        playAgain = new JButton("Start");
+        playAgain = new JButton("Nochmal Spielen");
+        playAgain.setVisible(true); // Sicherstellen, dass der Button sichtbar ist
         buttonPanel = new JPanel();
+        buttonPanel.add(playAgain);
+
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1; // Änderung: Button unterhalb des Gewinnertextes
         gbc.anchor = GridBagConstraints.CENTER;
-        this.add(playAgain, gbc);
-        buttonPanel.add(playAgain);
-        playAgain.addActionListener(e -> {
-            Main.showMenu();
-        });
+        gbc.insets = new Insets(20, 0, 0, 0); // Abstand nach oben hinzufügen
+
+        this.add(buttonPanel, gbc); // ButtonPanel hinzufügen
+        playAgain.addActionListener(e -> Main.showMenu());
     }
 
     @Override
@@ -53,21 +55,22 @@ public class WinPanel extends JPanel {
         String winnerText = "Winner: " + winner.getName();
         int textWidth = g2.getFontMetrics().stringWidth(winnerText);
         int textX = (getWidth() - textWidth) / 2;
-        int textY = getHeight() / 2;
+        int textY = getHeight() / 3; // Änderung: Etwas höher setzen
         g2.drawString(winnerText, textX, textY);
 
+        g2.setFont(new Font("Arial", Font.BOLD, 18));
         if (winnerImage != null) {
-            g2.drawImage(winnerImage, getWidth()-164, 400, 64, 64, this);
+            g2.drawImage(winnerImage, getWidth() - 164, 400, 64, 64, this);
+            g2.drawString(winner.getName(), getWidth() - 164, 390);
         }
 
-        // GIF-Regenwolke
-        if (rainCloudGif != null) {
-            rainCloudGif.paintIcon(this, g, -20, 75);
-        }
-
-        // Verliererbild unter der Wolke
         if (loserImage != null) {
             g2.drawImage(loserImage, 132, 400, 64, 64, this);
+            g2.drawString(loser.getName(), 132, 385);
+        }
+
+        if (rainCloudGif != null) {
+            rainCloudGif.paintIcon(this, g, -85, 160);
         }
     }
 }

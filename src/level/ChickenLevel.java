@@ -18,8 +18,8 @@ public class ChickenLevel extends Level{
 
         this.groundY = 700;
         this.skyHeight = 800;
-        this.playerStartY = groundY - 32;
-        this.playerStartX = 768;
+        this.playerStartY = groundY-64;
+        this.playerStartX = 742;
         this.skyImage = loadImage("src/images/kampfArena.gif");
         this.bullets = 5;
         this.playerSpeed = 2;

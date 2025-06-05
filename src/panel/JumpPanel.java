@@ -82,9 +82,6 @@ public class JumpPanel extends JPanel {
         g2.setFont(new Font("Arial", Font.BOLD, 25));
         g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2-31, 32);
 
-        g2.setFont(new Font("Arial", Font.BOLD, 12));
-        g2.setColor(Color.white);
-
     }
 
     private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand, Steuerung steuerung) {
@@ -132,10 +129,16 @@ public class JumpPanel extends JPanel {
         }
         // Spieler
         g2.drawImage(player.getImage(), player.getX() - cameraX, player.getY(), player.getWidth(), player.getHeight(), this);
+        g2.setFont(new Font("Arial", Font.BOLD, 12));
+        g2.setColor(Color.white);
         g2.setColor(Color.WHITE);
-        if(player.getName().length() <= 4){
-            g2.drawString(player.getName(), player.getX()+5-cameraX, player.getY()-10);
-        } else{
+        if(player.getName().length() < 5){
+            int verschiebung = (5 -  player.getName().length()) *4;
+            g2.drawString(player.getName(), player.getX()-cameraX + verschiebung, player.getY()-10);
+        } else if (player.getName().length() >= 7){
+            int verschiebung = (player.getName().length() - 7)*4;
+            g2.drawString(player.getName(), player.getX()- cameraX - verschiebung, player.getY()-10);
+        } else {
             g2.drawString(player.getName(), player.getX()- cameraX, player.getY()-10);
         }
 
