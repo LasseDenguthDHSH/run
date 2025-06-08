@@ -90,12 +90,9 @@ public class Player {
                     platform.applyEffect(this);
 
                     // Speichert die letzte sichere Position
-                    if (level instanceof Level1 && !(platform instanceof CheckpointPlatform) && !(platform instanceof DeathPlatform) && !(platform instanceof JumpPlatform) && !(platform instanceof BoostPlatform) && !(platform instanceof MovingPlatform) && !(platform instanceof EntityPlatform)) {
+                    if (level instanceof Level1 && !(platform instanceof DeathPlatform) && !(platform instanceof JumpPlatform) && !(platform instanceof BoostPlatform) && !(platform instanceof MovingPlatform) && !(platform instanceof EntityPlatform)) {
                         checkpointX = platform.getX() + platform.getWidth() / 2 - 16;
                         checkpointY = platform.getY() - 32;
-                    } else if (level instanceof Level3) {
-                        checkpointX = level.getPlayerStartX();
-                        checkpointY = level.getPlayerStartY();
                     }
                     return;
                 }

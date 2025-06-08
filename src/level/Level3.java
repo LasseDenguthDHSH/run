@@ -25,15 +25,18 @@ public class Level3 extends Level{
         this.platformSpeed = 2;
 
 
-        platforms.add(new Platform(0, groundY-platformHeight, platformWidth, platformHeight, this)); // STANDPLATFORM
+        platforms.add(new CheckpointPlatform(0, groundY-platformHeight, platformWidth, platformHeight, this)); // STANDPLATFORM
         platforms.add(new Platform(170, 600, platformWidth, platformHeight, this));
         platforms.add(new BoostPlatform(320, 650, platformWidth, platformHeight, this));
         platforms.add(new Platform(750, 700, platformWidth, platformHeight, this));
         platforms.add(new JumpPlatform(900, 600, platformWidth/2, platformHeight, this));
         platforms.add(new JumpPlatform(1050, 400, platformWidth/2, platformHeight, this));
         platforms.add(new Platform(1200, 200, platformWidth/3, platformHeight, this));
-        platforms.add(new MovingPlatform(1350, 450, platformWidth, platformHeight, this, 2, true, 1350, 1500));
+        platforms.add(new MovingPlatform(1250, 450, platformWidth*2, platformHeight, this, 1, true, 1250, 1400));
         platforms.add(new Platform(1600, 450, platformWidth/3, platformHeight, this));
+        platforms.add(new Platform(1700, 450, platformWidth/3, platformHeight, this));
+        platforms.add(new DeathPlatform(1780, 550, platformWidth/2, platformHeight, this));
+        platforms.add(new CheckpointPlatform(1830, 550, platformWidth/3, platformHeight, this));
 
         this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2 - 16;
         this.zielY = platforms.getLast().getY();

@@ -9,7 +9,7 @@ import java.awt.*;
 public class BoostPlatform extends Platform {
     public BoostPlatform(int x, int y, int width, int height, Level level) {
         super(x, y, width, height, level);
-        this.platformColor = new Color(0, 200, 150);
+        this.platformColor = new Color(0, 240, 240);
         this.platformSound = new Sounds("src/sounds/boost_sound.wav");
     }
     @Override
