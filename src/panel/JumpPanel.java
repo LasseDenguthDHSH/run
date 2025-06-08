@@ -40,13 +40,13 @@ public class JumpPanel extends JPanel {
         this.addKeyListener(steuerung);
         this.setFocusable(true);
 
-        this.anzahlHintergrunde = currentLevel.getZielX()/frame.getWidth() + 2;
-        this.totalWidth = frame.getWidth()*anzahlHintergrunde;
+        this.anzahlHintergrunde = currentLevel.getZielX() / frame.getWidth() + 2;
+        this.totalWidth = frame.getWidth() * anzahlHintergrunde;
 
-            this.player1Name = JOptionPane.showInputDialog(null, "Name für Spieler 1:");
-            if (player1Name == null || player1Name.trim().isEmpty()) player1Name = "Spieler 1";
-            this.player2Name = JOptionPane.showInputDialog(null, "Name für Spieler 2:");
-            if (player2Name == null || player2Name.trim().isEmpty()) player2Name = "Spieler 2";
+        this.player1Name = JOptionPane.showInputDialog(null, "Name für Spieler 1:");
+        if (player1Name == null || player1Name.trim().isEmpty()) player1Name = "Spieler 1";
+        this.player2Name = JOptionPane.showInputDialog(null, "Name für Spieler 2:");
+        if (player2Name == null || player2Name.trim().isEmpty()) player2Name = "Spieler 2";
 
         this.player1 = new Player(player1Name, 32, 32, currentLevel, currentLevel.getPlayer1Image());
         this.player2 = new Player(player2Name, 32, 32, currentLevel, currentLevel.getPlayer2Image());
@@ -80,7 +80,7 @@ public class JumpPanel extends JPanel {
         // Stoppuhr
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 25));
-        g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2-31, 32);
+        g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2 - 31, 32);
 
     }
 
@@ -117,14 +117,14 @@ public class JumpPanel extends JPanel {
             g2.setColor(platform.getPlatformColor());
             g2.fillRect((platform.getX() - cameraX), platform.getY(), platform.getWidth(),
                     platform.getHeight());
-            if (platform instanceof MovingPlatform){
+            if (platform instanceof MovingPlatform) {
                 platform.move(currentLevel.getPlatformSpeed());
             } else if (platform instanceof CheckpointPlatform) {
                 g2.fillRect(abstand + (platform.getX() * progressBarWidth / currentLevel.getZielX()), barY, 8, 8);
             }
         }
         for (Entity entity : currentLevel.getEntities()) {
-            g2.drawImage(entity.getEntityImage(), entity.getX()-cameraX, entity.getY(), entity.getSize(), entity.getSize(), this);
+            g2.drawImage(entity.getEntityImage(), entity.getX() - cameraX, entity.getY(), entity.getSize(), entity.getSize(), this);
             entity.move(currentLevel.getPlatformSpeed());
         }
         // Spieler
@@ -132,14 +132,14 @@ public class JumpPanel extends JPanel {
         g2.setFont(new Font("Arial", Font.BOLD, 12));
         g2.setColor(Color.white);
         g2.setColor(Color.WHITE);
-        if(player.getName().length() < 5){
-            int verschiebung = (5 -  player.getName().length()) *4;
-            g2.drawString(player.getName(), player.getX()-cameraX + verschiebung, player.getY()-10);
-        } else if (player.getName().length() >= 7){
-            int verschiebung = (player.getName().length() - 7)*4;
-            g2.drawString(player.getName(), player.getX()- cameraX - verschiebung, player.getY()-10);
+        if (player.getName().length() < 5) {
+            int verschiebung = (5 - player.getName().length()) * 4;
+            g2.drawString(player.getName(), player.getX() - cameraX + verschiebung, player.getY() - 10);
+        } else if (player.getName().length() >= 7) {
+            int verschiebung = (player.getName().length() - 7) * 4;
+            g2.drawString(player.getName(), player.getX() - cameraX - verschiebung, player.getY() - 10);
         } else {
-            g2.drawString(player.getName(), player.getX()- cameraX, player.getY()-10);
+            g2.drawString(player.getName(), player.getX() - cameraX, player.getY() - 10);
         }
 
 
@@ -147,9 +147,9 @@ public class JumpPanel extends JPanel {
         if (currentLevel instanceof Level2) {
             g2.drawImage(arrowVertical, 2080 - cameraX, getHeight() / 2, arrowVertical.getWidth(this) * 3 / 7, arrowVertical.getHeight(this) * 3 / 7, this);
         } else if (currentLevel instanceof Level1) {
-            g2.drawImage(arrowVertical, 3880 - cameraX, 720, arrowVertical.getWidth(this) /6, arrowVertical.getHeight(this) / 6, this);
+            g2.drawImage(arrowVertical, 3880 - cameraX, 720, arrowVertical.getWidth(this) / 6, arrowVertical.getHeight(this) / 6, this);
         }
-        g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this)+5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
+        g2.drawImage(goalFlag, currentLevel.getZielX() - cameraX, currentLevel.getZielY() - goalFlag.getHeight(this) + 5, goalFlag.getWidth(this), goalFlag.getHeight(this), this);
 
         // Steuerungsbilder für Spieler 1 (WASD)
         if (player == player1) {
@@ -165,14 +165,14 @@ public class JumpPanel extends JPanel {
 
     public void update() {
         boolean moved = false;
-        if (player1.getX()>= currentLevel.getZielX()){
+        if (player1.getX() >= currentLevel.getZielX()) {
             this.winner = player1;
             this.loser = player2;
-        } else if (player2.getX()>= currentLevel.getZielX()){
+        } else if (player2.getX() >= currentLevel.getZielX()) {
             this.winner = player2;
             this.loser = player1;
         }
-        if (winner != null){
+        if (winner != null) {
             gameTimer.stop();
             endZeit = stoppuhr.getFormattedTime();
             currentLevel.getBackgroundMusic().stop();
@@ -208,9 +208,9 @@ public class JumpPanel extends JPanel {
             moved = true;
         }
 
-        if (steuerung.isSpezialButtonPressed()){
-                this.winner = player1;
-                this.loser = player2;
+        if (steuerung.isSpezialButtonPressed()) {
+            this.winner = player1;
+            this.loser = player2;
             Main.startChickenGame();
         }
 
@@ -235,6 +235,7 @@ public class JumpPanel extends JPanel {
 
         repaint();
     }
+
     public int getTotalWidth() {
         return totalWidth;
     }
@@ -250,15 +251,19 @@ public class JumpPanel extends JPanel {
     public Player getWinner() {
         return winner;
     }
+
     public void setWinner(Player winner) {
         this.winner = winner;
     }
-    public Player getLoser(){
+
+    public Player getLoser() {
         return loser;
     }
-    public void setLoser(Player loser){
+
+    public void setLoser(Player loser) {
         this.loser = loser;
     }
+
     public Player getPlayer1() {
         return player1;
     }
@@ -266,9 +271,11 @@ public class JumpPanel extends JPanel {
     public Player getPlayer2() {
         return player2;
     }
-    public JumpPanel getPanel(){
+
+    public JumpPanel getPanel() {
         return this;
     }
+
     private void checkCollision(Player player) {
         for (Entity entity : currentLevel.getEntities()) {
             if (player.getX() < entity.getX() + entity.getSize() &&

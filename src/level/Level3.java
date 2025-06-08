@@ -10,7 +10,7 @@ public class Level3 extends Level{
     public Level3(String title) {
         super(title);
         this.groundY = 720;
-        this.platformWidth = 150;
+        this.platformWidth = 100;
         this.platformHeight = 20;
         this.skyHeight = 720;
         setPlayerStartY(groundY-32 - platformHeight);
@@ -18,7 +18,7 @@ public class Level3 extends Level{
         this.skyImage = loadImage("src/images/sky_Level3.png");
         this.player1Image = loadImage("src/images/player1_level3.png");
         this.player2Image = loadImage("src/images/player2_level3.png");
-        this.platformColor = new Color(40, 40, 60);
+        this.platformColor = Color.white;
         this.backgroundMusic = new Music("src/music/lava_music.wav");
         backgroundMusic.setVolume(0.7);
         this.respawnSound = new Sounds("src/sounds/respawnLevel3_sound.wav");
@@ -26,9 +26,15 @@ public class Level3 extends Level{
 
 
         platforms.add(new Platform(0, groundY-platformHeight, platformWidth, platformHeight, this)); // STANDPLATFORM
-        platforms.add(new Platform(300, 500, platformWidth, platformHeight, this));
-        platforms.add(new Platform(600, 300, platformWidth, platformHeight, this));
-        platforms.add(new JumpPlatform(800, 600, platformWidth, platformHeight, this));
+        platforms.add(new Platform(170, 600, platformWidth, platformHeight, this));
+        platforms.add(new BoostPlatform(320, 650, platformWidth, platformHeight, this));
+        platforms.add(new Platform(750, 700, platformWidth, platformHeight, this));
+        platforms.add(new JumpPlatform(900, 600, platformWidth/2, platformHeight, this));
+        platforms.add(new JumpPlatform(1050, 400, platformWidth/2, platformHeight, this));
+        platforms.add(new Platform(1200, 200, platformWidth/3, platformHeight, this));
+        platforms.add(new MovingPlatform(1350, 450, platformWidth, platformHeight, this, 2, true, 1350, 1500));
+        platforms.add(new Platform(1600, 450, platformWidth/3, platformHeight, this));
+
         this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2 - 16;
         this.zielY = platforms.getLast().getY();
     }

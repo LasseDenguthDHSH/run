@@ -18,6 +18,7 @@ public class Main {
     static JumpPanel jumpPanel;
     public static ChickenPanel chickenPanel;
     public static MenuPanel menuPanel;
+    public static WinPanel winPanel;
 
     public static void main(String[] args) {
 
@@ -57,7 +58,7 @@ public class Main {
     }
 
     public static void showWinPanel(ChickenPanel chickenPanel) {
-        WinPanel winPanel = new WinPanel(chickenPanel);
+        winPanel = new WinPanel(chickenPanel);
         panelManager.add(winPanel, "Winner");
         cardLayout.show(panelManager, "Winner");
         winPanel.requestFocusInWindow();

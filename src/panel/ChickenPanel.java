@@ -208,7 +208,7 @@ public class ChickenPanel extends JPanel {
         repaint();
     }
 
-    public Level getCurrentLevel() {
+    public ChickenLevel getCurrentLevel() {
         return currentLevel;
     }
 
@@ -218,5 +218,13 @@ public class ChickenPanel extends JPanel {
 
     public Player getLoser() {
         return loser;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
+    public void setLoser(Player lose) {
+        this.loser = loser;
     }
 }

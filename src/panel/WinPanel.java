@@ -37,6 +37,11 @@ public class WinPanel extends JPanel {
 
         this.add(buttonPanel, gbc); // ButtonPanel hinzufügen
         playAgain.addActionListener(e -> Main.showMenu());
+        Main.chickenPanel.setWinner(null);
+        Main.chickenPanel.setLoser(null);
+        Main.chickenPanel.getCurrentLevel().setBullets(5);
+        Main.chickenPanel.getCurrentLevel().setHits(0);
+
     }
 
     @Override
