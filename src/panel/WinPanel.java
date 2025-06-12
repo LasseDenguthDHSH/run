@@ -6,6 +6,7 @@ import src.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class WinPanel extends JPanel {
     ChickenPanel chickenPanel;
@@ -67,11 +68,11 @@ public class WinPanel extends JPanel {
         String winnerText = "Winner: " + winner.getName();
         int textWidth = g2.getFontMetrics().stringWidth(winnerText);
         int textX = (getWidth() - textWidth) / 2;
-        int textY = getHeight() / 3; // Änderung: Etwas höher setzen
+        int textY = getHeight() / 3 + 50;
         g2.drawString(winnerText, textX, textY);
 
         //Zeittext
-        g2.drawString(jumpPanel.getEndZeitAnzeige(), textX, textY-200);
+        g2.drawString(jumpPanel.getEndZeitAnzeige(), textX + 100, textY-200);
 
         g2.setFont(new Font("Arial", Font.BOLD, 18));
         if (winnerImage != null) {
@@ -86,6 +87,21 @@ public class WinPanel extends JPanel {
 
         if (rainCloudGif != null) {
             rainCloudGif.paintIcon(this, g, -85, 160);
+        }
+        g2.setColor(Color.WHITE);
+        g2.drawString("Bestenliste für " + jumpPanel.getCurrentLevel().getTitle() + ":", textX + 65, textY+235);
+
+        int index = 1;
+        Map<String, String> bestenliste = DatabaseManager.getBestenliste(jumpPanel.getCurrentLevel());
+        for (Map.Entry<String, String> entry : bestenliste.entrySet()) {
+            if (index <= 10) {
+                String text = index + ". " + entry.getKey() + ": " + entry.getValue();
+                g2.drawString(text, textX + 65, textY + 250 + index *20);
+                index++;
+            } else {
+                break;
+            }
+
         }
     }
 }

@@ -2,6 +2,8 @@ package src.network;
 
 import src.level.Level;
 import java.sql.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class DatabaseManager {
     static String url = "jdbc:mysql://mysql-3de56c2b-jump.c.aivencloud.com:17474/jump?ssl-mode=REQUIRED";
@@ -72,5 +74,23 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static Map<String, String> getBestenliste(Level level) {
+        Map<String, String> bestenliste = new LinkedHashMap<>();
+        String sql = "SELECT name, zeitanzeige FROM bestenliste WHERE level = ? ORDER BY bestzeit ASC";
+
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, level.getId());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                bestenliste.put(rs.getString("name"), rs.getString("zeitanzeige"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bestenliste;
     }
 }

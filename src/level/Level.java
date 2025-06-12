@@ -37,11 +37,8 @@ public abstract class Level {
     Sounds winSound;
     ArrayList<Entity> entities = new ArrayList<>();
     int platformSpeed;
-    String database;
 
     public Level(String title) {
-
-
         this.title = title;
         this.playerStartX = 50;
         this.gravity = 0.7;

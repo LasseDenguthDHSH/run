@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Steuerung implements KeyListener, MouseListener, MouseMotionListener {
+public class Controls implements KeyListener, MouseListener, MouseMotionListener {
     private boolean up1Pressed = false;
     private boolean up2Pressed = false;
     private boolean right1Pressed = false;
@@ -19,7 +19,7 @@ public class Steuerung implements KeyListener, MouseListener, MouseMotionListene
     private int mouseX;
     private int mouseY;
 
-    public Steuerung() {
+    public Controls() {
         this.controlWASD = new ImageIcon("src/images/controlWASD.png").getImage();
         this.controlArrows = new ImageIcon("src/images/controlArrows.png").getImage();
     }

@@ -1,10 +1,10 @@
 package src;
 
-public class Stoppuhr {
+public class Clock {
     private long startTime = -1;
     private boolean running = false;
 
-    public Stoppuhr() {
+    public Clock() {
     }
 
     public void start() {

@@ -15,11 +15,11 @@ public class JumpPanel extends JPanel {
     private Player player1;
     private Player player2;
     private Level currentLevel;
-    private Steuerung steuerung;
+    private Controls controls;
     private Timer gameTimer;
     private int cameraX1;
     private int cameraX2;
-    private Stoppuhr stoppuhr;
+    private Clock clock;
     private boolean timerStarted = false;
     private Image arrowVertical;
     private Image arrowHorizontal;
@@ -37,8 +37,8 @@ public class JumpPanel extends JPanel {
     public JumpPanel(Level level, JFrame frame, JumpPanel jumpPanel) {
         this.jumpPanel = jumpPanel;
         this.currentLevel = level;
-        this.steuerung = new Steuerung();
-        this.addKeyListener(steuerung);
+        this.controls = new Controls();
+        this.addKeyListener(controls);
         this.setFocusable(true);
 
         this.anzahlHintergrunde = currentLevel.getZielX() / frame.getWidth() + 2;
@@ -55,7 +55,7 @@ public class JumpPanel extends JPanel {
         this.arrowVertical = new ImageIcon("src/images/arrowVertical.png").getImage();
         this.arrowHorizontal = new ImageIcon("src/images/arrowHorizontal.png").getImage();
         this.goalFlag = new ImageIcon("src/images/goalflag.png").getImage();
-        this.stoppuhr = new Stoppuhr();
+        this.clock = new Clock();
 
         gameTimer = new Timer(16, e -> update());
         gameTimer.start();
@@ -68,11 +68,11 @@ public class JumpPanel extends JPanel {
 
         // Linke Hälfte für Spieler 1
         g2.setClip(0, 0, getWidth() / 2, getHeight());
-        renderScene(g2, player1, cameraX1, 60, steuerung);
+        renderScene(g2, player1, cameraX1, 60, controls);
 
         // Rechte Hälfte für Spieler 2
         g2.setClip(getWidth() / 2, 0, getWidth() / 2, getHeight());
-        renderScene(g2, player2, cameraX2, getWidth() / 2 + 60, steuerung);
+        renderScene(g2, player2, cameraX2, getWidth() / 2 + 60, controls);
 
         // Split
         g2.setClip(null);
@@ -81,11 +81,11 @@ public class JumpPanel extends JPanel {
         // Stoppuhr
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 25));
-        g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2 - 31, 32);
+        g2.drawString(clock.getFormattedTime(), getWidth() / 2 - 31, 32);
 
     }
 
-    private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand, Steuerung steuerung) {
+    private void renderScene(Graphics2D g2, Player player, int cameraX, int abstand, Controls controls) {
         // Kamera für Spieler 1
         if (player == player1) {
             cameraX1 = Math.max(player1.getX() - (getWidth() / 4), 0);
@@ -154,12 +154,12 @@ public class JumpPanel extends JPanel {
 
         // Steuerungsbilder für Spieler 1 (WASD)
         if (player == player1) {
-            g2.drawImage(steuerung.getControlWASD(), 85 - cameraX1, 280, steuerung.getControlWASD().getWidth(this) / 4, steuerung.getControlWASD().getHeight(this) / 4, this);
+            g2.drawImage(controls.getControlWASD(), 85 - cameraX1, 280, controls.getControlWASD().getWidth(this) / 4, controls.getControlWASD().getHeight(this) / 4, this);
             g2.drawImage(arrowHorizontal, 83 - cameraX1, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
         // Steuerungsbilder für Spieler 2 (Pfeiltasten)
         if (player == player2) {
-            g2.drawImage(steuerung.getControlArrows(), 85 - cameraX2, 280, steuerung.getControlArrows().getWidth(this) / 4, steuerung.getControlArrows().getHeight(this) / 4, this);
+            g2.drawImage(controls.getControlArrows(), 85 - cameraX2, 280, controls.getControlArrows().getWidth(this) / 4, controls.getControlArrows().getHeight(this) / 4, this);
             g2.drawImage(arrowHorizontal, 83 - cameraX2, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
     }
@@ -175,42 +175,42 @@ public class JumpPanel extends JPanel {
         }
         if (winner != null) {
             gameTimer.stop();
-            endZeit = stoppuhr.getElapsedTime();
-            endZeitAnzeige = stoppuhr.getFormattedTime();
+            endZeit = clock.getElapsedTime();
+            endZeitAnzeige = clock.getFormattedTime();
             currentLevel.getBackgroundMusic().stop();
             currentLevel.getWinSound().play();
             Main.startChickenGame();
         }
 
         // **Steuerung für Spieler 1**
-        if (steuerung.isRight1Pressed()) {
+        if (controls.isRight1Pressed()) {
             player1.moveRight(player1.getSpeed());
             moved = true;
         }
-        if (steuerung.isLeft1Pressed()) {
+        if (controls.isLeft1Pressed()) {
             player1.moveLeft(player1.getSpeed());
             moved = true;
         }
-        if (steuerung.isUp1Pressed()) {
+        if (controls.isUp1Pressed()) {
             player1.jump();
             moved = true;
         }
 
         // **Steuerung für Spieler 2**
-        if (steuerung.isRight2Pressed()) {
+        if (controls.isRight2Pressed()) {
             player2.moveRight(player2.getSpeed());
             moved = true;
         }
-        if (steuerung.isLeft2Pressed()) {
+        if (controls.isLeft2Pressed()) {
             player2.moveLeft(player2.getSpeed());
             moved = true;
         }
-        if (steuerung.isUp2Pressed()) {
+        if (controls.isUp2Pressed()) {
             player2.jump();
             moved = true;
         }
 
-        if (steuerung.isSpezialButtonPressed()) {
+        if (controls.isSpezialButtonPressed()) {
             this.winner = player1;
             this.loser = player2;
             Main.startChickenGame();
@@ -225,11 +225,11 @@ public class JumpPanel extends JPanel {
 
         // Stoppuhr starten bei erster Bewegung
         if (!timerStarted && moved) {
-            stoppuhr.start();
+            clock.start();
             timerStarted = true;
             currentLevel.getBackgroundMusic().play();
         }
-        if (steuerung.isEscapePressed()) {
+        if (controls.isEscapePressed()) {
             gameTimer.stop();
             currentLevel.getBackgroundMusic().stop();
             Main.showMenu();

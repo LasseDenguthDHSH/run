@@ -1,21 +1,19 @@
 package src.panel;
 
 import src.Main;
-import src.Stoppuhr;
+import src.Clock;
 import src.level.ChickenLevel;
-import src.level.Level;
 import src.player.Player;
-import src.player.Steuerung;
-import src.sounds.Sounds;
+import src.player.Controls;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ChickenPanel extends JPanel {
-    private Stoppuhr stoppuhr;
+    private Clock clock;
     private Player chicken;
     private ChickenLevel currentLevel;
-    private Steuerung steuerung;
+    private Controls controls;
     private Timer gameTimer;
     private boolean timerStarted = false;
     private JumpPanel jumpPanel;
@@ -23,7 +21,6 @@ public class ChickenPanel extends JPanel {
     private Image groundImage;
     private Image skyImage;
     private boolean justShot = false;
-    private MenuPanel menuPanel = Main.menuPanel;
     private JButton startButton;
     private Player winner;
     private Player loser;
@@ -61,13 +58,13 @@ public class ChickenPanel extends JPanel {
         this.hits[4] = new ImageIcon("src/images/hits4.png").getImage();
         this.hits[5] = new ImageIcon("src/images/hits5.png").getImage();
 
-        this.steuerung = new Steuerung();
-        this.addKeyListener(steuerung);
-        this.addMouseListener(steuerung);
-        this.addMouseMotionListener(steuerung);
+        this.controls = new Controls();
+        this.addKeyListener(controls);
+        this.addMouseListener(controls);
+        this.addMouseMotionListener(controls);
         this.setFocusable(true);
 
-        this.stoppuhr = new Stoppuhr();
+        this.clock = new Clock();
         gameTimer = new Timer(16, e -> update());
 
         // Initialize button
@@ -88,7 +85,7 @@ public class ChickenPanel extends JPanel {
         startButton.addActionListener(e -> {
             timerStarted = true;
             gameTimer.start();
-            stoppuhr.start();
+            clock.start();
             startButton.setEnabled(false);
             this.remove(buttonPanel);
         });
@@ -133,7 +130,7 @@ public class ChickenPanel extends JPanel {
         // Draw stopwatch
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 35));
-        g2.drawString(stoppuhr.getFormattedTime(), getWidth() / 2 - 40, 170);
+        g2.drawString(clock.getFormattedTime(), getWidth() / 2 - 40, 170);
 
         // Draw chicken player
         g2.drawImage(chicken.getImage(), chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
@@ -156,28 +153,28 @@ public class ChickenPanel extends JPanel {
         }
 
         // Player movement
-        if (steuerung.isRight1Pressed()) {
+        if (controls.isRight1Pressed()) {
             if(chicken.getX()<= getWidth() - 64){
                 chicken.moveRight(chicken.getSpeed());
                 moved = true;
             }
         }
-        if (steuerung.isLeft1Pressed()) {
+        if (controls.isLeft1Pressed()) {
             chicken.moveLeft(chicken.getSpeed());
             moved = true;
         }
-        if (steuerung.isUp1Pressed()) {
+        if (controls.isUp1Pressed()) {
             if (chicken.getY() >= 64){
                 chicken.jump();
                 moved = true;
             }
         }
-        if (steuerung.isMouseClicked()) {
+        if (controls.isMouseClicked()) {
             if (!justShot) {
                 currentLevel.setBullets(currentLevel.getBullets() - 1);
                 currentLevel.getGun_sound().play();
                 Rectangle hitbox = new Rectangle(chicken.getX(), chicken.getY(), 64, 64);
-                if (hitbox.contains(steuerung.getMouseX(), steuerung.getMouseY())) {
+                if (hitbox.contains(controls.getMouseX(), controls.getMouseY())) {
                     currentLevel.getChicken_sound().play();
                     currentLevel.setHits(currentLevel.getHits() + 1);
                 }
@@ -187,7 +184,7 @@ public class ChickenPanel extends JPanel {
             justShot = false;
         }
 
-        if (steuerung.isSpezialButtonPressed()) {
+        if (controls.isSpezialButtonPressed()) {
             Main.showWinPanel();
         }
 
@@ -195,11 +192,11 @@ public class ChickenPanel extends JPanel {
 
         // Start stopwatch when player moves
         if (!timerStarted && moved) {
-            stoppuhr.start();
+            clock.start();
             timerStarted = true;
             currentLevel.getBackgroundMusic().play();
         }
-        if (steuerung.isEscapePressed()) {
+        if (controls.isEscapePressed()) {
             gameTimer.stop();
             currentLevel.getBackgroundMusic().stop();
             Main.showMenu();
