@@ -63,6 +63,7 @@ public class Main {
         cardLayout.show(panelManager, "Winner");
         winPanel.requestFocusInWindow();
         frame.setTitle("Winner");
+        //moin
     }
     public static void startChickenGame() {
         chickenPanel = new ChickenPanel(frame, jumpPanel);
