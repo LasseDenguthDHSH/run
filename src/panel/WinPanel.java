@@ -21,8 +21,10 @@ public class WinPanel extends JPanel {
         this.jumpPanel = jumpPanel;
         this.winner = chickenPanel.getWinner();
         this.loser = chickenPanel.getLoser();
-        DatabaseManager.saveSpielzeit(winner.getName(), jumpPanel.getEndZeit());
+        DatabaseManager.saveSpielzeit(winner.getName(), jumpPanel.getEndZeit(),
+                    jumpPanel.getEndZeitAnzeige(),jumpPanel.getCurrentLevel());
         DatabaseManager.getSpielzeiten();
+
 
         winnerImage = winner.getImage();
         loserImage = loser.getImage();
@@ -69,7 +71,7 @@ public class WinPanel extends JPanel {
         g2.drawString(winnerText, textX, textY);
 
         //Zeittext
-        g2.drawString(jumpPanel.getEndZeit(), textX, textY-200);
+        g2.drawString(jumpPanel.getEndZeitAnzeige(), textX, textY-200);
 
         g2.setFont(new Font("Arial", Font.BOLD, 18));
         if (winnerImage != null) {

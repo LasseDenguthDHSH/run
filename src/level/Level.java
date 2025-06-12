@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Level {
+    int id;
     int groundY;
     int platformWidth;
     int platformHeight;
@@ -161,7 +162,7 @@ public abstract class Level {
         return platformSpeed;
     }
 
-    public String getDatabase() {
-        return database;
+    public int getId(){
+        return id;
     }
 }

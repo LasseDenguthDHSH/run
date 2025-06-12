@@ -28,7 +28,8 @@ public class JumpPanel extends JPanel {
     int totalWidth;
     Player winner;
     Player loser;
-    String endZeit;
+    long endZeit;
+    String endZeitAnzeige;
     JumpPanel jumpPanel;
     protected String player1Name = "Spieler 1";
     protected String player2Name = "Spieler 2";
@@ -174,7 +175,8 @@ public class JumpPanel extends JPanel {
         }
         if (winner != null) {
             gameTimer.stop();
-            endZeit = stoppuhr.getFormattedTime();
+            endZeit = stoppuhr.getElapsedTime();
+            endZeitAnzeige = stoppuhr.getFormattedTime();
             currentLevel.getBackgroundMusic().stop();
             currentLevel.getWinSound().play();
             Main.startChickenGame();
@@ -240,8 +242,12 @@ public class JumpPanel extends JPanel {
         return totalWidth;
     }
 
-    public String getEndZeit() {
+    public long getEndZeit() {
+
         return endZeit;
+    }
+    public String getEndZeitAnzeige(){
+        return endZeitAnzeige;
     }
 
     public Level getCurrentLevel() {

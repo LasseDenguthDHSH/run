@@ -9,7 +9,7 @@ public class Level2 extends Level {
     Image pfeil;
     public Level2(String title) {
         super(title);
-        this.database = "bestenliste_level2";
+        this.id = 2;
         this.gravity = 0.25;
         this.groundY = 832;
         this.skyHeight = 800;

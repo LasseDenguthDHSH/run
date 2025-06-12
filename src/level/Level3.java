@@ -9,7 +9,7 @@ import java.awt.*;
 public class Level3 extends Level{
     public Level3(String title) {
         super(title);
-        this.database = "bestenliste_level3";
+        this.id = 3;
         this.groundY = 720;
         this.platformWidth = 100;
         this.platformHeight = 20;
