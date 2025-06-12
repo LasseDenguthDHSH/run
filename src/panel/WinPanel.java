@@ -1,6 +1,7 @@
 package src.panel;
 
 import src.Main;
+import src.network.DatabaseManager;
 import src.player.Player;
 
 import javax.swing.*;
@@ -8,16 +9,20 @@ import java.awt.*;
 
 public class WinPanel extends JPanel {
     ChickenPanel chickenPanel;
+    JumpPanel jumpPanel;
     Player winner, loser;
     Image winnerImage, loserImage;
     ImageIcon rainCloudGif;
     JButton playAgain;
     JPanel buttonPanel;
 
-    public WinPanel(ChickenPanel chickenPanel) {
+    public WinPanel(ChickenPanel chickenPanel, JumpPanel jumpPanel) {
         this.chickenPanel = chickenPanel;
+        this.jumpPanel = jumpPanel;
         this.winner = chickenPanel.getWinner();
         this.loser = chickenPanel.getLoser();
+        DatabaseManager.saveSpielzeit(winner.getName(), jumpPanel.getEndZeit());
+        DatabaseManager.getSpielzeiten();
 
         winnerImage = winner.getImage();
         loserImage = loser.getImage();
@@ -62,6 +67,9 @@ public class WinPanel extends JPanel {
         int textX = (getWidth() - textWidth) / 2;
         int textY = getHeight() / 3; // Änderung: Etwas höher setzen
         g2.drawString(winnerText, textX, textY);
+
+        //Zeittext
+        g2.drawString(jumpPanel.getEndZeit(), textX, textY-200);
 
         g2.setFont(new Font("Arial", Font.BOLD, 18));
         if (winnerImage != null) {

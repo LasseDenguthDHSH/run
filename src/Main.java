@@ -57,8 +57,8 @@ public class Main {
         frame.setTitle("Menu");
     }
 
-    public static void showWinPanel(ChickenPanel chickenPanel) {
-        winPanel = new WinPanel(chickenPanel);
+    public static void showWinPanel() {
+        winPanel = new WinPanel(chickenPanel, jumpPanel);
         panelManager.add(winPanel, "Winner");
         cardLayout.show(panelManager, "Winner");
         winPanel.requestFocusInWindow();

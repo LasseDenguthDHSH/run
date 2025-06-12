@@ -152,7 +152,7 @@ public class ChickenPanel extends JPanel {
                 this.winner = jumpPanel.getLoser();
                 this.loser  = jumpPanel.getWinner();
             }
-            Main.showWinPanel(this);
+            Main.showWinPanel();
         }
 
         // Player movement
@@ -188,7 +188,7 @@ public class ChickenPanel extends JPanel {
         }
 
         if (steuerung.isSpezialButtonPressed()) {
-            Main.showWinPanel(this);
+            Main.showWinPanel();
         }
 
         chicken.applyGravity(currentLevel);
