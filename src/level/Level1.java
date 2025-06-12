@@ -4,7 +4,6 @@ import src.music.Music;
 import src.sounds.Sounds;
 import src.platform.*;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Level1 extends Level {
@@ -15,19 +14,17 @@ public class Level1 extends Level {
         this.groundY = 832;
         this.skyHeight = 800;
         this.setPlayerStartY(groundY-164);
+
         this.skyImage = loadImage("src/images/sky_Level1.png");
         this.player1Image = loadImage("src/images/player1_level1.png");
         this.player2Image = loadImage("src/images/player2_level1.png");
-        this.platformColor = new Color(30, 30, 100);
 
-        // Hintergrundmusik starten
         this.backgroundMusic = new Music("src/music/background.wav");
         backgroundMusic.setVolume(0.6);
-
         this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
 
+        this.platformColor = new Color(30, 30, 100);
         this.platformSpeed = 3;
-        // Plattformen hinzufügen
         platforms.add(new Platform(0, 700, platformWidth, platformHeight, this));
         platforms.add(new MovingPlatform(350, 600, platformWidth, platformHeight, this, 1, false, 120, 580));
         platforms.add(new Platform(650, 500, platformWidth, platformHeight, this));
@@ -53,7 +50,7 @@ public class Level1 extends Level {
         platforms.add(new Platform(4730, 700, platformWidth, platformHeight/2, this));
 
 
-        this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2-16;
-        this.zielY = platforms.getLast().getY();
+        this.goalX = platforms.getLast().getX()+platforms.getLast().getWidth()/2-16;
+        this.goalY = platforms.getLast().getY();
     }
 }

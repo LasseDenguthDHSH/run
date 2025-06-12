@@ -12,7 +12,6 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
     private boolean left1Pressed = false;
     private boolean left2Pressed = false;
     private boolean escapePressed = false;
-    private boolean spezialButtonPressed = false;
     private boolean mouseClicked = false;
     private Image controlWASD;
     private Image controlArrows;
@@ -51,7 +50,6 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
         return escapePressed;
     }
     public boolean isMouseClicked() { return mouseClicked; }
-    public boolean isSpezialButtonPressed() { return spezialButtonPressed; }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -66,11 +64,8 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
             case KeyEvent.VK_RIGHT -> right2Pressed = true;
             case KeyEvent.VK_LEFT -> left2Pressed = true;
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
-            case KeyEvent.VK_P -> spezialButtonPressed = true;
-
         }
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -81,7 +76,6 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
             case KeyEvent.VK_RIGHT -> right2Pressed = false;
             case KeyEvent.VK_LEFT -> left2Pressed = false;
             case KeyEvent.VK_ESCAPE -> escapePressed = false;
-            case KeyEvent.VK_P -> spezialButtonPressed = false;
         }
     }
     public Image getControlWASD() {
@@ -128,9 +122,6 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
-        System.out.println("Mouse Position: " + mouseX + ", " + mouseY);
     }
 
     public int getMouseX(){

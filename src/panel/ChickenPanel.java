@@ -101,9 +101,6 @@ public class ChickenPanel extends JPanel {
         g2.drawImage(skyImage, 0, 0, getWidth(), currentLevel.getSkyHeight(), this);
         g2.drawImage(groundImage, 0, currentLevel.getGroundY(), getWidth(), 100, this);
 
-
-
-
         int bulletX = getWidth()/2 + getWidth()/4 + 150;
         int bulletY = getHeight()/2 + getHeight()/4 - 130;
         switch (currentLevel.getBullets()){
@@ -184,10 +181,6 @@ public class ChickenPanel extends JPanel {
             justShot = false;
         }
 
-        if (controls.isSpezialButtonPressed()) {
-            Main.showWinPanel();
-        }
-
         chicken.applyGravity(currentLevel);
 
         // Start stopwatch when player moves
@@ -221,7 +214,5 @@ public class ChickenPanel extends JPanel {
         this.winner = winner;
     }
 
-    public void setLoser(Player lose) {
-        this.loser = loser;
-    }
+    public void setLoser(Player loser) {this.loser = loser;}
 }

@@ -25,7 +25,6 @@ public class Player {
     private Sounds respawnSound;
     private Level currentLevel;
 
-
     public Player(String name, int width, int height, Level currentLevel, Image image) {
         this.name = name;
         this.width = width;

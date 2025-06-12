@@ -19,7 +19,7 @@ public class DatabaseManager {
         }
     }
 
-    public static void saveSpielzeit(String name, long zeit, String zeitAnzeige, Level level) {
+    public static void saveSpielzeit(String name, long time, String timeDisplay, Level level) {
         String checkSql = "SELECT bestzeit FROM bestenliste WHERE name = ? AND level = ?";
         String updateSql = "UPDATE bestenliste SET bestzeit = ?, zeitanzeige = ? WHERE name = ? AND level = ?";
         String insertSql = "INSERT INTO bestenliste (name, bestzeit, zeitanzeige, level) VALUES (?, ?, ?, ?)";
@@ -33,12 +33,12 @@ public class DatabaseManager {
             ResultSet rs = checkStmt.executeQuery();
 
             if (rs.next()) {
-                long bestzeit = rs.getLong("bestzeit");
+                long recordTime = rs.getLong("bestzeit");
 
-                if (zeit < bestzeit) {
+                if (time < recordTime) {
                     try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
-                        updateStmt.setLong(1, zeit);
-                        updateStmt.setString(2, zeitAnzeige);
+                        updateStmt.setLong(1, time);
+                        updateStmt.setString(2, timeDisplay);
                         updateStmt.setString(3, name);
                         updateStmt.setInt(4, level.getId());
                         updateStmt.executeUpdate();
@@ -50,8 +50,8 @@ public class DatabaseManager {
             } else {
                 try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
                     insertStmt.setString(1, name);
-                    insertStmt.setLong(2, zeit);
-                    insertStmt.setString(3, zeitAnzeige);
+                    insertStmt.setLong(2, time);
+                    insertStmt.setString(3, timeDisplay);
                     insertStmt.setInt(4, level.getId());
                     insertStmt.executeUpdate();
                     System.out.println("Neue Bestzeit gespeichert für " + name);
@@ -76,7 +76,7 @@ public class DatabaseManager {
         }
     }
     public static Map<String, String> getBestenliste(Level level) {
-        Map<String, String> bestenliste = new LinkedHashMap<>();
+        Map<String, String> top10List = new LinkedHashMap<>();
         String sql = "SELECT name, zeitanzeige FROM bestenliste WHERE level = ? ORDER BY bestzeit ASC";
 
         try (Connection conn = connect();
@@ -85,12 +85,12 @@ public class DatabaseManager {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                bestenliste.put(rs.getString("name"), rs.getString("zeitanzeige"));
+                top10List.put(rs.getString("name"), rs.getString("zeitanzeige"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return bestenliste;
+        return top10List;
     }
 }

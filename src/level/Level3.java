@@ -15,17 +15,18 @@ public class Level3 extends Level{
         this.platformHeight = 20;
         this.skyHeight = 720;
         setPlayerStartY(groundY-32 - platformHeight);
+
         this.groundImage = loadImage("src/images/ground_Level3.png");
         this.skyImage = loadImage("src/images/sky_Level3.png");
         this.player1Image = loadImage("src/images/player1_level3.png");
         this.player2Image = loadImage("src/images/player2_level3.png");
-        this.platformColor = Color.white;
+
         this.backgroundMusic = new Music("src/music/lava_music.wav");
         backgroundMusic.setVolume(0.7);
         this.respawnSound = new Sounds("src/sounds/respawnLevel3_sound.wav");
+
         this.platformSpeed = 2;
-
-
+        this.platformColor = Color.white;
         platforms.add(new CheckpointPlatform(0, groundY-platformHeight, platformWidth, platformHeight, this)); // STANDPLATFORM
         platforms.add(new Platform(170, 600, platformWidth, platformHeight, this));
         platforms.add(new BoostPlatform(320, 650, platformWidth, platformHeight, this));
@@ -39,7 +40,7 @@ public class Level3 extends Level{
         platforms.add(new DeathPlatform(1780, 550, platformWidth/2, platformHeight, this));
         platforms.add(new CheckpointPlatform(1830, 550, platformWidth/3, platformHeight, this));
 
-        this.zielX = platforms.getLast().getX()+platforms.getLast().getWidth()/2 - 16;
-        this.zielY = platforms.getLast().getY();
+        this.goalX = platforms.getLast().getX()+platforms.getLast().getWidth()/2 - 16;
+        this.goalY = platforms.getLast().getY();
     }
 }

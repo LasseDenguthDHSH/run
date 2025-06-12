@@ -51,18 +51,6 @@ public class Entity {
         return x;
     }
 
-    public int getLeftBoundary() {
-        return leftBoundary;
-    }
-
-    public int getRightBoundary() {
-        return rightBoundary;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
     public int getY() {
         return y;
     }

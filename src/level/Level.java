@@ -4,7 +4,6 @@ import src.music.Music;
 import src.sounds.Sounds;
 import src.platform.*;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -18,8 +17,8 @@ public abstract class Level {
     int skyHeight;
     int playerStartX;
     int playerStartY;
-    int zielX;
-    int zielY;
+    int goalX;
+    int goalY;
     double gravity;
     double playerJumpStrength;
     Image groundImage;
@@ -117,11 +116,11 @@ public abstract class Level {
     public double getJumpPlatformEffect() {
         return jumpPlatformEffect;
     }
-    public int getZielX() {
-        return zielX;
+    public int getGoalX() {
+        return goalX;
     }
-    public int getZielY() {
-        return zielY;
+    public int getGoalY() {
+        return goalY;
     }
     public String getTitle() {
         return title;

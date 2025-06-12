@@ -15,4 +15,23 @@ public class MovingPlatform extends Platform {
         this.rightBoundary = rightBoundary;
         this.platformColor = level.getPlatformColor();
     }
+    public void move(int platformSpeed) {
+        if (movingRight) {
+            frameCounter++;
+            if (frameCounter % platformSpeed == 0) { // Jede zweite Aktualisierung bewegen
+                x += speed;
+            }
+            if (x > rightBoundary) {
+                movingRight = false;
+            }
+        } else {
+            frameCounter++;
+            if (frameCounter % platformSpeed == 0) { // Jede zweite Aktualisierung bewegen
+                x -= speed;
+            }
+            if (x < leftBoundary) {
+                movingRight = true;
+            }
+        }
+    }
 }

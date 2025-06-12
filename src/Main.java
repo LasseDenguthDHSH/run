@@ -1,6 +1,4 @@
 package src;
-
-import src.level.ChickenLevel;
 import src.level.Level;
 import src.panel.ChickenPanel;
 import src.panel.JumpPanel;

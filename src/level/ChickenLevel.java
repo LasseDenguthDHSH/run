@@ -15,7 +15,6 @@ public class ChickenLevel extends Level{
 
     public ChickenLevel(String title) {
         super(title);
-
         this.groundY = 700;
         this.skyHeight = 800;
         this.playerStartY = groundY-64;
