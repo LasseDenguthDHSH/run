@@ -66,7 +66,8 @@ public class DatabaseManager {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                System.out.println(rs.getString("name") + ": " + rs.getString("zeitanzeige"));
+                System.out.println(rs.getString("name") + ": " + rs.getString("zeitanzeige") + ", "
+                        + rs.getString("level"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
