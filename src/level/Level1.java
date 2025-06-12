@@ -11,6 +11,7 @@ public class Level1 extends Level {
 
     public Level1(String title) {
         super(title);
+        this.database = "bestenliste_level1";
         this.groundY = 832;
         this.skyHeight = 800;
         this.setPlayerStartY(groundY-164);

@@ -36,6 +36,7 @@ public abstract class Level {
     Sounds winSound;
     ArrayList<Entity> entities = new ArrayList<>();
     int platformSpeed;
+    String database;
 
     public Level(String title) {
 
@@ -158,5 +159,9 @@ public abstract class Level {
 
     public int getPlatformSpeed() {
         return platformSpeed;
+    }
+
+    public String getDatabase() {
+        return database;
     }
 }
