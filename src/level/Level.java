@@ -45,7 +45,7 @@ public abstract class Level {
         this.platformHeight = 18;
         this.playerSpeed = 3;
         this.playerJumpStrength = 11;
-        this.jumpSound = new Sounds("src/sounds/jump.wav");
+        this.jumpSound = new Sounds("src/sounds/jump_sound.wav");
         this.winSound = new Sounds("src/sounds/win_sound.wav");
         winSound.setVolume(0.8);
     }

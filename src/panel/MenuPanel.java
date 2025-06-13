@@ -28,7 +28,7 @@ public class MenuPanel extends JPanel {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50)); // Abstand zu den Rändern
 
         // Schaltflächen erstellen
-        JButton level1Button = createImageButton("src/images/level1.png");
+        JButton level1Button = createImageButton("src/images/level1_button.png");
         JButton level2Button = createButton("Level 2");
         JButton level3Button = createButton("Level 3");
 

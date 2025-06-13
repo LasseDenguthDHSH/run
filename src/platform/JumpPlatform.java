@@ -12,7 +12,7 @@ public class JumpPlatform extends Platform {
         super(x, y, width, height, level);
         this.platformColor = new Color(200, 100, 0);
         this.jumpPlatformEffect= level.getJumpPlatformEffect();
-        this.platformSound = new Sounds("src/sounds/jump.wav");
+        this.platformSound = new Sounds("src/sounds/jump_sound.wav");
         platformSound.setVolume(1);
     }
 

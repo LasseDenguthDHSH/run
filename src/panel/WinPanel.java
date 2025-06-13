@@ -24,8 +24,6 @@ public class WinPanel extends JPanel {
         this.loser = chickenPanel.getLoser();
         DatabaseManager.saveSpielzeit(winner.getName(), jumpPanel.getFinishTime(),
                     jumpPanel.getFinishTimeDisplay(),jumpPanel.getCurrentLevel());
-        DatabaseManager.getSpielzeiten();
-
 
         winnerImage = winner.getImage();
         loserImage = loser.getImage();

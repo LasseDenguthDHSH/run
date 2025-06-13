@@ -1,4 +1,5 @@
 package src;
+
 import src.level.Level;
 import src.panel.ChickenPanel;
 import src.panel.JumpPanel;
@@ -63,6 +64,7 @@ public class Main {
         frame.setTitle("Winner");
         //moin
     }
+
     public static void startChickenGame() {
         chickenPanel = new ChickenPanel(frame, jumpPanel);
         panelManager.add(chickenPanel, chickenPanel.getCurrentLevel().getTitle());

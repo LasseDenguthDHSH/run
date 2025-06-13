@@ -19,7 +19,7 @@ public class ChickenLevel extends Level{
         this.skyHeight = 800;
         this.playerStartY = groundY-64;
         this.playerStartX = 742;
-        this.skyImage = loadImage("src/images/kampfArena.gif");
+        this.skyImage = loadImage("src/images/sky_chickenLevel.gif");
         this.bullets = 5;
         this.playerSpeed = 2;
         this.gravity = 0.4;
@@ -32,7 +32,7 @@ public class ChickenLevel extends Level{
         gun_sound.setVolume(0.7);
         this.chicken_sound = new Sounds("src/sounds/chicken_sound.wav");
         chicken_sound.setVolume(0.7);
-        this.backgroundMusic = new Music("src/music/background.wav");
+        this.backgroundMusic = new Music("src/music/level1_music.wav");
         backgroundMusic.setVolume(0.6);
 
         this.informations = loadImage("src/images/chickenInformation.png");

@@ -11,7 +11,6 @@ import java.awt.*;
 
 public class ChickenPanel extends JPanel {
     private Clock clock;
-    private Player chicken;
     private ChickenLevel currentLevel;
     private Controls controls;
     private Timer gameTimer;
@@ -22,6 +21,7 @@ public class ChickenPanel extends JPanel {
     private Image skyImage;
     private boolean justShot = false;
     private JButton startButton;
+    private Player chicken;
     private Player winner;
     private Player loser;
     private Image [] ammo = new Image[6];
@@ -39,7 +39,7 @@ public class ChickenPanel extends JPanel {
         this.groundImage = currentLevel.getGroundImage();
         this.skyImage = currentLevel.getSkyImage();
 
-        this.chicken = new Player("Chicken", 64, 64, currentLevel, chickenImage);
+        this.chicken = new Player(jumpPanel.getWinner().getName(), 64, 64, currentLevel, chickenImage);
         this.winner = jumpPanel.getWinner();
         this.loser = jumpPanel.getLoser();
 
@@ -129,10 +129,18 @@ public class ChickenPanel extends JPanel {
         g2.setFont(new Font("Arial", Font.BOLD, 35));
         g2.drawString(clock.getFormattedTime(), getWidth() / 2 - 40, 170);
 
-        // Draw chicken player
-        g2.drawImage(chicken.getImage(), chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
         if (!timerStarted) {
             g2.drawImage(currentLevel.getInformations(), getWidth()/2-600, 60, currentLevel.getInformations().getWidth(this)*6/5, currentLevel.getInformations().getHeight(this)*6/5, this);
+        }
+        // Draw chicken player
+        g2.drawImage(chicken.getImage(), chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
+        g2.setFont(new Font("Arial", Font.BOLD, 20));
+        if (winner.getName().length() < 5) {
+            g2.drawString(winner.getName(), chicken.getX() + (5 - winner.getName().length()) * 4, chicken.getY() - 10);
+        } else if (winner.getName().length() >= 7) {
+            g2.drawString(winner.getName(), chicken.getX()-(winner.getName().length() - 7) * 4, chicken.getY() - 10);
+        } else {
+            g2.drawString(winner.getName(), chicken.getX(), chicken.getY() - 10);
         }
     }
 
@@ -152,7 +160,7 @@ public class ChickenPanel extends JPanel {
         // Player movement
         if (controls.isRight1Pressed()) {
             if(chicken.getX()<= getWidth() - 64){
-                chicken.moveRight(chicken.getSpeed());
+                chicken.moveRight(winner.getSpeed());
                 moved = true;
             }
         }

@@ -13,14 +13,10 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
     private boolean left2Pressed = false;
     private boolean escapePressed = false;
     private boolean mouseClicked = false;
-    private Image controlWASD;
-    private Image controlArrows;
     private int mouseX;
     private int mouseY;
 
     public Controls() {
-        this.controlWASD = new ImageIcon("src/images/controlWASD.png").getImage();
-        this.controlArrows = new ImageIcon("src/images/controlArrows.png").getImage();
     }
 
     public boolean isUp1Pressed() {
@@ -78,12 +74,6 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
             case KeyEvent.VK_ESCAPE -> escapePressed = false;
         }
     }
-    public Image getControlWASD() {
-        return controlWASD;
-    }
-    public Image getControlArrows() {
-        return controlArrows;
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -122,6 +112,8 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
     }
 
     public int getMouseX(){

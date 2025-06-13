@@ -5,6 +5,8 @@ import src.platform.*;
 import src.level.*;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player {
     String name;
@@ -14,6 +16,7 @@ public class Player {
     int y;
     double speed;
     double jumpStrength;
+    int yJump;
     double velocityY = 0;
     boolean isJumping = false;
     boolean isOnPlatform = false;
@@ -24,6 +27,7 @@ public class Player {
     private int checkpointY;
     private Sounds respawnSound;
     private Level currentLevel;
+    boolean justJumped = false;
 
     public Player(String name, int width, int height, Level currentLevel, Image image) {
         this.name = name;
@@ -43,13 +47,21 @@ public class Player {
     }
 
     public void jump() {
-        if (currentLevel instanceof ChickenLevel){
-                currentLevel.getJumpSound().play();
-                isOnGround = false;
-                isOnPlatform = false;
-                isJumping = true;
-                velocityY = -jumpStrength;
-        }else{
+        if (currentLevel instanceof ChickenLevel && !justJumped) {
+            isOnGround = false;
+            isOnPlatform = false;
+            isJumping = true;
+            justJumped = true;
+            velocityY = -jumpStrength;
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    currentLevel.getJumpSound().play();
+                    justJumped = false;
+                }
+            }, 300);
+
+    } else {
             if (!isJumping && isOnPlatform || isOnGround) {
                 currentLevel.getJumpSound().play();
                 isOnGround = false;
@@ -74,8 +86,8 @@ public class Player {
                 y = level.getGroundY() - height;
                 isJumping = false;
                 isOnGround = true;
-                if (!(level instanceof ChickenLevel)){
-                    resetToCheckpoint(level, respawnSound);
+                if (!(level instanceof ChickenLevel)) {
+                    resetToCheckpoint(respawnSound);
                 }
                 velocityY = 0;
             }
@@ -98,13 +110,33 @@ public class Player {
             }
         }
 
-}
+    }
+
+    public void checkCollision() {
+        for (Entity entity : currentLevel.getEntities()) {
+            if (this.getX() < entity.getX() + entity.getSize() &&
+                    this.getX() + this.getWidth() > entity.getX() &&
+                    this.getY() < entity.getY() + entity.getSize() &&
+                    this.getY() + this.getHeight() > entity.getY()) {
+
+                // Respawn am letzten Checkpoint oder Startposition
+                this.resetToCheckpoint(currentLevel.getRespawnSound());
+            }
+        }
+    }
+
+    public void resetToCheckpoint(Sounds respawnSound) {
+        this.x = checkpointX;
+        this.y = checkpointY;
+        respawnSound.play();
+        this.velocityX = 0;
+    }
 
     public void boostMovement() {
         x += velocityX;
         velocityX *= 0.95;
 
-        if (Math.abs(velocityX) < 0.2) {
+        if (Math.abs(velocityX) < 0.3) {
             velocityX = 0;
         }
     }
@@ -126,6 +158,7 @@ public class Player {
     public String getName() {
         return name;
     }
+
     public int getX() {
         return x;
     }
@@ -142,21 +175,19 @@ public class Player {
         return width;
     }
 
-    public void setVelocityY(double velocityY) {
-        this.velocityY = velocityY;
-    }
+    public double getSpeed() { return speed; }
 
-    public double getSpeed() {
-        return speed;
-    }
+    public void setVelocityY(double velocityY) { this.velocityY = velocityY; }
+
     public void setCheckpoint(int x, int y) {
         this.checkpointX = x;
         this.checkpointY = y;
     }
-    public void resetToCheckpoint(Level level, Sounds respawnSound) {
-        this.x = checkpointX;
-        this.y = checkpointY;
-        respawnSound.play();
-        this.velocityX = 0;
+    public int getyJump() {
+        return yJump;
     }
+    public void setJustJumped(boolean justJumped) {
+        this.justJumped = justJumped;
+    }
+
 }

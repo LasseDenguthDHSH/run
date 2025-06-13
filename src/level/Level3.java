@@ -21,7 +21,7 @@ public class Level3 extends Level{
         this.player1Image = loadImage("src/images/player1_level3.png");
         this.player2Image = loadImage("src/images/player2_level3.png");
 
-        this.backgroundMusic = new Music("src/music/lava_music.wav");
+        this.backgroundMusic = new Music("src/music/level3_music.wav");
         backgroundMusic.setVolume(0.7);
         this.respawnSound = new Sounds("src/sounds/respawnLevel3_sound.wav");
 

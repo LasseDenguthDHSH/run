@@ -33,6 +33,8 @@ public class JumpPanel extends JPanel {
     JumpPanel jumpPanel;
     protected String player1Name;
     protected String player2Name;
+    private Image controlWASD;
+    private Image controlArrows;
 
     public JumpPanel(Level level, JFrame frame, JumpPanel jumpPanel) {
         this.jumpPanel = jumpPanel;
@@ -55,6 +57,9 @@ public class JumpPanel extends JPanel {
         this.arrowVertical = new ImageIcon("src/images/arrowVertical.png").getImage();
         this.arrowHorizontal = new ImageIcon("src/images/arrowHorizontal.png").getImage();
         this.goalFlag = new ImageIcon("src/images/goalflag.png").getImage();
+        this.controlWASD = new ImageIcon("src/images/controlWASD.png").getImage();
+        this.controlArrows = new ImageIcon("src/images/controlArrows.png").getImage();
+
         this.clock = new Clock();
 
         gameTimer = new Timer(16, e -> update());
@@ -151,12 +156,12 @@ public class JumpPanel extends JPanel {
 
         // Steuerungsbilder für Spieler 1 (WASD)
         if (player == player1) {
-            g2.drawImage(controls.getControlWASD(), 85 - cameraX1, 280, controls.getControlWASD().getWidth(this) / 4, controls.getControlWASD().getHeight(this) / 4, this);
+            g2.drawImage(controlWASD, 85 - cameraX1, 280, controlWASD.getWidth(this) / 4, controlWASD.getHeight(this) / 4, this);
             g2.drawImage(arrowHorizontal, 83 - cameraX1, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
         // Steuerungsbilder für Spieler 2 (Pfeiltasten)
         if (player == player2) {
-            g2.drawImage(controls.getControlArrows(), 85 - cameraX2, 280, controls.getControlArrows().getWidth(this) / 4, controls.getControlArrows().getHeight(this) / 4, this);
+            g2.drawImage(controlArrows, 85 - cameraX2, 280, controlArrows.getWidth(this) / 4, controlArrows.getHeight(this) / 4, this);
             g2.drawImage(arrowHorizontal, 83 - cameraX2, 367, arrowHorizontal.getWidth(this) / 4, arrowHorizontal.getHeight(this) / 6, this);
         }
     }
@@ -211,8 +216,8 @@ public class JumpPanel extends JPanel {
         player2.applyGravity(currentLevel);
         player1.boostMovement();
         player2.boostMovement();
-        checkCollision(player1);
-        checkCollision(player2);
+        player1.checkCollision();
+        player2.checkCollision();
 
         // Stoppuhr starten bei erster Bewegung
         if (!timerStarted && moved) {
@@ -249,16 +254,4 @@ public class JumpPanel extends JPanel {
         return loser;
     }
 
-    private void checkCollision(Player player) {
-        for (Entity entity : currentLevel.getEntities()) {
-            if (player.getX() < entity.getX() + entity.getSize() &&
-                    player.getX() + player.getWidth() > entity.getX() &&
-                    player.getY() < entity.getY() + entity.getSize() &&
-                    player.getY() + player.getHeight() > entity.getY()) {
-
-                // Respawn am letzten Checkpoint oder Startposition
-                player.resetToCheckpoint(currentLevel, currentLevel.getRespawnSound());
-            }
-        }
-    }
 }
