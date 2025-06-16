@@ -33,12 +33,21 @@ public class Level3 extends Level{
         platforms.add(new Platform(750, 700, platformWidth, platformHeight, this));
         platforms.add(new JumpPlatform(900, 600, platformWidth/2, platformHeight, this));
         platforms.add(new JumpPlatform(1050, 400, platformWidth/2, platformHeight, this));
-        platforms.add(new Platform(1200, 200, platformWidth/3, platformHeight, this));
+        platforms.add(new CheckpointPlatform(1200, 200, platformWidth/3, platformHeight, this));
         platforms.add(new MovingPlatform(1250, 450, platformWidth*2, platformHeight, this, 1, true, 1250, 1400));
         platforms.add(new Platform(1600, 450, platformWidth/3, platformHeight, this));
         platforms.add(new Platform(1700, 450, platformWidth/3, platformHeight, this));
         platforms.add(new DeathPlatform(1780, 550, platformWidth/2, platformHeight, this));
         platforms.add(new CheckpointPlatform(1830, 550, platformWidth/3, platformHeight, this));
+        platforms.add(new Platform(1960, 500, platformWidth, platformHeight, this));
+        platforms.add(new EntityPlatform(2110, 400, platformWidth*3, platformHeight, this));
+        entities.add(new Entity(platforms.getLast(), 1));
+        platforms.add(new JumpPlatform(2550, 700, platformWidth, platformHeight, this));
+        platforms.add(new JumpPlatform(2800, 700, platformWidth, platformHeight, this));
+        platforms.add(new JumpPlatform(3000, 500, platformWidth, platformHeight, this));
+        platforms.add(new BoostPlatform(3250, 500, platformWidth, platformHeight, this));
+        platforms.add(new CheckpointPlatform(3800, 700, platformWidth*2, platformHeight, this));
+
 
         this.goalX = platforms.getLast().getX()+platforms.getLast().getWidth()/2 - 16;
         this.goalY = platforms.getLast().getY();

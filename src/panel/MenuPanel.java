@@ -29,8 +29,8 @@ public class MenuPanel extends JPanel {
 
         // Schaltflächen erstellen
         JButton level1Button = createImageButton("src/images/level1_button.png");
-        JButton level2Button = createButton("Level 2");
-        JButton level3Button = createButton("Level 3");
+        JButton level2Button = createImageButton("src/images/level2_button.png");
+        JButton level3Button = createImageButton("src/images/level3_button.png");
 
         // Buttons hinzufügen
         buttonPanel.add(level1Button);
