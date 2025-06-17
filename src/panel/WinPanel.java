@@ -23,7 +23,7 @@ public class WinPanel extends JPanel {
         this.winner = chickenPanel.getWinner();
         this.loser = chickenPanel.getLoser();
         DatabaseManager.saveSpielzeit(winner.getName(), jumpPanel.getFinishTime(),
-                    jumpPanel.getFinishTimeDisplay(),jumpPanel.getCurrentLevel());
+                jumpPanel.getFinishTimeDisplay(), jumpPanel.getCurrentLevel());
 
         winnerImage = winner.getImage();
         loserImage = loser.getImage();
@@ -70,7 +70,7 @@ public class WinPanel extends JPanel {
         g2.drawString(winnerText, textX, textY);
 
         //Zeittext
-        g2.drawString(jumpPanel.getFinishTimeDisplay(), textX + 100, textY-200);
+        g2.drawString(jumpPanel.getFinishTimeDisplay(), textX + 100, textY - 200);
 
         g2.setFont(new Font("Arial", Font.BOLD, 18));
         if (winnerImage != null) {
@@ -87,14 +87,14 @@ public class WinPanel extends JPanel {
             rainCloudGif.paintIcon(this, g, -85, 160);
         }
         g2.setColor(Color.WHITE);
-        g2.drawString("Bestenliste für " + jumpPanel.getCurrentLevel().getTitle() + ":", textX + 65, textY+235);
+        g2.drawString("Bestenliste für " + jumpPanel.getCurrentLevel().getTitle() + ":", textX + 65, textY + 235);
 
         int index = 1;
         Map<String, String> bestenliste = DatabaseManager.getBestenliste(jumpPanel.getCurrentLevel());
         for (Map.Entry<String, String> entry : bestenliste.entrySet()) {
             if (index <= 10) {
                 String text = index + ". " + entry.getKey() + ": " + entry.getValue();
-                g2.drawString(text, textX + 65, textY + 250 + index *20);
+                g2.drawString(text, textX + 65, textY + 250 + index * 20);
                 index++;
             } else {
                 break;

@@ -10,6 +10,7 @@ import java.awt.*;
 public class MenuPanel extends JPanel {
 
     Sounds buttonSound = new Sounds("src/sounds/button_sound.wav");
+
     public MenuPanel() {
         setLayout(new BorderLayout());
         setBackground(new Color(39, 78, 99)); // Hintergrundfarbe setzen
@@ -46,20 +47,6 @@ public class MenuPanel extends JPanel {
         level3Button.addActionListener(e -> Main.startGame(new Level3("Level 3")));
         playSound(level3Button);
 
-    }
-
-    JButton createButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 24)); // Größere Schrift
-        button.setBackground(new Color(70, 130, 180)); // Hintergrundfarbe setzen
-        button.setForeground(Color.WHITE); // Schriftfarbe setzen
-        button.setFocusPainted(false); // Kein Fokusrahmen
-        button.setPreferredSize(new Dimension(200, 60)); // Doppelt so große Buttons
-        button.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.BLACK, 4), // Dicke Ränder
-                BorderFactory.createEmptyBorder(10, 20, 10, 20) // Größerer Innenabstand
-        ));
-        return button;
     }
 
     private JButton createImageButton(String imagePath) {

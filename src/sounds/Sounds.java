@@ -28,10 +28,6 @@ public class Sounds {
             clip.setFramePosition(0);
             clip.start();
         }
-    }public void stop() {
-        if (clip != null) {
-            clip.stop();
-        }
     }
 
     public void setVolume(double level) {
@@ -39,7 +35,7 @@ public class Sounds {
             double min = volumeControl.getMinimum();
             double max = volumeControl.getMaximum();
             double volume = min + (max - min) * level;
-            volumeControl.setValue((float)volume);
+            volumeControl.setValue((float) volume);
         }
     }
 

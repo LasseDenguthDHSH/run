@@ -61,7 +61,7 @@ public class Player {
                 }
             }, 300);
 
-    } else {
+        } else {
             if (!isJumping && isOnPlatform || isOnGround) {
                 currentLevel.getJumpSound().play();
                 isOnGround = false;
@@ -175,19 +175,17 @@ public class Player {
         return width;
     }
 
-    public double getSpeed() { return speed; }
+    public double getSpeed() {
+        return speed;
+    }
 
-    public void setVelocityY(double velocityY) { this.velocityY = velocityY; }
+    public void setVelocityY(double velocityY) {
+        this.velocityY = velocityY;
+    }
 
     public void setCheckpoint(int x, int y) {
         this.checkpointX = x;
         this.checkpointY = y;
-    }
-    public int getyJump() {
-        return yJump;
-    }
-    public void setJustJumped(boolean justJumped) {
-        this.justJumped = justJumped;
     }
 
 }

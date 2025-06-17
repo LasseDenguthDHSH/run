@@ -41,7 +41,7 @@ public class Music {
             double min = volumeControl.getMinimum();
             double max = volumeControl.getMaximum();
             double volume = min + (max - min) * level;
-            volumeControl.setValue( (float)volume);
+            volumeControl.setValue((float) volume);
         }
     }
 }

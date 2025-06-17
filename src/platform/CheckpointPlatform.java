@@ -2,6 +2,7 @@ package src.platform;
 
 import src.level.Level;
 import src.player.Player;
+
 import java.awt.*;
 
 public class CheckpointPlatform extends Platform {
@@ -12,7 +13,7 @@ public class CheckpointPlatform extends Platform {
 
     @Override
     public void applyEffect(Player player) {
-        player.setCheckpoint(getX()+getWidth()/2-16, getY()-32);
+        player.setCheckpoint(getX() + getWidth() / 2 - 16, getY() - 32);
     }
 }
 

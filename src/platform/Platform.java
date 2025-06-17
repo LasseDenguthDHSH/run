@@ -15,17 +15,17 @@ public class Platform {
     protected int rightBoundary;
     protected int frameCounter = 0;
     protected Sounds platformSound;
-    Level level;
+
     public Platform(int x, int y, int width, int height, Level level) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.level = level;
         this.platformColor = level.getPlatformColor();
     }
 
-    public void applyEffect(Player player){}
+    public void applyEffect(Player player) {
+    }
 
     public int getX() {
         return x;
@@ -43,5 +43,7 @@ public class Platform {
         return height;
     }
 
-    public Color getPlatformColor() { return platformColor; }
+    public Color getPlatformColor() {
+        return platformColor;
+    }
 }

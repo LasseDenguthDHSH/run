@@ -235,10 +235,10 @@ public class JumpPanel extends JPanel {
     }
 
     public long getFinishTime() {
-
         return finishTime;
     }
-    public String getFinishTimeDisplay(){
+
+    public String getFinishTimeDisplay() {
         return finishTimeDisplay;
     }
 

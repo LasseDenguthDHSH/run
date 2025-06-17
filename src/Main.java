@@ -66,7 +66,7 @@ public class Main {
     }
 
     public static void startChickenGame() {
-        chickenPanel = new ChickenPanel(frame, jumpPanel);
+        chickenPanel = new ChickenPanel(jumpPanel);
         panelManager.add(chickenPanel, chickenPanel.getCurrentLevel().getTitle());
         frame.setTitle(chickenPanel.getCurrentLevel().getTitle());
 

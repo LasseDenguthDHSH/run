@@ -14,15 +14,17 @@ public class Entity {
     int size = 32;
 
     Image entityImage;
+
     public Entity(Platform platform, int speed) {
         this.speed = speed;
         this.x = platform.getX();
         this.y = platform.getY() - 32;
         this.leftBoundary = platform.getX();
-        this.rightBoundary = platform.getX()+ platform.getWidth() - size;
+        this.rightBoundary = platform.getX() + platform.getWidth() - size;
         this.entityImage = new ImageIcon("src/images/entity.png").getImage();
         this.movingRight = true;
     }
+
     public void move(int platformSpeed) {
         if (movingRight) {
             frameCounter++;

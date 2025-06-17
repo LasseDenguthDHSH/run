@@ -3,6 +3,7 @@ package src.level;
 import src.music.Music;
 import src.sounds.Sounds;
 import src.platform.*;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
@@ -69,6 +70,7 @@ public abstract class Level {
     public int getGroundY() {
         return groundY;
     }
+
     public int getSkyHeight() {
         return skyHeight;
     }
@@ -116,12 +118,15 @@ public abstract class Level {
     public double getJumpPlatformEffect() {
         return jumpPlatformEffect;
     }
+
     public int getGoalX() {
         return goalX;
     }
+
     public int getGoalY() {
         return goalY;
     }
+
     public String getTitle() {
         return title;
     }
@@ -158,7 +163,7 @@ public abstract class Level {
         return platformSpeed;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 }

@@ -1,7 +1,5 @@
 package src.player;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class Controls implements KeyListener, MouseListener, MouseMotionListener {
@@ -42,14 +40,19 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
     public boolean isLeft2Pressed() {
         return left2Pressed;
     }
+
     public boolean isEscapePressed() {
         return escapePressed;
     }
-    public boolean isMouseClicked() { return mouseClicked; }
+
+    public boolean isMouseClicked() {
+        return mouseClicked;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
     }
+
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -62,6 +65,7 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
             case KeyEvent.VK_ESCAPE -> escapePressed = true;
         }
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -116,10 +120,11 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
         mouseY = e.getY();
     }
 
-    public int getMouseX(){
+    public int getMouseX() {
         return mouseX;
     }
-    public int getMouseY(){
+
+    public int getMouseY() {
         return mouseY;
     }
 }

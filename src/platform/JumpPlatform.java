@@ -8,10 +8,11 @@ import java.awt.*;
 
 public class JumpPlatform extends Platform {
     double jumpPlatformEffect;
+
     public JumpPlatform(int x, int y, int width, int height, Level level) {
         super(x, y, width, height, level);
         this.platformColor = new Color(200, 100, 0);
-        this.jumpPlatformEffect= level.getJumpPlatformEffect();
+        this.jumpPlatformEffect = level.getJumpPlatformEffect();
         this.platformSound = new Sounds("src/sounds/jump_sound.wav");
         platformSound.setVolume(1);
     }

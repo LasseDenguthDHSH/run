@@ -1,11 +1,12 @@
 package src.level;
+
 import src.music.Music;
 import src.sounds.Sounds;
 
 import java.awt.*;
 
 
-public class ChickenLevel extends Level{
+public class ChickenLevel extends Level {
 
     int bullets;
     int hits = 0;
@@ -17,7 +18,7 @@ public class ChickenLevel extends Level{
         super(title);
         this.groundY = 700;
         this.skyHeight = 800;
-        this.playerStartY = groundY-64;
+        this.playerStartY = groundY - 64;
         this.playerStartX = 742;
         this.skyImage = loadImage("src/images/sky_chickenLevel.gif");
         this.bullets = 5;
@@ -38,9 +39,11 @@ public class ChickenLevel extends Level{
         this.informations = loadImage("src/images/chickenInformation.png");
 
     }
+
     public int getBullets() {
         return bullets;
     }
+
     public void setBullets(int bullets) {
         this.bullets = bullets;
     }
@@ -53,7 +56,7 @@ public class ChickenLevel extends Level{
         this.hits = hits;
     }
 
-    public Sounds getGun_sound(){
+    public Sounds getGun_sound() {
         return gun_sound;
     }
 

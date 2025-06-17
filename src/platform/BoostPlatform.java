@@ -12,6 +12,7 @@ public class BoostPlatform extends Platform {
         this.platformColor = new Color(0, 240, 240);
         this.platformSound = new Sounds("src/sounds/boost_sound.wav");
     }
+
     @Override
     public void applyEffect(Player player) {
         player.setVelocityX(player.getSpeed() * 10);

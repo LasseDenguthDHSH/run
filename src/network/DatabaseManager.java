@@ -1,6 +1,7 @@
 package src.network;
 
 import src.level.Level;
+
 import java.sql.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -62,19 +63,6 @@ public class DatabaseManager {
         }
     }
 
-    public static void getSpielzeiten() {
-        String sql = "SELECT * FROM bestenliste ORDER BY bestzeit ASC";
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                System.out.println(rs.getString("name") + ": " + rs.getString("zeitanzeige") + ", "
-                        + rs.getString("level"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     public static Map<String, String> getBestenliste(Level level) {
         Map<String, String> top10List = new LinkedHashMap<>();
         String sql = "SELECT name, zeitanzeige FROM bestenliste WHERE level = ? ORDER BY bestzeit ASC";

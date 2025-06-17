@@ -12,6 +12,7 @@ public class DeathPlatform extends Platform {
         this.platformColor = Color.red;
         this.platformSound = new Sounds("src/sounds/error2_sound.wav");
     }
+
     @Override
     public void applyEffect(Player player) {
         player.resetToCheckpoint(platformSound);

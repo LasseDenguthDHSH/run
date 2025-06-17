@@ -15,6 +15,7 @@ public class MovingPlatform extends Platform {
         this.rightBoundary = rightBoundary;
         this.platformColor = level.getPlatformColor();
     }
+
     public void move(int platformSpeed) {
         if (movingRight) {
             frameCounter++;
