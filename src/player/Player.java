@@ -90,7 +90,7 @@ public class Player {
                 }
                 velocityY = 0;
             }
-            //Spieler aufPlatform
+            //Spieler auf Platform
             for (Platform platform : level.getPlatforms()) {
                 if (y + height >= platform.getY() && y + height - velocityY < platform.getY() && x + width - 10 > platform.getX() && x < platform.getX() + platform.getWidth()) {
                     y = platform.getY() - height;
