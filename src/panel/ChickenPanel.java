@@ -145,7 +145,7 @@ public class ChickenPanel extends JPanel {
             g2.drawImage(currentLevel.getInformations(), getWidth() / 2 - 600, 60, currentLevel.getInformations().getWidth(this) * 6 / 5, currentLevel.getInformations().getHeight(this) * 6 / 5, this);
         }
         // Draw chicken player
-        g2.drawImage(chicken.getImage(), chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
+        g2.drawImage(chickenImage, chicken.getX(), chicken.getY(), chicken.getWidth(), chicken.getHeight(), this);
         g2.setFont(new Font("Arial", Font.BOLD, 20));
         if (winner.getName().length() < 5) {
             g2.drawString(winner.getName(), chicken.getX() + (5 - winner.getName().length()) * 4, chicken.getY() - 10);
@@ -172,7 +172,7 @@ public class ChickenPanel extends JPanel {
         // Player movement
         if (controls.isRight1Pressed()) {
             if (chicken.getX() <= getWidth() - 64) {
-                chicken.moveRight(winner.getSpeed());
+                chicken.moveRight(chicken.getSpeed());
                 moved = true;
             }
         }
@@ -194,6 +194,11 @@ public class ChickenPanel extends JPanel {
                 if (hitbox.contains(controls.getMouseX(), controls.getMouseY())) {
                     currentLevel.getChicken_sound().play();
                     currentLevel.setHits(currentLevel.getHits() + 1);
+                    chickenImage = new ImageIcon("src/images/chickenHit.png").getImage();
+                    new javax.swing.Timer(400, e -> {
+                        chickenImage = new ImageIcon("src/images/chicken.png").getImage();
+                        ((javax.swing.Timer) e.getSource()).stop();
+                    }).start();
                 }
                 justShot = true;
             }
