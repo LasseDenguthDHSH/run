@@ -16,7 +16,6 @@ public class Player {
     int y;
     double speed;
     double jumpStrength;
-    int yJump;
     double velocityY = 0;
     boolean isJumping = false;
     boolean isOnPlatform = false;

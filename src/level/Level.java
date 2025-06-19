@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public abstract class Level {
     int id;
+    String title;
     int groundY;
     int platformWidth;
     int platformHeight;
@@ -27,7 +28,6 @@ public abstract class Level {
     Image player1Image;
     Image player2Image;
     ArrayList<Platform> platforms = new ArrayList<>();
-    String title;
     Color platformColor;
     double jumpPlatformEffect = -24;
     double playerSpeed;

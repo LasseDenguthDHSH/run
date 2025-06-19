@@ -1,0 +1,93 @@
+@startuml
+
+' Class definitions
+class Player {
+  - String name
+  - int width
+  - int height
+  - int x
+  - int y
+  - double speed
+  - double jumpStrength
+  - int yJump
+  - double velocityY
+  + Player(String name, int width, int height, Level currentLevel, Image image)
+  + void jump()
+  + void applyGravity(Level level)
+  + void resetToCheckpoint(Sounds respawnSound)
+  + void moveLeft(double speed)
+  + void moveRight(double speed)
+}
+class Controls implements KeyListener, MouseListener, MouseMotionListener {
+}
+class Entity {
+  - int speed
+  - int x
+  - int y
+  - int size
+  + Entity(Platform platform, int speed)
+  + void move(int platformSpeed)
+}
+
+class Platform {
+  # int x
+  # int y
+  # int width
+  # int height
+  # Color platformColor
+  + Platform(int x, int y, int width, int height, Level level)
+  + void applyEffect(Player player)
+}
+
+class JumpPlatform extends Platform {
+}
+
+class BoostPlatform extends Platform {
+}
+
+class DeathPlatform extends Platform {
+}
+
+class MovingPlatform extends Platform {
+}
+class CheckpointPlatform extends Platform {
+}
+
+abstract class Level {
+  # int id
+  # String title
+  # int groundY
+  # double gravity
+  # ArrayList<Platform> platforms
+  # ArrayList<Entity> entities
+  + Level(String title)
+}
+
+class Level1 extends Level {
+}
+
+class Level2 extends Level {
+}
+
+class Level3 extends Level {
+}
+
+class ChickenLevel extends Level {
+}
+
+
+
+class JumpPanel extends JPanel {
+}
+
+class MenuPanel extends JPanel {
+}
+
+class ChickenPanel extends JPanel {
+}
+
+class WinPanel extends JPanel {
+}
+
+
+@enduml
