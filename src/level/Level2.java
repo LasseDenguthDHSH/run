@@ -7,7 +7,6 @@ import src.platform.*;
 import java.awt.*;
 
 public class Level2 extends Level {
-    Image arrow;
 
     public Level2(String title) {
         super(title);
@@ -24,7 +23,7 @@ public class Level2 extends Level {
         this.player1Image = loadImage("src/images/player1_level2.png");
         this.player2Image = loadImage("src/images/player2_level2.png");
 
-        this.backgroundMusic = new Music("src/music/Moon_music.wav");
+        this.backgroundMusic = new Music("src/music/level2_music.wav");
         backgroundMusic.setVolume(0.8);
         this.respawnSound = new Sounds("src/sounds/respawn_sound.wav");
 
@@ -33,8 +32,9 @@ public class Level2 extends Level {
         platforms.add(new CheckpointPlatform(0, 700, platformWidth, platformHeight, this));
         platforms.add(new Platform(500, 600, platformWidth, platformHeight, this));
         platforms.add(new Platform(1020, 500, platformWidth, platformHeight, this));
-        platforms.add(new EntityPlatform(1250, 300, platformWidth * 3, platformHeight, this));
-        entities.add(new Entity(platforms.getLast(), 3));
+        platforms.add(new EntityPlatform(1250, 300, platformWidth * 2, platformHeight, this));
+        entities.add(new Entity(platforms.getLast(), 2));
+        platforms.add(new CheckpointPlatform(1490, 300, platformWidth, platformHeight, this));
         platforms.add(new JumpPlatform(1950, 800, platformWidth * 3, platformHeight, this));
         platforms.add(new Platform(2650, 650, platformWidth, platformHeight, this));
         platforms.add(new DeathPlatform(3100, 500, platformWidth, platformHeight, this));

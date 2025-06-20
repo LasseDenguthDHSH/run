@@ -29,8 +29,9 @@ public class Level1 extends Level {
         platforms.add(new MovingPlatform(350, 600, platformWidth * 2, platformHeight, this, 1, false, 120, 580 - platformWidth));
         platforms.add(new EntityPlatform(650, 500, platformWidth * 3, platformHeight, this));
         entities.add(new Entity(platforms.getLast(), 1));
-        platforms.add(new JumpPlatform(1020, 700, platformWidth / 2, platformHeight, this));
-        platforms.add(new BoostPlatform(1220, 600, platformWidth, platformHeight, this));
+        platforms.add(new Platform(1000, 700, platformWidth, platformHeight, this));
+        platforms.add(new JumpPlatform(1120, 600, platformWidth / 2, platformHeight, this));
+        platforms.add(new BoostPlatform(1250, 600, platformWidth, platformHeight, this));
         platforms.add(new Platform(1750, 750, platformWidth * 2, platformHeight, this));
         platforms.add(new Platform(2000, 650, platformWidth, platformHeight, this));
         platforms.add(new Platform(2150, 750, platformWidth, platformHeight, this));
