@@ -9,24 +9,24 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Player {
-    String name;
-    int width;
-    int height;
-    int x;
-    int y;
-    double speed;
-    double jumpStrength;
-    double velocityY = 0;
-    boolean isJumping = false;
-    boolean isOnPlatform = false;
-    boolean isOnGround = true;
-    private Image playerImage;
-    private double velocityX = 0;
+    private String name;
+    private int width;
+    private int height;
+    private int x;
+    private int y;
     private int checkpointX;
     private int checkpointY;
+    private double speed;
+    private double jumpStrength;
+    private double velocityY = 0;
+    private double velocityX = 0;
+    private boolean isJumping = false;
+    private boolean isOnPlatform = false;
+    private boolean isOnGround = true;
+    private boolean justJumped = false;
+    private Image playerImage;
     private Sounds respawnSound;
     private Level currentLevel;
-    boolean justJumped = false;
 
     public Player(String name, int width, int height, Level currentLevel, Image image) {
         this.name = name;

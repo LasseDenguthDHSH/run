@@ -10,24 +10,24 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ChickenPanel extends JPanel {
+    private boolean justShot = false;
+    private boolean timerStarted = false;
+    private Player chicken;
+    private Player winner;
+    private Player loser;
+    private Image hitLetters;
+    private Image chickenImage;
+    private Image groundImage;
+    private Image skyImage;
+    private Image[] ammo = new Image[6];
+    private Image[] hits = new Image[6];
     private Clock clock;
     private ChickenLevel currentLevel;
     private Controls controls;
     private Timer gameTimer;
-    private boolean timerStarted = false;
     private JumpPanel jumpPanel;
-    private Image chickenImage;
-    private Image groundImage;
-    private Image skyImage;
-    private boolean justShot = false;
     private JButton startButton;
-    private Player chicken;
-    private Player winner;
-    private Player loser;
-    private Image[] ammo = new Image[6];
-    private Image[] hits = new Image[6];
-    private Image hitLetters;
-    JPanel buttonPanel;
+    private JPanel buttonPanel;
 
 
     public ChickenPanel(JumpPanel jumpPanel) {
@@ -69,7 +69,6 @@ public class ChickenPanel extends JPanel {
 
         // Initialize button
         startButton = new JButton("Start");
-
 
         setLayout(new BorderLayout());
         buttonPanel = new JPanel();

@@ -9,13 +9,13 @@ import java.awt.*;
 import java.util.Map;
 
 public class WinPanel extends JPanel {
-    ChickenPanel chickenPanel;
-    JumpPanel jumpPanel;
     Player winner, loser;
     Image winnerImage, loserImage;
     ImageIcon rainCloudGif;
     JButton playAgain;
     JPanel buttonPanel;
+    ChickenPanel chickenPanel;
+    JumpPanel jumpPanel;
 
     public WinPanel(ChickenPanel chickenPanel, JumpPanel jumpPanel) {
         this.chickenPanel = chickenPanel;

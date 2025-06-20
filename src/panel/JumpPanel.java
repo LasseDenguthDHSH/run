@@ -12,32 +12,30 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JumpPanel extends JPanel {
-    private Player player1;
-    private Player player2;
-    private Level currentLevel;
-    private Controls controls;
-    private Timer gameTimer;
+    private int numBackgrounds;
+    private int totalWidth;
     private int cameraX1;
     private int cameraX2;
-    private Clock clock;
+    private long finishTime;
     private boolean timerStarted = false;
+    protected String player1Name;
+    protected String player2Name;
+    private String finishTimeDisplay;
+    private Player player1;
+    private Player player2;
+    private Player winner;
+    private Player loser;
+    private Level currentLevel;
     private Image arrowVertical;
     private Image arrowHorizontal;
     private Image goalFlag;
-    int numBackgrounds;
-    int totalWidth;
-    Player winner;
-    Player loser;
-    long finishTime;
-    String finishTimeDisplay;
-    JumpPanel jumpPanel;
-    protected String player1Name;
-    protected String player2Name;
     private Image controlWASD;
     private Image controlArrows;
+    private Controls controls;
+    private Clock clock;
+    private Timer gameTimer;
 
-    public JumpPanel(Level level, JFrame frame, JumpPanel jumpPanel) {
-        this.jumpPanel = jumpPanel;
+    public JumpPanel(Level level, JFrame frame) {
         this.currentLevel = level;
         this.controls = new Controls();
         this.addKeyListener(controls);

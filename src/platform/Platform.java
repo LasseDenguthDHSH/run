@@ -7,13 +7,13 @@ import src.player.Player;
 import java.awt.*;
 
 public class Platform {
-    int x, y, width, height;
-    protected Color platformColor;
-    protected boolean movingRight = false;
+    protected int x, y, width, height;
     protected int speed;
     protected int leftBoundary;
     protected int rightBoundary;
     protected int frameCounter = 0;
+    protected boolean movingRight = false;
+    protected Color platformColor;
     protected Sounds platformSound;
 
     public Platform(int x, int y, int width, int height, Level level) {

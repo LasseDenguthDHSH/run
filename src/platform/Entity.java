@@ -4,14 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Entity {
-    int speed;
-    int rightBoundary;
-    int leftBoundary;
-    int x;
-    int y;
-    boolean movingRight;
-    int frameCounter = 0;
-    int size = 32;
+    protected int speed;
+    protected int rightBoundary;
+    protected int leftBoundary;
+    protected int x;
+    protected int y;
+    protected int frameCounter = 0;
+    protected int size = 32;
+    protected boolean movingRight;
 
     Image entityImage;
 

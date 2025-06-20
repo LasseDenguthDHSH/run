@@ -8,20 +8,22 @@ import java.awt.*;
 
 public class ChickenLevel extends Level {
 
-    int bullets;
-    int hits = 0;
+    private int bullets;
+    private int hits;
     private Sounds gun_sound;
     private Sounds chicken_sound;
     private Image informations;
 
     public ChickenLevel(String title) {
         super(title);
+
         this.groundY = 700;
         this.skyHeight = 800;
         this.playerStartY = groundY - 64;
         this.playerStartX = 742;
         this.skyImage = loadImage("src/images/sky_chickenLevel.gif");
         this.bullets = 5;
+        this.hits = 0;
         this.playerSpeed = 2;
         this.gravity = 0.4;
         this.playerJumpStrength = 10;

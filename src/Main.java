@@ -10,11 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
-    static CardLayout cardLayout;
-    static JPanel panelManager;
-    static JFrame frame;
-    static int fensterLeiste = 37;
-    static JumpPanel jumpPanel;
+    private static CardLayout cardLayout;
+    private static JPanel panelManager;
+    private static JFrame frame;
+    private static final int fensterLeiste = 37;
+    public static JumpPanel jumpPanel;
     public static ChickenPanel chickenPanel;
     public static MenuPanel menuPanel;
     public static WinPanel winPanel;
@@ -38,12 +38,10 @@ public class Main {
     }
 
     public static void startGame(Level level) {
-        // Spielpanel erstellen und hinzufügen
-        jumpPanel = new JumpPanel(level, frame, jumpPanel);
+        jumpPanel = new JumpPanel(level, frame);
         panelManager.add(jumpPanel, level.getTitle());
         frame.setTitle(level.getTitle());
 
-        // Zum Spielpanel wechseln
         cardLayout.show(panelManager, level.getTitle());
         jumpPanel.requestFocusInWindow();
     }
@@ -51,18 +49,19 @@ public class Main {
     public static void showMenu() {
         menuPanel = new MenuPanel();
         panelManager.add(menuPanel, "Menu");
+        frame.setTitle("Menu");
+
         cardLayout.show(panelManager, "Menu");
         menuPanel.requestFocusInWindow();
-        frame.setTitle("Menu");
     }
 
     public static void showWinPanel() {
         winPanel = new WinPanel(chickenPanel, jumpPanel);
         panelManager.add(winPanel, "Winner");
+        frame.setTitle("Winner");
+
         cardLayout.show(panelManager, "Winner");
         winPanel.requestFocusInWindow();
-        frame.setTitle("Winner");
-        //moin
     }
 
     public static void startChickenGame() {
@@ -70,9 +69,10 @@ public class Main {
         panelManager.add(chickenPanel, chickenPanel.getCurrentLevel().getTitle());
         frame.setTitle(chickenPanel.getCurrentLevel().getTitle());
 
-        // Zum Spielpanel wechseln
         cardLayout.show(panelManager, chickenPanel.getCurrentLevel().getTitle());
         chickenPanel.requestFocusInWindow();
+
+
 
 
     }

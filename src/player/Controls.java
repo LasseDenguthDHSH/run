@@ -3,6 +3,8 @@ package src.player;
 import java.awt.event.*;
 
 public class Controls implements KeyListener, MouseListener, MouseMotionListener {
+    private int mouseX;
+    private int mouseY;
     private boolean up1Pressed = false;
     private boolean up2Pressed = false;
     private boolean right1Pressed = false;
@@ -11,8 +13,6 @@ public class Controls implements KeyListener, MouseListener, MouseMotionListener
     private boolean left2Pressed = false;
     private boolean escapePressed = false;
     private boolean mouseClicked = false;
-    private int mouseX;
-    private int mouseY;
 
     public Controls() {
     }
