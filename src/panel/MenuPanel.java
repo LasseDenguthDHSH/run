@@ -16,7 +16,7 @@ public class MenuPanel extends JPanel {
         setBackground(new Color(39, 78, 99)); // Hintergrundfarbe setzen
 
         // Titeltext hinzufügen
-        ImageIcon titleIcon = new ImageIcon("src/images/JumpAndRunAndMoor.png");
+        ImageIcon titleIcon = new ImageIcon("src/images/jumpandrunandmoor.png");
         JLabel titleLabel = new JLabel(titleIcon);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setBorder(BorderFactory.createEmptyBorder(140, 50, 0, 0)); // Abstand hinzufügen
