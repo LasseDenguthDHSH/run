@@ -6,16 +6,23 @@ import src.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Map;
 
 public class WinPanel extends JPanel {
+    private PrintWriter out;
+    private Socket socket;
+    ChickenPanel chickenPanel;
+    JumpPanel jumpPanel;
     Player winner, loser;
     Image winnerImage, loserImage;
     ImageIcon rainCloudGif;
     JButton playAgain;
     JPanel buttonPanel;
-    ChickenPanel chickenPanel;
-    JumpPanel jumpPanel;
 
     public WinPanel(ChickenPanel chickenPanel, JumpPanel jumpPanel) {
         this.chickenPanel = chickenPanel;
@@ -48,6 +55,17 @@ public class WinPanel extends JPanel {
         Main.chickenPanel.getCurrentLevel().setBullets(5);
         Main.chickenPanel.getCurrentLevel().setHits(0);
 
+        try {
+            socket = new Socket("localhost", 44444);
+            //socket = new Socket("10.25.3.28", 44444);
+            out = new PrintWriter(socket.getOutputStream(), true);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -64,6 +82,11 @@ public class WinPanel extends JPanel {
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 50));
         String winnerText = "Winner: " + winner.getName();
+        try {
+            sendMessage(winner.getName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         int textWidth = g2.getFontMetrics().stringWidth(winnerText);
         int textX = (getWidth() - textWidth) / 2;
         int textY = getHeight() / 3 + 50;
@@ -101,5 +124,9 @@ public class WinPanel extends JPanel {
             }
 
         }
+    }
+
+    private void sendMessage(String message) throws IOException {
+        out.println(message);
     }
 }
