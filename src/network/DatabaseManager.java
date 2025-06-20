@@ -7,9 +7,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class DatabaseManager {
-    static String url = "jdbc:mysql://mysql-3de56c2b-jump.c.aivencloud.com:17474/jump?ssl-mode=REQUIRED";
-    static String user = "avnadmin";
-    static String password = "AVNS_l0bMjzlvjMRQ2-Oqzb7";
+    private static String url = "jdbc:mysql://mysql-3de56c2b-jump.c.aivencloud.com:17474/jump?ssl-mode=REQUIRED";
+    private static String user = "avnadmin";
+    private static String password = "AVNS_l0bMjzlvjMRQ2-Oqzb7";
 
     public static Connection connect() {
         try {

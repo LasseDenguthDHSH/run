@@ -18,8 +18,8 @@ public class JumpPanel extends JPanel {
     private int cameraX2;
     private long finishTime;
     private boolean timerStarted = false;
-    protected String player1Name;
-    protected String player2Name;
+    private String player1Name;
+    private String player2Name;
     private String finishTimeDisplay;
     private Player player1;
     private Player player2;

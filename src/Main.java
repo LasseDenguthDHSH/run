@@ -10,10 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
+    private static final int fensterLeiste = 37;
     private static CardLayout cardLayout;
     private static JPanel panelManager;
     private static JFrame frame;
-    private static final int fensterLeiste = 37;
     public static JumpPanel jumpPanel;
     public static ChickenPanel chickenPanel;
     public static MenuPanel menuPanel;

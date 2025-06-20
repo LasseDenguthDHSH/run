@@ -10,9 +10,9 @@ public class ChickenLevel extends Level {
 
     private int bullets;
     private int hits;
+    private Image informations;
     private Sounds gun_sound;
     private Sounds chicken_sound;
-    private Image informations;
 
     public ChickenLevel(String title) {
         super(title);
