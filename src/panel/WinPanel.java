@@ -55,16 +55,16 @@ public class WinPanel extends JPanel {
         Main.chickenPanel.getCurrentLevel().setBullets(5);
         Main.chickenPanel.getCurrentLevel().setHits(0);
 
-        try {
-            socket = new Socket("localhost", 44444);
-            //socket = new Socket("10.25.3.28", 44444);
-            out = new PrintWriter(socket.getOutputStream(), true);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            socket = new Socket("localhost", 44444);
+//            //socket = new Socket("10.25.3.28", 44444);
+//            out = new PrintWriter(socket.getOutputStream(), true);
+//
+//            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -82,11 +82,11 @@ public class WinPanel extends JPanel {
         g2.setColor(Color.WHITE);
         g2.setFont(new Font("Arial", Font.BOLD, 50));
         String winnerText = "Winner: " + winner.getName();
-        try {
-            sendMessage(winner.getName());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            sendMessage(winner.getName());
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         int textWidth = g2.getFontMetrics().stringWidth(winnerText);
         int textX = (getWidth() - textWidth) / 2;
         int textY = getHeight() / 3 + 50;
